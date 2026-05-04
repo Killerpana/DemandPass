@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { campaigns } from "@/lib/data";
-export default function TokenPage({
+export default async function TokenPage({
   params,
   searchParams,
 }: {
-  params: { id: string };
-  searchParams: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{
     token?: string;
     level?: string;
     city?: string;
@@ -14,21 +14,23 @@ export default function TokenPage({
     ticket?: string;
     benefits?: string;
     num?: string;
-  };
+  }>;
 }) {
-  const id = Number(params.id);
+  const { id: idStr } = await params;
+  const id = Number(idStr);
   const c = campaigns[id];
   if (!c) notFound();
 
-  const token = searchParams.token || "DP-XX-BA-0000";
-  const level = searchParams.level || "Bronce";
-  const city = searchParams.city || "—";
-  const price = searchParams.price || "—";
-  const ticket = searchParams.ticket || "—";
-  const benefits = searchParams.benefits
-    ? searchParams.benefits.split(",").filter(Boolean)
+  const sp = await searchParams;
+  const token = sp.token || "DP-XX-BA-0000";
+  const level = sp.level || "Bronce";
+  const city = sp.city || "—";
+  const price = sp.price || "—";
+  const ticket = sp.ticket || "—";
+  const benefits = sp.benefits
+    ? sp.benefits.split(",").filter(Boolean)
     : [];
-  const num = searchParams.num || "0000";
+  const num = sp.num || "0000";
 
   const levelColors: Record<string, string> = {
     Bronce: "#d97706",
