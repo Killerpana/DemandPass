@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { campaigns } from "@/lib/data";
 
-export default function CampaignDetail({ params }: { params: { id: string } }) {
-  const c = campaigns[Number(params.id)];
+export default async function CampaignDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const c = campaigns[Number(id)];
   if (!c) notFound();
   const pct = Math.min(100, Math.round((c.current / c.goal) * 100));
 
