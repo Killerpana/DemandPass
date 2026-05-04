@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #08080e;
+  --surface: #0f0f1a;
+  --surface2: #161626;
+  --surface3: #1e1e32;
+  --border: rgba(255, 255, 255, 0.08);
+  --border2: rgba(255, 255, 255, 0.13);
+  --border3: rgba(255, 255, 255, 0.22);
+  --txt: #f0f0ff;
+  --txt2: #a0a0c0;
+  --txt3: #606080;
+  --violet: #7c3aed;
+  --violet2: #9d6ef8;
+  --violet3: #c4a8fd;
+  --blue: #2563eb;
+  --blue2: #4d8ef8;
+  --blue3: #93c5fd;
+  --emerald: #059669;
+  --emerald2: #10b981;
+  --emerald3: #6ee7b7;
+  --amber: #d97706;
+  --amber2: #f59e0b;
+  --amber3: #fcd34d;
+  --red: #dc2626;
+  --red2: #ef4444;
+  --gold: #f59e0b;
+  --silver: #94a3b8;
+  --bronze: #b45309;
+  --r8: 8px;
+  --r12: 12px;
+  --r16: 16px;
+  --r20: 20px;
+  --r24: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface3);
+  border-radius: 2px;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: var(--r12);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.15s;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+.btn-violet {
+  background: linear-gradient(135deg, var(--violet), var(--blue));
+  color: #fff;
+}
+.btn-violet:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.btn-violet:active {
+  transform: translateY(0);
+}
+.btn-ghost {
+  background: var(--surface2);
+  color: var(--txt);
+  border: 1px solid var(--border2);
+}
+.btn-ghost:hover {
+  border-color: var(--border3);
+  background: var(--surface3);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--violet3);
+  border: 1px solid var(--violet2);
+}
+.btn-outline:hover {
+  background: var(--violet);
+  border-color: var(--violet);
+  color: #fff;
+}
+.btn-success {
+  background: linear-gradient(135deg, var(--emerald), #0d9488);
+  color: #fff;
+}
+.btn-success:hover {
+  opacity: 0.9;
+}
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: var(--r16);
+}
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 13px;
+  border-radius: var(--r8);
+}
+.btn-full {
+  width: 100%;
+}
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.badge-violet {
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--violet3);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+.badge-blue {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--blue3);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+.badge-emerald {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--emerald3);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+.badge-amber {
+  background: rgba(217, 119, 6, 0.12);
+  color: var(--amber3);
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r20);
+  padding: 20px;
+}
+.card-hover {
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.card-hover:hover {
+  border-color: var(--border3);
+  background: var(--surface2);
+  transform: translateY(-2px);
+}
+
+/* ── Progress ── */
+.progress {
+  width: 100%;
+  height: 5px;
+  background: var(--surface3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--blue));
+  transition: width 0.6s ease;
+}
+.progress-lg {
+  height: 8px;
+}
+
+/* ── Stats ── */
+.stat-card {
+  background: var(--surface2);
+  border-radius: var(--r12);
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+}
+.stat-val {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--txt);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--txt3);
+  margin-top: 4px;
+  font-weight: 500;
+}
+.stat-change {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ── Tags ── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--surface3);
+  color: var(--txt2);
+  border: 1px solid var(--border);
+  margin: 3px 3px 3px 0;
+}
+.tag-active {
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--violet3);
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+/* ── Dot pulse ── */
+.dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald2);
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ── Grids ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+/* ── Wrap ── */
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Section labels ── */
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--txt3);
+  margin-bottom: 6px;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--txt);
+}
