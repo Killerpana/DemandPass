@@ -99,12 +99,12 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                 transition: "all .3s",
                 background:
                   i < step
-                    ? "var(--violet)"
+                    ? "var(--burg)"
                     : i === step
-                    ? "linear-gradient(135deg, var(--violet), var(--blue))"
+                    ? "linear-gradient(135deg, var(--burg), var(--burg2))"
                     : "var(--surface3)",
                 color: i <= step ? "#fff" : "var(--txt3)",
-                boxShadow: i === step ? "0 0 0 3px rgba(124,58,237,0.2)" : "none",
+                boxShadow: i === step ? "0 0 0 3px rgba(139,15,53,0.2)" : "none",
               }}
             >
               {i < step ? "✓" : i + 1}
@@ -114,7 +114,7 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                 style={{
                   flex: 1,
                   height: 2,
-                  background: i < step ? "var(--violet)" : "var(--surface3)",
+                  background: i < step ? "var(--burg)" : "var(--surface3)",
                   transition: "background .3s",
                 }}
               />
@@ -152,16 +152,16 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                   textAlign: "left",
                   background:
                     data[cfg.key as keyof WizardData] === opt
-                      ? "rgba(124,58,237,0.1)"
+                      ? "rgba(139,15,53,0.1)"
                       : "var(--surface2)",
                   border: `1.5px solid ${
                     data[cfg.key as keyof WizardData] === opt
-                      ? "var(--violet2)"
+                      ? "var(--burg2)"
                       : "var(--border)"
                   }`,
                   color:
                     data[cfg.key as keyof WizardData] === opt
-                      ? "var(--violet3)"
+                      ? "var(--burg3)"
                       : "var(--txt)",
                   padding: "13px 16px",
                   borderRadius: "var(--r12)",
@@ -184,12 +184,12 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                     borderRadius: "50%",
                     border: `2px solid ${
                       data[cfg.key as keyof WizardData] === opt
-                        ? "var(--violet)"
+                        ? "var(--burg)"
                         : "var(--border3)"
                     }`,
                     background:
                       data[cfg.key as keyof WizardData] === opt
-                        ? "var(--violet)"
+                        ? "var(--burg)"
                         : "transparent",
                     display: "flex",
                     alignItems: "center",
@@ -219,12 +219,12 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                     padding: "10px 16px",
                     borderRadius: "var(--r12)",
                     border: `1.5px solid ${
-                      data.benefits.includes(opt) ? "var(--blue2)" : "var(--border)"
+                      data.benefits.includes(opt) ? "var(--burg2)" : "var(--border)"
                     }`,
                     background: data.benefits.includes(opt)
-                      ? "rgba(37,99,235,0.12)"
+                      ? "rgba(139,15,53,0.10)"
                       : "var(--surface2)",
-                    color: data.benefits.includes(opt) ? "var(--blue3)" : "var(--txt2)",
+                    color: data.benefits.includes(opt) ? "var(--burg3)" : "var(--txt2)",
                     fontSize: 14,
                     fontFamily: "Outfit, sans-serif",
                     fontWeight: 500,
@@ -256,9 +256,9 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                 key={lvl.name}
                 onClick={() => setData((d) => ({ ...d, level: lvl.name }))}
                 style={{
-                  background: data.level === lvl.name ? "rgba(124,58,237,0.08)" : "var(--surface2)",
+                  background: data.level === lvl.name ? "rgba(139,15,53,0.08)" : "var(--surface2)",
                   border: `1.5px solid ${
-                    data.level === lvl.name ? "var(--violet2)" : "var(--border)"
+                    data.level === lvl.name ? "var(--burg2)" : "var(--border)"
                   }`,
                   borderTop: `3px solid ${lvl.color}`,
                   borderRadius: "var(--r16)",
@@ -276,7 +276,7 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
                       left: "50%",
                       transform: "translateX(-50%)",
                       background:
-                        "linear-gradient(90deg, var(--violet), var(--blue))",
+                        "linear-gradient(90deg, var(--burg), var(--blue))",
                       color: "#fff",
                       fontSize: 10,
                       fontWeight: 700,
@@ -465,7 +465,7 @@ export function SupportWizard({ campaignId }: { campaignId: number }) {
         }}
       >
         {step > 0 ? (
-          <button onClick={back} className="btn btn-ghost">
+          <button onClick={back} className="btn btn-ghost" aria-label="Volver al paso anterior">
             ← Atrás
           </button>
         ) : (

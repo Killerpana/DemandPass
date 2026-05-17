@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <h1 className="animate-in animate-in-d1" style={{ fontSize:"clamp(36px, 5.5vw, 58px)", fontWeight:800, lineHeight:1.07, letterSpacing:"-1.5px", marginBottom:18, color:"var(--txt)" }}>
           Demanda verificada para<br />
-          <span style={{ background:"linear-gradient(90deg, var(--violet2), var(--blue2))", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+          <span style={{ background:"linear-gradient(90deg, var(--burg2), var(--burg3))", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
             eventos en vivo
           </span>
         </h1>
@@ -38,7 +38,7 @@ export default function Home() {
           <Link href="/dashboard" className="btn btn-ghost btn-lg">Ver dashboard productora</Link>
         </div>
         <div className="animate-in animate-in-d4" style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:1, background:"var(--border)", borderRadius:"var(--r16)", overflow:"hidden", maxWidth:540, margin:"0 auto" }}>
-          {[{val:"12.4K",label:"Fans registrados",color:"var(--violet2)"},{val:"82%",label:"Demanda verificada",color:"var(--blue2)"},{val:"3",label:"Campañas activas",color:"var(--emerald2)"}].map(({val,label,color})=>(
+          {[{val:"12.4K",label:"Fans registrados",color:"var(--burg2)"},{val:"82%",label:"Demanda verificada",color:"var(--burg3)"},{val:"3",label:"Campañas activas",color:"var(--emerald2)"}].map(({val,label,color})=>(
             <div key={label} style={{ background:"var(--surface)", padding:"20px", textAlign:"center" }}>
               <div style={{ fontSize:28, fontWeight:800, color, letterSpacing:"-1px" }}>{val}</div>
               <div style={{ fontSize:12, color:"var(--txt3)", marginTop:4, fontWeight:500 }}>{label}</div>
@@ -56,7 +56,7 @@ export default function Home() {
           <div className="grid-3">
             {[{n:"1",title:"Fans apoyan",desc:"Indican ciudad, rango de precio y tipo de entrada. Las campañas oficiales incluyen reserva condicional."},{n:"2",title:"Se mide la demanda",desc:"Datos verificados por ciudad, precio aceptado y perfil del fan. Sin bots ni datos falsos."},{n:"3",title:"Productoras deciden",desc:"Dashboard con forecast, venue recomendado y lista de fans verificados con acceso prioritario si el show avanza."}].map(({n,title,desc})=>(
               <div key={n} style={{ padding:24, background:"var(--surface)", border:"1px solid var(--border)", borderRadius:"var(--r20)" }}>
-                <div style={{ width:40, height:40, borderRadius:"var(--r12)", background:"linear-gradient(135deg, var(--violet), var(--blue))", display:"flex", alignItems:"center", justifyContent:"center", fontSize:16, fontWeight:800, color:"#fff", marginBottom:16 }}>{n}</div>
+                <div style={{ width:40, height:40, borderRadius:"var(--r12)", background:"linear-gradient(135deg, var(--burg), var(--burg2))", display:"flex", alignItems:"center", justifyContent:"center", fontSize:16, fontWeight:800, color:"#fff", marginBottom:16 }}>{n}</div>
                 <h3 style={{ fontSize:15, fontWeight:700, marginBottom:8, color:"var(--txt)" }}>{title}</h3>
                 <p style={{ fontSize:13, color:"var(--txt2)", lineHeight:1.65 }}>{desc}</p>
               </div>
@@ -124,7 +124,7 @@ export default function Home() {
 
       <section style={{ padding:"56px 24px", borderTop:"1px solid var(--border)" }}>
         <div className="wrap">
-          <div style={{ background:"linear-gradient(135deg, rgba(124,58,237,0.08), rgba(37,99,235,0.08))", border:"1px solid rgba(124,58,237,0.2)", borderRadius:"var(--r24)", padding:"40px 36px", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:24 }}>
+          <div style={{ background:"linear-gradient(135deg, rgba(124,58,237,0.08), rgba(37,99,235,0.08))", border:"1px solid rgba(139,15,53,0.25)", borderRadius:"var(--r24)", padding:"40px 36px", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:24 }}>
             <div style={{ maxWidth:480 }}>
               <p className="section-eyebrow" style={{ marginBottom:8 }}>Para productoras y promotores</p>
               <h2 style={{ fontSize:24, fontWeight:800, letterSpacing:"-0.5px", color:"var(--txt)", marginBottom:12 }}>Tomá decisiones con datos reales</h2>

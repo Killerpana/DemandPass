@@ -60,7 +60,7 @@ export default async function TokenPage({
           animation: tokenCardIn 0.4s ease-out both;
         }
         .token-holo-border {
-          background: linear-gradient(90deg, var(--violet), var(--blue), #10b981, var(--violet));
+          background: linear-gradient(90deg, #8B0F35, #A31645, #C4264E, #8B0F35);
           background-size: 300% 300%;
           animation: holoBorder 8s ease infinite;
           padding: 1.5px;
@@ -82,7 +82,15 @@ export default async function TokenPage({
         {/* Header */}
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
           <span className="badge badge-emerald"><span className="dot-pulse" />Registrado con éxito</span>
-          <span style={{ fontSize:12, color:"var(--txt3)" }}>{c.artist} · {c.city}</span>
+          <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+            <svg width={20} height={20} viewBox="0 0 40 40" fill="none">
+              <path d="M6 4H18C28 4 34 10 34 20C34 30 28 36 18 36H6V4Z" fill="none" stroke="#8B0F35" strokeWidth="3.5" strokeLinejoin="round"/>
+              <rect x="11" y="26" width="3.5" height="6" rx="1" fill="#8B0F35" opacity="0.7"/>
+              <rect x="16" y="21" width="3.5" height="11" rx="1" fill="#A31645" opacity="0.9"/>
+              <rect x="21" y="16" width="3.5" height="16" rx="1" fill="#A31645"/>
+            </svg>
+            <span style={{ fontSize:12, color:"var(--txt3)" }}>{c.artist} · {c.city}</span>
+          </div>
         </div>
 
         <h1 style={{ fontSize:22, fontWeight:800, letterSpacing:"-0.5px", color:"var(--txt)", marginBottom:4 }}>

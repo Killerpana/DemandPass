@@ -154,8 +154,8 @@ export default async function CampaignDetail({ params }: { params: Promise<{ id:
         {/* Campaign type explanation */}
         <div
           style={{
-            background: c.type === "official" ? "rgba(124,58,237,0.07)" : "rgba(37,99,235,0.07)",
-            border: `1px solid ${c.type === "official" ? "rgba(124,58,237,0.2)" : "rgba(37,99,235,0.2)"}`,
+            background: c.type === "official" ? "rgba(139,15,53,0.07)" : "rgba(163,22,69,0.07)",
+            border: `1px solid ${c.type === "official" ? "rgba(139,15,53,0.25)" : "rgba(163,22,69,0.2)"}`,
             borderRadius: "var(--r12)",
             padding: "14px 16px",
             marginBottom: 20,

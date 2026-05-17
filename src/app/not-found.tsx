@@ -17,7 +17,7 @@ export default function NotFound() {
           style={{
             fontSize: 80,
             fontWeight: 800,
-            background: "linear-gradient(135deg, var(--violet2), var(--blue2))",
+            background: "linear-gradient(135deg, var(--burg2), var(--burg3))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             letterSpacing: "-4px",

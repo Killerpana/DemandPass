@@ -20,8 +20,9 @@ export default function DashboardPage() {
   const [exportModal, setExportModal] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setMounted(true), 100);
-    const t2 = setTimeout(() => setShowSkeleton(false), 800);
+    // react-best-practices: lazy state init, minimal timeouts
+    const t1 = setTimeout(() => setMounted(true), 50);
+    const t2 = setTimeout(() => setShowSkeleton(false), 600);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
@@ -176,7 +177,7 @@ Recomendación: Venue 8.000-12.000 personas en Buenos Aires, precio base USD 70.
             </div>
             {cityView === "chart" ? (
               cities.map(({ name, pct, fans }) => (
-                <BarRow key={name} label={name} pct={pct} sub={`${fans.toLocaleString("es-AR")} fans`} color="linear-gradient(90deg, var(--violet), var(--blue))" animate={mounted} tooltip={`${pct}% del total — ${fans.toLocaleString("es-AR")} fans`} />
+                <BarRow key={name} label={name} pct={pct} sub={`${fans.toLocaleString("es-AR")} fans`} color="linear-gradient(90deg, var(--burg), var(--burg2))" animate={mounted} tooltip={`${pct}% del total — ${fans.toLocaleString("es-AR")} fans`} />
               ))
             ) : (
               <table className="data-table">
@@ -200,7 +201,7 @@ Recomendación: Venue 8.000-12.000 personas en Buenos Aires, precio base USD 70.
             </div>
             {priceView === "chart" ? (
               prices.map(({ range, pct }) => (
-                <BarRow key={range} label={range} pct={pct} sub={`${pct}%`} color="linear-gradient(90deg, var(--blue), var(--violet2))" animate={mounted} tooltip={`${pct}% de los fans`} />
+                <BarRow key={range} label={range} pct={pct} sub={`${pct}%`} color="linear-gradient(90deg, var(--burg2), var(--burg3))" animate={mounted} tooltip={`${pct}% de los fans`} />
               ))
             ) : (
               <table className="data-table">
@@ -250,7 +251,7 @@ Recomendación: Venue 8.000-12.000 personas en Buenos Aires, precio base USD 70.
           <p style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"1.5px", color:"var(--txt3)", marginBottom:16 }}>Beneficios más solicitados</p>
           <div className="grid-2">
             {d.benefits.map(({ label, pct }) => (
-              <BarRow key={label} label={label} pct={pct} sub={`${pct}%`} color="linear-gradient(90deg, var(--violet), var(--blue))" animate={mounted} tooltip={`${pct}% de los fans lo eligieron`} />
+              <BarRow key={label} label={label} pct={pct} sub={`${pct}%`} color="linear-gradient(90deg, var(--burg), var(--burg2))" animate={mounted} tooltip={`${pct}% de los fans lo eligieron`} />
             ))}
           </div>
         </div>
