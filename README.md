@@ -1,43 +1,39 @@
-# next-port v3 — Detalle de campaña + flujo de votar
+# next-port v3.1 — Bugfix wizard + token
 
-Rediseño completo de:
-- `/campaigns/[id]` — detalle de campaña (cover gigante + demand status card + actividad en vivo + perks + legal + sticky CTA)
-- `/campaigns/[id]/support` — wizard de 6 pasos reskinado (mantiene la misma lógica + URL params, así el `/token` sigue funcionando intacto)
+Patch chico que arregla **2 bugs reales** detectados en el flujo de apoyar.
 
-## 🗂️ Archivos (5 archivos · 2 reemplazos · 3 nuevos)
+## 🐛 Bugs arreglados
 
-| Origen | Destino en tu repo | Acción |
-|---|---|---|
-| `next-port-v3/src/components/marketing/CampaignDetail.tsx`       | `src/components/marketing/CampaignDetail.tsx`       | ➕ Nuevo |
-| `next-port-v3/src/components/marketing/LiveActivityFeed.tsx`     | `src/components/marketing/LiveActivityFeed.tsx`     | ➕ Nuevo |
-| `next-port-v3/src/components/marketing/SupportWizardV2.tsx`      | `src/components/marketing/SupportWizardV2.tsx`      | ➕ Nuevo |
-| `next-port-v3/src/app/campaigns/[id]/page.tsx`                   | `src/app/campaigns/[id]/page.tsx`                   | 🔁 Reemplaza |
-| `next-port-v3/src/app/campaigns/[id]/support/page.tsx`           | `src/app/campaigns/[id]/support/page.tsx`           | 🔁 Reemplaza |
+### 1. Wizard mostraba siempre "Lenny Kravitz" (cualquier campaña)
 
-## ✨ Lo que cambia
+**Síntoma:** apoyabas a Bad Bunny, completabas el wizard, y en el paso 6 (confirmación) la card mostraba "Lenny Kravitz · Raise Vibration Tour · Buenos Aires".
 
-**Página de detalle (`/campaigns/[id]`)**
-- Cover hero con gradient del color de la campaña + watermark gigante del artista
-- Demand status card destacada (apoyos / objetivo / % / progress + grid de meta: días / faltan / certeza / beneficio)
-- Sección "Sobre el tour" con la descripción
-- Lista de beneficios con check rojo carmesí
-- Sticky CTA en la derecha con precio estimado + reserva condicional
-- **Live Activity Feed**: feed simulado que tickea cada 5s mostrando @user · ciudad · precio
-- Disclaimer legal con estilo amber
+**Causa:** la wizard buscaba la campaña por **índice de array** (`campaigns[campaignId]`). Las 9 campañas extras del v2 tienen id 100+ pero NO están en `src/lib/data.ts` (están en `marketing-data.ts`), así que la búsqueda fallaba y caía a Lenny (índice 0).
 
-**Wizard de votar (`/campaigns/[id]/support`)**
-- Stepper de 6 pasos en la cabecera, con line connectors animados
-- Título grande tipo "PASO 1/6 → ¿DÓNDE QUERÉS VER EL SHOW?"
-- Cards de opciones con radio buttons rediseñados
-- Multi-select pills para beneficios
-- Cards de niveles (Bronce/Plata/Oro) con borde superior del color
-- Confirmación con header del artista + grid de preferencias + chips de beneficios
-- Footer con "Atrás" + "Siguiente / Confirmar apoyo" + glow rojo en el CTA principal
+**Fix:** la wizard ahora recibe el `Campaign` completo como prop, en vez de buscarlo internamente.
 
-**Compatibilidad preservada**
-- La página `/campaigns/[id]/token` queda intacta — recibe los mismos URL params que antes
-- El componente original `src/components/ui/SupportWizard.tsx` no se borra (queda como fallback si querés revertir)
-- Funciona tanto con las 3 campañas originales como con las 9 extras del v2
+### 2. Token page tiraba 404 para campañas extras
+
+**Síntoma:** si confirmabas el apoyo en una campaña con id 100+ (ej: Bad Bunny), te tiraba a una página de error.
+
+**Causa:** misma raíz — `campaigns[Number(id)]` con id=101 retorna `undefined`.
+
+**Fix:** el token page ahora usa `allCampaigns.find(c => c.id === id)` igual que las otras páginas.
+
+## 🗂️ Archivos (3 reemplazos)
+
+| Origen | Destino en tu repo |
+|---|---|
+| `next-port-v3-1/src/components/marketing/SupportWizardV2.tsx` | `src/components/marketing/SupportWizardV2.tsx` |
+| `next-port-v3-1/src/app/campaigns/[id]/support/page.tsx` | `src/app/campaigns/[id]/support/page.tsx` |
+| `next-port-v3-1/src/app/campaigns/[id]/token/page.tsx` | `src/app/campaigns/[id]/token/page.tsx` |
+
+## ✨ Mejoras menores incluidas
+
+- En el paso de beneficios: copy clarificado → "Esto nos ayuda a entender qué experiencia querés que la productora priorice"
+- En el paso de niveles: agregué disclaimer → "ⓘ Los beneficios exactos varían según el show y la productora. Estos son lineamientos."
+- En la confirmación: "Beneficios elegidos" → "Beneficios que querés que se prioricen" (más honesto sobre qué significa)
+- El token page completamente reskinado a la estética nueva (estaba en el estilo viejo)
 
 ## 🚀 Aplicarlo
 
@@ -45,24 +41,22 @@ Rediseño completo de:
 cd $HOME\Downloads\demandpass\mi-repo
 git checkout main
 git pull origin main
-git checkout -b redesign/campaign-detail
-Copy-Item -Path ..\next-port-v3\* -Destination . -Recurse -Force
+git checkout -b fix/wizard-campaign-lookup
+Copy-Item -Path ..\next-port-v3-1\* -Destination . -Recurse -Force
 git add .
-git commit -m "feat(campaigns): redesigned detail + support wizard"
-git push origin redesign/campaign-detail
+git commit -m "fix(wizard): resolve campaign by id instead of array index"
+git push origin fix/wizard-campaign-lookup
 ```
 
-Después abrís el link del PR que te tira el push → "Create pull request" → esperás Vercel build verde → "Merge pull request".
+Después: PR → Vercel ✅ → Merge.
 
-## 🧪 Cómo testear
+## 🧪 Cómo verificar el fix
 
-Después de mergear y deployar, probá esta secuencia:
-1. **`/campaigns`** → click en cualquier card "Apoyar"
-2. **`/campaigns/X`** → ves el detalle con cover + live feed + sticky CTA
-3. **Click "Apoyar esta campaña"** → entrás al wizard
-4. Completá los 6 pasos
-5. **Click "Confirmar apoyo"** → te lleva al `/token` con tu DemandPass digital
+1. Andá a **`/campaigns`** → click "Apoyar" en **Bad Bunny** (no Lenny)
+2. Completá los 6 pasos
+3. En el paso 6 → la card del artista debe decir **"Bad Bunny · Más Tarde Tour · Ciudad de México"** ✅
+4. "Confirmar apoyo" → te lleva al `/token` → debe mostrar Bad Bunny también, no 404 ✅
 
-## ⏭️ Siguiente pantalla
+## ⏭️ Después de mergear
 
-**`/dashboard` (B2B)** — la pantalla más densa, con KPIs, tabla de campañas, demand pulse, heatmap LATAM, curva de precio, fans verificados.
+Volvemos al plan: **`/dashboard` (B2B)** es la próxima pantalla. Avisame cuando deployes el fix.

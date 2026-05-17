@@ -1,11 +1,15 @@
-// src/components/marketing/SupportWizardV2.tsx
-// Reskinned 6-step wizard. Same data flow + URL params as the original
-// SupportWizard so the /token success page keeps working.
+// src/components/marketing/SupportWizardV2.tsx — v3.1
+// Bugfix: receive the Campaign directly instead of looking it up by array index.
+// The original v3 version did `campaigns[campaignId]` which only resolves the
+// 3 campaigns in src/lib/data.ts — it broke for the 9 extra campaigns from
+// marketing-data.ts (always fell back to Lenny Kravitz). This version is fed
+// the full Campaign object by the page.
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { campaigns, levels, wizardSteps } from "@/lib/data";
+import { levels, wizardSteps } from "@/lib/data";
+import type { Campaign } from "@/lib/data";
 import { Pill } from "@/components/ui/Pill";
 
 type Key = "city" | "price" | "ticket" | "benefits" | "level";
@@ -17,9 +21,8 @@ interface WizardData {
   level: string | null;
 }
 
-export function SupportWizardV2({ campaignId }: { campaignId: number }) {
+export function SupportWizardV2({ campaign }: { campaign: Campaign }) {
   const router = useRouter();
-  const campaign = campaigns[campaignId];
   const [step, setStep] = useState(0);
   const [data, setData] = useState<WizardData>({
     city: null, price: null, ticket: null, benefits: [], level: null,
@@ -61,7 +64,7 @@ export function SupportWizardV2({ campaignId }: { campaignId: number }) {
         benefits: data.benefits.join(","),
         num,
       });
-      router.push(`/campaigns/${campaignId}/token?${params.toString()}`);
+      router.push(`/campaigns/${campaign.id}/token?${params.toString()}`);
       return;
     }
     setStep((s) => s + 1);
@@ -132,7 +135,7 @@ export function SupportWizardV2({ campaignId }: { campaignId: number }) {
 
       {/* Body */}
       <div key={step} className="p-7" style={{ animation: "wiz-fade .25s ease-out" }}>
-        {/* Single-choice (city, price, ticket) */}
+        {/* Single-choice */}
         {cfg.type === "single" && "options" in cfg && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {cfg.options!.map((opt) => {
@@ -152,28 +155,19 @@ export function SupportWizardV2({ campaignId }: { campaignId: number }) {
                 >
                   <div
                     className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                    style={{
-                      border: `2px solid ${sel ? "var(--color-burg3)" : "var(--color-border2)"}`,
-                    }}
+                    style={{ border: `2px solid ${sel ? "var(--color-burg3)" : "var(--color-border2)"}` }}
                     aria-hidden
                   >
-                    {sel && (
-                      <div className="w-2 h-2 rounded-full" style={{ background: "var(--color-burg3)" }} />
-                    )}
+                    {sel && <div className="w-2 h-2 rounded-full" style={{ background: "var(--color-burg3)" }} />}
                   </div>
-                  <span
-                    className="text-[15px] font-semibold"
-                    style={{ color: sel ? "var(--color-txt)" : "var(--color-txt)" }}
-                  >
-                    {opt}
-                  </span>
+                  <span className="text-[15px] font-semibold text-[var(--color-txt)]">{opt}</span>
                 </button>
               );
             })}
           </div>
         )}
 
-        {/* Multi-choice (benefits) */}
+        {/* Multi-choice */}
         {cfg.type === "multi" && "options" in cfg && (
           <div>
             <div className="flex flex-wrap gap-2 mb-4">
@@ -198,72 +192,79 @@ export function SupportWizardV2({ campaignId }: { campaignId: number }) {
               })}
             </div>
             <p className="text-[12px] text-[var(--color-txt3)]">
-              Podés seleccionar más de uno · <span className="tabular-nums" style={{ fontFamily: "var(--font-mono)" }}>{data.benefits.length}</span> seleccionado{data.benefits.length !== 1 ? "s" : ""}
+              Esto nos ayuda a entender qué experiencia querés que la productora priorice. Podés seleccionar más de uno · <span className="tabular-nums" style={{ fontFamily: "var(--font-mono)" }}>{data.benefits.length}</span> seleccionado{data.benefits.length !== 1 ? "s" : ""}
             </p>
           </div>
         )}
 
         {/* Level cards */}
         {cfg.type === "level" && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {levels.map((lvl) => {
-              const sel = data.level === lvl.name;
-              return (
-                <button
-                  key={lvl.name}
-                  type="button"
-                  onClick={() => setData((d) => ({ ...d, level: lvl.name }))}
-                  className="text-left p-5 rounded-xl relative transition-all"
-                  style={{
-                    background: sel ? "rgba(196,38,78,0.10)" : "var(--color-surface2)",
-                    border: `1.5px solid ${sel ? "var(--color-burg3)" : "var(--color-border2)"}`,
-                    borderTop: `4px solid ${lvl.color}`,
-                    boxShadow: sel ? "0 0 0 3px rgba(196,38,78,0.14)" : "none",
-                    fontFamily: "var(--font-sans)",
-                  }}
-                >
-                  {lvl.popular && (
-                    <span
-                      className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-[0.08em]"
-                      style={{
-                        background: "linear-gradient(90deg, var(--color-burg), var(--color-burg3))",
-                        color: "#fff",
-                      }}
-                    >
-                      Más elegido
-                    </span>
-                  )}
-                  <div
-                    className="text-[18px] uppercase font-bold mb-1"
-                    style={{ color: lvl.color, fontFamily: "var(--font-display)", letterSpacing: "0.005em" }}
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {levels.map((lvl) => {
+                const sel = data.level === lvl.name;
+                return (
+                  <button
+                    key={lvl.name}
+                    type="button"
+                    onClick={() => setData((d) => ({ ...d, level: lvl.name }))}
+                    className="text-left p-5 rounded-xl relative transition-all"
+                    style={{
+                      background: sel ? "rgba(196,38,78,0.10)" : "var(--color-surface2)",
+                      border: `1.5px solid ${sel ? "var(--color-burg3)" : "var(--color-border2)"}`,
+                      borderTop: `4px solid ${lvl.color}`,
+                      boxShadow: sel ? "0 0 0 3px rgba(196,38,78,0.14)" : "none",
+                      fontFamily: "var(--font-sans)",
+                    }}
                   >
-                    {lvl.name}
-                  </div>
-                  <div className="text-[12px] text-[var(--color-txt3)] mb-4">{lvl.desc}</div>
-                  <ul className="list-none m-0 flex flex-col gap-2">
-                    {lvl.perks.map((p) => (
-                      <li key={p} className="flex items-center gap-2 text-[12px] text-[var(--color-txt2)]">
-                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: lvl.color }} />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </button>
-              );
-            })}
-          </div>
+                    {lvl.popular && (
+                      <span
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-[0.08em]"
+                        style={{
+                          background: "linear-gradient(90deg, var(--color-burg), var(--color-burg3))",
+                          color: "#fff",
+                        }}
+                      >
+                        Más elegido
+                      </span>
+                    )}
+                    <div
+                      className="text-[18px] uppercase font-bold mb-1"
+                      style={{ color: lvl.color, fontFamily: "var(--font-display)", letterSpacing: "0.005em" }}
+                    >
+                      {lvl.name}
+                    </div>
+                    <div className="text-[12px] text-[var(--color-txt3)] mb-4">{lvl.desc}</div>
+                    <ul className="list-none m-0 flex flex-col gap-2">
+                      {lvl.perks.map((p) => (
+                        <li key={p} className="flex items-center gap-2 text-[12px] text-[var(--color-txt2)]">
+                          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: lvl.color }} />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </button>
+                );
+              })}
+            </div>
+            <p
+              className="mt-4 text-[12px] text-[var(--color-txt3)] leading-[1.55]"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
+              ⓘ Los beneficios exactos varían según el show y la productora. Estos son lineamientos — la productora confirma el detalle si el evento se aprueba.
+            </p>
+          </>
         )}
 
         {/* Confirm */}
         {cfg.type === "confirm" && (
           <div className="rounded-lg" style={{ background: "var(--color-surface2)", border: "1px solid var(--color-border)" }}>
-            {/* Artist header */}
             <div className="flex items-center gap-3 p-5 border-b border-[var(--color-border)]">
               <div
                 className="w-12 h-12 rounded-md flex items-center justify-center font-extrabold text-[16px]"
                 style={{
                   background: `linear-gradient(135deg, ${campaign.color}30, ${campaign.color}90)`,
-                  border: `1px solid var(--color-border2)`,
+                  border: "1px solid var(--color-border2)",
                   color: "#fff",
                   fontFamily: "var(--font-display)",
                   letterSpacing: "1px",
@@ -296,9 +297,7 @@ export function SupportWizardV2({ campaignId }: { campaignId: number }) {
                   className="p-3 rounded-md"
                   style={{ background: "var(--color-bg)", border: "1px solid var(--color-border)" }}
                 >
-                  <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[var(--color-txt3)] mb-1">
-                    {k}
-                  </div>
+                  <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[var(--color-txt3)] mb-1">{k}</div>
                   <div className="text-[14px] font-semibold">{v}</div>
                 </div>
               ))}
@@ -307,7 +306,7 @@ export function SupportWizardV2({ campaignId }: { campaignId: number }) {
             {data.benefits.length > 0 && (
               <div className="px-5 pb-5">
                 <div className="text-[11px] uppercase tracking-[0.14em] font-semibold text-[var(--color-txt2)] mb-2">
-                  Beneficios elegidos
+                  Beneficios que querés que se prioricen
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {data.benefits.map((b) => (
