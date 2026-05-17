@@ -1,4 +1,7 @@
-// src/app/campaigns/[id]/support/page.tsx — wizard page (redesigned shell)
+// src/app/campaigns/[id]/support/page.tsx — v3.1 fix
+// Pass the full Campaign object to the wizard so the artist/city/event
+// resolve correctly for ALL campaigns (including the 9 extras from
+// marketing-data.ts that don't live in src/lib/data.ts).
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { campaigns } from "@/lib/data";
@@ -13,14 +16,6 @@ export default async function SupportPage({ params }: { params: Promise<{ id: st
   const id = Number(idStr);
   const c = allCampaigns.find((x) => x.id === id) ?? null;
   if (!c) notFound();
-
-  // The wizard component only works for indexed campaigns in /lib/data.
-  // For extra campaigns we still render the wizard with `index 0` as a safe fallback —
-  // production would wire this through your real backend / id resolver.
-  const wizardIndex =
-    campaigns.findIndex((x) => x.id === c.id) !== -1
-      ? campaigns.findIndex((x) => x.id === c.id)
-      : 0;
 
   return (
     <div className="max-w-[760px] mx-auto px-6 sm:px-12 py-10">
@@ -58,7 +53,7 @@ export default async function SupportPage({ params }: { params: Promise<{ id: st
         </Pill>
       </div>
 
-      <SupportWizardV2 campaignId={wizardIndex} />
+      <SupportWizardV2 campaign={c} />
     </div>
   );
 }
