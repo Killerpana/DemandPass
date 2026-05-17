@@ -14,286 +14,150 @@ export default function Home() {
     <>
       <LiveToasts />
 
-      {/* ── HERO — asimétrico, editorial ── */}
-      <section style={{
-        minHeight: "92vh",
-        display: "flex",
-        alignItems: "center",
-        position: "relative",
-        overflow: "hidden",
-        padding: "0 0 0 0",
-      }}>
-        {/* Fondo con textura noise + gradiente */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse 70% 80% at 20% 50%, rgba(139,15,53,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 80% 20%, rgba(139,15,53,0.06) 0%, transparent 50%)",
-          zIndex: 0,
-        }} />
-        {/* Líneas decorativas verticales */}
-        <div style={{
-          position: "absolute", top: 0, right: "38%", bottom: 0,
-          width: 1, background: "linear-gradient(to bottom, transparent, rgba(139,15,53,0.3), transparent)",
-          zIndex: 0,
-        }} />
-        <div style={{
-          position: "absolute", top: 0, right: "62%", bottom: 0,
-          width: 1, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.04), transparent)",
-          zIndex: 0,
-        }} />
+      {/* ── HERO ── */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        {/* Gradient background */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_20%_50%,rgba(139,15,53,0.15)_0%,transparent_60%),radial-gradient(ellipse_50%_60%_at_80%_20%,rgba(139,15,53,0.06)_0%,transparent_50%)]" />
+        {/* Vertical lines */}
+        <div className="absolute top-0 bottom-0 right-[38%] w-px bg-gradient-to-b from-transparent via-[rgba(139,15,53,0.3)] to-transparent" />
+        <div className="absolute top-0 bottom-0 left-[25%] w-px bg-gradient-to-b from-transparent via-[rgba(255,255,255,0.04)] to-transparent" />
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
 
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 40px", width: "100%", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+        <div className="max-w-[1100px] mx-auto px-10 py-20 w-full relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-            {/* COLUMNA IZQUIERDA — contenido */}
+            {/* LEFT — content */}
             <div>
-              {/* Eyebrow badge */}
-              <div style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: "rgba(139,15,53,0.1)",
-                border: "1px solid rgba(139,15,53,0.3)",
-                borderRadius: 4, padding: "6px 14px",
-                marginBottom: 32,
-              }}>
+              {/* Badge */}
+              <div className="animate-in inline-flex items-center gap-2 bg-[rgba(139,15,53,0.1)] border border-[rgba(139,15,53,0.3)] rounded px-4 py-2 mb-8">
                 <span className="dot-pulse" />
-                <span style={{ fontSize: 11, fontWeight: 700, color: "var(--burg3)", letterSpacing: "2px", textTransform: "uppercase", fontFamily: "'Barlow Condensed', sans-serif" }}>
+                <span className="text-[11px] font-bold text-[var(--burg3)] tracking-[2px] uppercase font-[family-name:var(--font-condensed,_'Barlow_Condensed')]">
                   <AnimatedCounter start={12453} /> fans verificados
                 </span>
               </div>
 
-              {/* Headline — Bebas Neue estilo del logo */}
-              <h1 style={{
-                fontFamily: "'Bebas Neue', 'Barlow Condensed', sans-serif",
-                fontSize: "clamp(56px, 7vw, 88px)",
-                fontWeight: 400,
-                letterSpacing: "2px",
-                lineHeight: 0.95,
-                color: "var(--txt)",
-                marginBottom: 24,
-                textTransform: "uppercase",
-              }}>
+              {/* Headline */}
+              <h1 className="animate-in animate-in-d1 font-[family-name:'Bebas_Neue',_'Barlow_Condensed',_sans-serif] text-[clamp(60px,7vw,96px)] font-normal tracking-[3px] leading-[0.92] text-[var(--txt)] uppercase mb-6">
                 DEMANDA<br />
-                <span style={{ color: "var(--burg2)" }}>VERIFICADA</span><br />
+                <span className="text-[var(--burg2)]">VERIFICADA</span><br />
                 PARA EVENTOS<br />
                 EN VIVO
               </h1>
 
-              <p style={{
-                fontSize: 16, color: "var(--txt2)", lineHeight: 1.7,
-                maxWidth: 400, marginBottom: 16,
-                borderLeft: "2px solid var(--burg)",
-                paddingLeft: 16,
-              }}>
+              <p className="animate-in animate-in-d2 text-[16px] text-[var(--txt2)] leading-[1.7] max-w-[400px] mb-4 border-l-2 border-[var(--burg)] pl-4">
                 DemandPass convierte el apoyo de fans en intención de compra verificable{" "}
-                <strong style={{ color: "var(--txt)" }}>antes de confirmar un show.</strong>
+                <strong className="text-[var(--txt)]">antes de confirmar un show.</strong>
               </p>
-              <p style={{ fontSize: 13, color: "var(--txt3)", maxWidth: 380, marginBottom: 40, lineHeight: 1.6 }}>
+              <p className="animate-in animate-in-d2 text-[13px] text-[var(--txt3)] max-w-[380px] mb-10 leading-[1.6]">
                 Fans apoyan campañas. Productoras reciben datos reales para decidir artista, ciudad, precio y venue.
               </p>
 
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 48 }}>
-                <Link href="/campaigns" className="btn-burg">
+              {/* CTAs */}
+              <div className="animate-in animate-in-d3 flex gap-3 flex-wrap mb-12">
+                <Link href="/campaigns" className="inline-flex items-center gap-2 px-7 py-4 rounded bg-[var(--burg)] text-white text-[14px] font-extrabold uppercase tracking-[1.5px] italic font-[family-name:'Barlow_Condensed',sans-serif] hover:opacity-90 hover:-translate-y-0.5 transition-all min-h-[44px]">
                   Explorar campañas →
                 </Link>
-                <Link href="/dashboard" className="btn-ghost-link">
+                <Link href="/dashboard" className="inline-flex items-center px-7 py-4 rounded bg-transparent text-[var(--txt2)] border border-[var(--border2)] text-[14px] font-semibold hover:border-[var(--border3)] hover:text-[var(--txt)] transition-all min-h-[44px]">
                   Ver dashboard B2B
                 </Link>
               </div>
 
-              {/* Stats en línea */}
-              <div style={{ display: "flex", gap: 32, borderTop: "1px solid var(--border)", paddingTop: 24 }}>
+              {/* Stats */}
+              <div className="animate-in animate-in-d4 flex gap-8 border-t border-[var(--border)] pt-6">
                 {[
                   { val: "12.4K", label: "Fans registrados" },
                   { val: "82%", label: "Demanda verificada" },
                   { val: "3", label: "Campañas activas" },
                 ].map(({ val, label }) => (
                   <div key={label}>
-                    <div style={{
-                      fontFamily: "'Bebas Neue', sans-serif",
-                      fontSize: 32, color: "var(--burg2)",
-                      letterSpacing: "1px", lineHeight: 1,
-                      fontVariantNumeric: "tabular-nums",
-                    }}>{val}</div>
-                    <div style={{ fontSize: 11, color: "var(--txt3)", marginTop: 4, fontWeight: 500, textTransform: "uppercase", letterSpacing: "1px" }}>{label}</div>
+                    <div className="font-[family-name:'Bebas_Neue',sans-serif] text-[32px] text-[var(--burg2)] tracking-[1px] leading-none tabular-nums">{val}</div>
+                    <div className="text-[11px] text-[var(--txt3)] mt-1 font-medium uppercase tracking-[1px]">{label}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* COLUMNA DERECHA — visual */}
-            <div style={{ position: "relative" }}>
-              {/* Card principal — campaña destacada */}
-              <div style={{
-                background: "var(--surface2)",
-                border: "1px solid rgba(139,15,53,0.25)",
-                borderRadius: 16,
-                padding: 28,
-                position: "relative",
-                overflow: "hidden",
-              }}>
-                {/* Glow top */}
-                <div style={{
-                  position: "absolute", top: 0, left: 0, right: 0, height: 2,
-                  background: "linear-gradient(90deg, transparent, var(--burg2), transparent)",
-                }} />
+            {/* RIGHT — campaign card */}
+            <div className="relative">
+              <div className="relative bg-[var(--surface2)] border border-[rgba(139,15,53,0.25)] rounded-2xl p-7 overflow-hidden">
+                {/* Top glow line */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--burg2)] to-transparent" />
 
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "2px", color: "var(--txt3)", fontFamily: "'Barlow Condensed', sans-serif" }}>
-                    Campaña activa
-                  </span>
-                  <span style={{
-                    background: "rgba(139,15,53,0.12)", color: "var(--burg3)",
-                    border: "1px solid rgba(139,15,53,0.25)",
-                    borderRadius: 4, padding: "3px 10px",
-                    fontSize: 10, fontWeight: 700, letterSpacing: "1px",
-                    textTransform: "uppercase", fontFamily: "'Barlow Condensed', sans-serif",
-                  }}>Oficial</span>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-[10px] font-bold uppercase tracking-[2px] text-[var(--txt3)] font-[family-name:'Barlow_Condensed',sans-serif]">Campaña activa</span>
+                  <span className="bg-[rgba(139,15,53,0.12)] text-[var(--burg3)] border border-[rgba(139,15,53,0.25)] rounded px-2.5 py-1 text-[10px] font-bold tracking-[1px] uppercase font-[family-name:'Barlow_Condensed',sans-serif]">Oficial</span>
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
-                  <div style={{
-                    width: 52, height: 52, borderRadius: 12,
-                    background: "rgba(139,15,53,0.15)",
-                    border: "1px solid rgba(139,15,53,0.3)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 18, color: "var(--burg2)", letterSpacing: "1px",
-                  }}>LK</div>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 rounded-xl bg-[rgba(139,15,53,0.15)] border border-[rgba(139,15,53,0.3)] flex items-center justify-center font-[family-name:'Bebas_Neue',sans-serif] text-[18px] text-[var(--burg2)] tracking-[1px] shrink-0">LK</div>
                   <div>
-                    <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 20, fontWeight: 800, color: "var(--txt)", letterSpacing: "0.5px" }}>
-                      Lenny Kravitz
-                    </div>
-                    <div style={{ fontSize: 12, color: "var(--txt3)" }}>Raise Vibration Tour · Buenos Aires</div>
+                    <div className="font-[family-name:'Barlow_Condensed',sans-serif] text-[20px] font-extrabold text-[var(--txt)] tracking-[0.5px]">Lenny Kravitz</div>
+                    <div className="text-[12px] text-[var(--txt3)]">Raise Vibration Tour · Buenos Aires</div>
                   </div>
                 </div>
 
-                {/* Barra de progreso */}
-                <div style={{ marginBottom: 12 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                    <span style={{ fontSize: 12, color: "var(--txt2)", fontWeight: 600, fontVariantNumeric: "tabular-nums" }}>5.420 apoyos</span>
-                    <span style={{ fontSize: 12, color: "var(--burg3)", fontWeight: 700 }}>68%</span>
+                {/* Progress */}
+                <div className="mb-4">
+                  <div className="flex justify-between mb-2">
+                    <span className="text-[12px] text-[var(--txt2)] font-semibold tabular-nums">5.420 apoyos</span>
+                    <span className="text-[12px] text-[var(--burg3)] font-bold">68%</span>
                   </div>
-                  <div style={{ height: 6, background: "var(--surface3)", borderRadius: 3, overflow: "hidden" }}>
-                    <div style={{
-                      height: "100%", width: "68%", borderRadius: 3,
-                      background: "linear-gradient(90deg, var(--burg), var(--burg2))",
-                    }} />
+                  <div className="h-1.5 bg-[var(--surface3)] rounded-full overflow-hidden">
+                    <div className="h-full w-[68%] rounded-full bg-gradient-to-r from-[var(--burg)] to-[var(--burg2)]" />
                   </div>
-                  <div style={{ fontSize: 11, color: "var(--txt3)", marginTop: 6 }}>Objetivo: 8.000 apoyos</div>
+                  <div className="text-[11px] text-[var(--txt3)] mt-1.5">Objetivo: 8.000 apoyos</div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
-                  {[
-                    { label: "Precio est.", val: "USD 80–120" },
-                    { label: "Quedan", val: "47 días" },
-                  ].map(({ label, val }) => (
-                    <div key={label} style={{ background: "var(--surface3)", borderRadius: 8, padding: "10px 12px" }}>
-                      <div style={{ fontSize: 10, color: "var(--txt3)", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 4 }}>{label}</div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "var(--txt)", fontVariantNumeric: "tabular-nums" }}>{val}</div>
+                <div className="grid grid-cols-2 gap-2.5 mb-4">
+                  {[{ label: "Precio est.", val: "USD 80–120" }, { label: "Quedan", val: "47 días" }].map(({ label, val }) => (
+                    <div key={label} className="bg-[var(--surface3)] rounded-lg p-3">
+                      <div className="text-[10px] text-[var(--txt3)] uppercase tracking-[1px] mb-1">{label}</div>
+                      <div className="text-[14px] font-bold text-[var(--txt)] tabular-nums">{val}</div>
                     </div>
                   ))}
                 </div>
 
-                <Link href="/campaigns/0" style={{
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  padding: "11px", borderRadius: 8,
-                  background: "var(--burg)", color: "#fff",
-                  fontSize: 13, fontWeight: 800,
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontStyle: "italic", letterSpacing: "1px", textTransform: "uppercase",
-                }}>
+                <Link href="/campaigns/0" className="flex items-center justify-center py-3 rounded-lg bg-[var(--burg)] text-white text-[13px] font-extrabold uppercase tracking-[1px] italic font-[family-name:'Barlow_Condensed',sans-serif] hover:opacity-90 transition-opacity">
                   Ver campaña y apoyar →
                 </Link>
               </div>
 
-              {/* Card flotante — stats */}
-              <div style={{
-                position: "absolute", bottom: -20, left: -24,
-                background: "var(--surface)",
-                border: "1px solid var(--border2)",
-                borderRadius: 12, padding: "14px 18px",
-                display: "flex", alignItems: "center", gap: 12,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-              }}>
-                <div style={{
-                  width: 36, height: 36, borderRadius: 8,
-                  background: "rgba(16,185,129,0.12)",
-                  border: "1px solid rgba(16,185,129,0.2)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16,
-                }}>🔥</div>
+              {/* Floating badge */}
+              <div className="absolute -bottom-5 -left-6 bg-[var(--surface)] border border-[var(--border2)] rounded-xl px-4 py-3 flex items-center gap-3 shadow-2xl">
+                <div className="w-9 h-9 rounded-lg bg-[rgba(16,185,129,0.12)] border border-[rgba(16,185,129,0.2)] flex items-center justify-center text-base">🔥</div>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: "var(--txt)" }}>Alta demanda</div>
-                  <div style={{ fontSize: 11, color: "var(--txt3)" }}>+234 apoyos esta semana</div>
+                  <div className="text-[13px] font-bold text-[var(--txt)]">Alta demanda</div>
+                  <div className="text-[11px] text-[var(--txt3)]">+234 apoyos esta semana</div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* ── CÓMO FUNCIONA — full width con números grandes ── */}
+      {/* ── CÓMO FUNCIONA ── */}
       <ScrollReveal>
-        <section style={{
-          padding: "80px 40px",
-          borderTop: "1px solid var(--border)",
-          background: "var(--surface)",
-          position: "relative", overflow: "hidden",
-        }}>
-          {/* Número decorativo de fondo */}
-          <div style={{
-            position: "absolute", right: -20, top: -20,
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 300, color: "rgba(139,15,53,0.04)",
-            lineHeight: 1, userSelect: "none", pointerEvents: "none",
-          }}>DP</div>
-
-          <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
-            <div style={{ marginBottom: 48 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "3px", color: "var(--burg2)", marginBottom: 8, fontFamily: "'Barlow Condensed', sans-serif" }}>
-                Cómo funciona
-              </p>
-              <h2 style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "clamp(40px, 5vw, 64px)",
-                letterSpacing: "2px", color: "var(--txt)",
-                textTransform: "uppercase", lineHeight: 1,
-              }}>
-                Tres pasos.<br />
-                <span style={{ color: "var(--burg2)" }}>Datos reales.</span>
+        <section className="py-20 border-t border-[var(--border)] bg-[var(--surface)] relative overflow-hidden">
+          <div className="absolute right-[-20px] top-[-20px] font-[family-name:'Bebas_Neue',sans-serif] text-[300px] text-[rgba(139,15,53,0.04)] leading-none select-none pointer-events-none">DP</div>
+          <div className="max-w-[1100px] mx-auto px-10 relative z-10">
+            <div className="mb-12">
+              <p className="text-[11px] font-bold uppercase tracking-[3px] text-[var(--burg2)] mb-2 font-[family-name:'Barlow_Condensed',sans-serif]">Cómo funciona</p>
+              <h2 className="font-[family-name:'Bebas_Neue',sans-serif] text-[clamp(40px,5vw,64px)] tracking-[2px] text-[var(--txt)] uppercase leading-none">
+                Tres pasos.<br /><span className="text-[var(--burg2)]">Datos reales.</span>
               </h2>
             </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 1, background: "var(--border)" }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)]">
               {[
                 { n: "01", title: "Fans apoyan", desc: "Indican ciudad, rango de precio y tipo de entrada. Las campañas oficiales incluyen reserva condicional." },
                 { n: "02", title: "Se mide la demanda", desc: "Datos verificados por ciudad, precio aceptado y perfil del fan. Sin bots ni datos falsos." },
                 { n: "03", title: "Productoras deciden", desc: "Dashboard con forecast, venue recomendado y lista de fans verificados con acceso prioritario si el show avanza." },
               ].map(({ n, title, desc }) => (
-                <div key={n} style={{
-                  background: "var(--surface)", padding: "32px 28px",
-                  position: "relative", overflow: "hidden",
-                }}>
-                  <div style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 80, color: "rgba(139,15,53,0.08)",
-                    position: "absolute", top: -10, right: 16,
-                    lineHeight: 1, userSelect: "none",
-                  }}>{n}</div>
-                  <div style={{
-                    width: 36, height: 36, borderRadius: 4,
-                    background: "var(--burg)", display: "flex",
-                    alignItems: "center", justifyContent: "center",
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: 16, color: "#fff", letterSpacing: "1px",
-                    marginBottom: 16,
-                  }}>{n}</div>
-                  <h3 style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: 20, fontWeight: 800, color: "var(--txt)",
-                    marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.5px",
-                  }}>{title}</h3>
-                  <p style={{ fontSize: 13, color: "var(--txt2)", lineHeight: 1.7 }}>{desc}</p>
+                <div key={n} className="bg-[var(--surface)] p-8 relative overflow-hidden">
+                  <div className="absolute top-[-10px] right-4 font-[family-name:'Bebas_Neue',sans-serif] text-[80px] text-[rgba(139,15,53,0.06)] leading-none select-none">{n}</div>
+                  <div className="w-9 h-9 rounded bg-[var(--burg)] flex items-center justify-center font-[family-name:'Bebas_Neue',sans-serif] text-[16px] text-white tracking-[1px] mb-4">{n}</div>
+                  <h3 className="font-[family-name:'Barlow_Condensed',sans-serif] text-[20px] font-extrabold text-[var(--txt)] uppercase tracking-[0.5px] mb-2.5">{title}</h3>
+                  <p className="text-[13px] text-[var(--txt2)] leading-[1.7]">{desc}</p>
                 </div>
               ))}
             </div>
@@ -302,95 +166,59 @@ export default function Home() {
       </ScrollReveal>
 
       {/* ── DISCLAIMER ── */}
-      <section style={{ padding: "16px 40px", background: "rgba(139,15,53,0.05)", borderTop: "1px solid rgba(139,15,53,0.15)", borderBottom: "1px solid rgba(139,15,53,0.15)" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap", justifyContent: "center" }}>
+      <section className="py-4 px-10 bg-[rgba(139,15,53,0.05)] border-y border-[rgba(139,15,53,0.15)]">
+        <div className="max-w-[1100px] mx-auto flex items-center gap-6 flex-wrap justify-center">
           {["No es una entrada. Es un registro de interés verificado.", "El show no está confirmado. La reserva es condicional.", "La venta final ocurre en la ticketera oficial."].map(text => (
-            <div key={text} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--txt3)" }}>
-              <span style={{ width: 4, height: 4, borderRadius: "50%", background: "var(--burg2)", display: "inline-block", flexShrink: 0 }} />
+            <div key={text} className="flex items-center gap-2 text-[12px] text-[var(--txt3)]">
+              <span className="w-1 h-1 rounded-full bg-[var(--burg2)] shrink-0 inline-block" />
               {text}
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── CAMPAÑAS DESTACADAS ── */}
+      {/* ── CAMPAÑAS ── */}
       <ScrollReveal delay={100}>
-        <section style={{ padding: "80px 40px", borderTop: "1px solid var(--border)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 40, flexWrap: "wrap", gap: 16 }}>
+        <section className="py-20 px-10 border-t border-[var(--border)]">
+          <div className="max-w-[1100px] mx-auto">
+            <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
               <div>
-                <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "3px", color: "var(--burg2)", marginBottom: 8, fontFamily: "'Barlow Condensed', sans-serif" }}>
-                  Campañas destacadas
-                </p>
-                <h2 style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "clamp(36px, 4vw, 52px)",
-                  letterSpacing: "2px", color: "var(--txt)",
-                  textTransform: "uppercase", lineHeight: 1,
-                }}>
-                  Apoyá antes que<br />
-                  <span style={{ color: "var(--burg2)" }}>se confirme</span>
+                <p className="text-[11px] font-bold uppercase tracking-[3px] text-[var(--burg2)] mb-2 font-[family-name:'Barlow_Condensed',sans-serif]">Campañas destacadas</p>
+                <h2 className="font-[family-name:'Bebas_Neue',sans-serif] text-[clamp(36px,4vw,52px)] tracking-[2px] text-[var(--txt)] uppercase leading-none">
+                  Apoyá antes que<br /><span className="text-[var(--burg2)]">se confirme</span>
                 </h2>
               </div>
-              <Link href="/campaigns" style={{
-                padding: "10px 20px", borderRadius: 4,
-                border: "1px solid var(--border2)",
-                background: "transparent", color: "var(--txt2)",
-                fontSize: 13, fontWeight: 600, fontFamily: "'Barlow', sans-serif",
-              }}>
+              <Link href="/campaigns" className="px-5 py-2.5 rounded border border-[var(--border2)] text-[var(--txt2)] text-[13px] font-semibold hover:border-[var(--border3)] hover:text-[var(--txt)] transition-all">
                 Ver todas →
               </Link>
             </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {campaigns.map((c) => {
                 const pct = Math.min(100, Math.round((c.current / c.goal) * 100));
                 const isTrending = pct >= 70;
                 return (
-                  <Link key={c.id} href={`/campaigns/${c.id}`} className="campaign-card">
+                  <Link key={c.id} href={`/campaigns/${c.id}`} className="campaign-card bg-[var(--surface2)] border border-[var(--border)] rounded-xl p-5">
                     {isTrending && (
-                      <div style={{
-                        position: "absolute", top: 12, right: 12,
-                        background: "rgba(217,119,6,0.12)",
-                        border: "1px solid rgba(217,119,6,0.3)",
-                        borderRadius: 4, padding: "3px 8px",
-                        fontSize: 10, fontWeight: 700, color: "var(--amber2)",
-                        fontFamily: "'Barlow Condensed', sans-serif",
-                        letterSpacing: "0.5px", textTransform: "uppercase",
-                      }}>🔥 Alta demanda</div>
+                      <div className="absolute top-3 right-3 bg-[rgba(217,119,6,0.12)] border border-[rgba(217,119,6,0.3)] rounded px-2 py-1 text-[10px] font-bold text-[var(--amber2)] uppercase tracking-[0.5px] font-[family-name:'Barlow_Condensed',sans-serif]">
+                        🔥 Alta demanda
+                      </div>
                     )}
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-                      <div style={{
-                        width: 44, height: 44, borderRadius: 10,
-                        background: `${c.color}15`,
-                        border: `1px solid ${c.color}30`,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        fontFamily: "'Bebas Neue', sans-serif",
-                        fontSize: 14, color: c.color, letterSpacing: "1px", flexShrink: 0,
-                      }}>{c.img}</div>
-                      <div style={{ minWidth: 0 }}>
-                        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 16, fontWeight: 800, color: "var(--txt)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.artist}</div>
-                        <div style={{ fontSize: 12, color: "var(--txt3)" }}>{c.city}</div>
+                    <div className="flex items-center gap-2.5 mb-3.5">
+                      <div className="w-11 h-11 rounded-xl flex items-center justify-center font-[family-name:'Bebas_Neue',sans-serif] text-[14px] tracking-[1px] shrink-0" style={{ background: `${c.color}15`, border: `1px solid ${c.color}30`, color: c.color }}>{c.img}</div>
+                      <div className="min-w-0">
+                        <div className="font-[family-name:'Barlow_Condensed',sans-serif] text-[16px] font-extrabold text-[var(--txt)] truncate">{c.artist}</div>
+                        <div className="text-[12px] text-[var(--txt3)]">{c.city}</div>
                       </div>
                     </div>
-                    <span style={{
-                      display: "inline-flex", alignItems: "center",
-                      background: c.type === "official" ? "rgba(139,15,53,0.1)" : "rgba(163,22,69,0.08)",
-                      color: c.type === "official" ? "var(--burg3)" : "#e8a0b0",
-                      border: `1px solid ${c.type === "official" ? "rgba(139,15,53,0.25)" : "rgba(163,22,69,0.2)"}`,
-                      borderRadius: 4, padding: "2px 8px",
-                      fontSize: 10, fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase",
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      marginBottom: 12,
-                    }}>
+                    <span className="inline-flex items-center rounded px-2 py-0.5 text-[10px] font-bold tracking-[1px] uppercase font-[family-name:'Barlow_Condensed',sans-serif] mb-3" style={{ background: c.type === "official" ? "rgba(139,15,53,0.1)" : "rgba(163,22,69,0.08)", color: c.type === "official" ? "var(--burg3)" : "#e8a0b0", border: `1px solid ${c.type === "official" ? "rgba(139,15,53,0.25)" : "rgba(163,22,69,0.2)"}` }}>
                       {c.type === "official" ? "Oficial" : "Fan demand"}
                     </span>
-                    <div style={{ height: 4, background: "var(--surface3)", borderRadius: 2, overflow: "hidden", marginBottom: 8 }}>
-                      <div style={{ height: "100%", width: `${pct}%`, borderRadius: 2, background: "linear-gradient(90deg, var(--burg), var(--burg2))" }} />
+                    <div className="h-1 bg-[var(--surface3)] rounded-full overflow-hidden mb-2">
+                      <div className="h-full rounded-full bg-gradient-to-r from-[var(--burg)] to-[var(--burg2)]" style={{ width: `${pct}%` }} />
                     </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12 }}>
-                      <span style={{ color: "var(--txt2)", fontWeight: 600, fontVariantNumeric: "tabular-nums" }}>{c.current.toLocaleString("es-AR")} apoyos</span>
-                      <span style={{ color: "var(--burg3)", fontWeight: 700 }}>{pct}%</span>
+                    <div className="flex justify-between text-[12px]">
+                      <span className="text-[var(--txt2)] font-semibold tabular-nums">{c.current.toLocaleString("es-AR")} apoyos</span>
+                      <span className="text-[var(--burg3)] font-bold">{pct}%</span>
                     </div>
                   </Link>
                 );
@@ -400,66 +228,30 @@ export default function Home() {
         </section>
       </ScrollReveal>
 
-      {/* ── B2B BANNER — asimétrico ── */}
+      {/* ── B2B BANNER ── */}
       <ScrollReveal delay={150}>
-        <section style={{
-          padding: "0 40px 80px",
-          background: "var(--surface)",
-          borderTop: "1px solid var(--border)",
-        }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <div style={{
-              display: "grid", gridTemplateColumns: "1fr 1fr",
-              background: "var(--surface2)",
-              border: "1px solid rgba(139,15,53,0.2)",
-              borderRadius: 12, overflow: "hidden",
-            }}>
-              {/* Izquierda — contenido */}
-              <div style={{ padding: "48px 40px", borderRight: "1px solid var(--border)" }}>
-                <p style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "3px", color: "var(--burg2)", marginBottom: 16, fontFamily: "'Barlow Condensed', sans-serif" }}>
-                  Para productoras y promotores
-                </p>
-                <h2 style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: 48, letterSpacing: "2px", color: "var(--txt)",
-                  textTransform: "uppercase", lineHeight: 1, marginBottom: 16,
-                }}>
-                  Tomá decisiones<br />
-                  <span style={{ color: "var(--burg2)" }}>con datos reales</span>
+        <section className="px-10 pb-20 bg-[var(--surface)] border-t border-[var(--border)]">
+          <div className="max-w-[1100px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 bg-[var(--surface2)] border border-[rgba(139,15,53,0.2)] rounded-xl overflow-hidden">
+              <div className="p-12 border-r border-[var(--border)]">
+                <p className="text-[10px] font-bold uppercase tracking-[3px] text-[var(--burg2)] mb-4 font-[family-name:'Barlow_Condensed',sans-serif]">Para productoras y promotores</p>
+                <h2 className="font-[family-name:'Bebas_Neue',sans-serif] text-[48px] tracking-[2px] text-[var(--txt)] uppercase leading-none mb-4">
+                  Tomá decisiones<br /><span className="text-[var(--burg2)]">con datos reales</span>
                 </h2>
-                <p style={{ fontSize: 14, color: "var(--txt2)", lineHeight: 1.7, marginBottom: 28 }}>
-                  Dashboard con demanda verificada por ciudad, rango de precio aceptado, forecast de venta y recomendación automática de venue.
-                </p>
-                <Link href="/dashboard" style={{
-                  display: "inline-flex", alignItems: "center",
-                  padding: "12px 24px", borderRadius: 4,
-                  background: "var(--burg)", color: "#fff",
-                  fontSize: 13, fontWeight: 800,
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontStyle: "italic", letterSpacing: "1.5px", textTransform: "uppercase",
-                }}>
+                <p className="text-[14px] text-[var(--txt2)] leading-[1.7] mb-7">Dashboard con demanda verificada por ciudad, rango de precio aceptado, forecast de venta y recomendación automática de venue.</p>
+                <Link href="/dashboard" className="inline-flex items-center px-6 py-3 rounded bg-[var(--burg)] text-white text-[13px] font-extrabold uppercase tracking-[1.5px] italic font-[family-name:'Barlow_Condensed',sans-serif] hover:opacity-90 transition-opacity">
                   Ver dashboard B2B →
                 </Link>
               </div>
-
-              {/* Derecha — métricas */}
-              <div style={{ padding: "48px 40px", background: "rgba(139,15,53,0.03)" }}>
+              <div className="p-12 bg-[rgba(139,15,53,0.03)]">
                 {[
                   { val: "82%", label: "Fans verificados", color: "var(--burg2)" },
                   { val: "USD 74", label: "Precio promedio aceptado", color: "var(--txt)" },
                   { val: "7.800", label: "Forecast de tickets 48hs", color: "var(--emerald2)" },
-                ].map(({ val, label, color }, i) => (
-                  <div key={label} style={{
-                    paddingBottom: i < 2 ? 24 : 0,
-                    marginBottom: i < 2 ? 24 : 0,
-                    borderBottom: i < 2 ? "1px solid var(--border)" : "none",
-                  }}>
-                    <div style={{
-                      fontFamily: "'Bebas Neue', sans-serif",
-                      fontSize: 48, color, letterSpacing: "1px", lineHeight: 1,
-                      fontVariantNumeric: "tabular-nums",
-                    }}>{val}</div>
-                    <div style={{ fontSize: 12, color: "var(--txt3)", marginTop: 4, textTransform: "uppercase", letterSpacing: "1px", fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600 }}>{label}</div>
+                ].map(({ val, label, color }, i, arr) => (
+                  <div key={label} className={i < arr.length - 1 ? "pb-6 mb-6 border-b border-[var(--border)]" : ""}>
+                    <div className="font-[family-name:'Bebas_Neue',sans-serif] text-[48px] tracking-[1px] leading-none tabular-nums" style={{ color }}>{val}</div>
+                    <div className="text-[12px] text-[var(--txt3)] mt-1 uppercase tracking-[1px] font-[family-name:'Barlow_Condensed',sans-serif] font-semibold">{label}</div>
                   </div>
                 ))}
               </div>
@@ -470,13 +262,11 @@ export default function Home() {
 
       {/* ── FAQ ── */}
       <ScrollReveal delay={200}>
-        <section style={{ padding: "80px 40px", borderTop: "1px solid var(--border)" }}>
-          <div style={{ maxWidth: 700, margin: "0 auto" }}>
-            <div style={{ marginBottom: 48 }}>
-              <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "3px", color: "var(--burg2)", marginBottom: 8, fontFamily: "'Barlow Condensed', sans-serif" }}>Preguntas frecuentes</p>
-              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, letterSpacing: "2px", color: "var(--txt)", textTransform: "uppercase", lineHeight: 1 }}>
-                Lo que necesitás saber
-              </h2>
+        <section className="py-20 px-10 border-t border-[var(--border)]">
+          <div className="max-w-[700px] mx-auto">
+            <div className="mb-12">
+              <p className="text-[11px] font-bold uppercase tracking-[3px] text-[var(--burg2)] mb-2 font-[family-name:'Barlow_Condensed',sans-serif]">Preguntas frecuentes</p>
+              <h2 className="font-[family-name:'Bebas_Neue',sans-serif] text-[48px] tracking-[2px] text-[var(--txt)] uppercase leading-none">Lo que necesitás saber</h2>
             </div>
             {[
               { q: "¿DemandPass me garantiza una entrada?", a: "No. DemandPass registra tu interés y te da prioridad de acceso si el show se confirma. La compra de la entrada ocurre en la ticketera oficial, no en esta plataforma." },
@@ -484,13 +274,9 @@ export default function Home() {
               { q: "¿Qué diferencia hay entre Campaña oficial y Fan demand?", a: "Las campañas oficiales son impulsadas por la productora e incluyen reserva condicional. Las Fan demand son iniciadas por fans — si se alcanza el objetivo, la productora evalúa confirmarlo." },
               { q: "¿Para qué sirve el DemandPass token?", a: "El token es tu registro de prioridad. Si el show se confirma, te permite acceder a la preventa antes que el público general, según el nivel elegido." },
             ].map(({ q, a }, i, arr) => (
-              <div key={q} style={{ borderBottom: i < arr.length - 1 ? "1px solid var(--border)" : "none", padding: "24px 0" }}>
-                <h3 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontSize: 18, fontWeight: 800, color: "var(--txt)",
-                  marginBottom: 10, letterSpacing: "0.3px", textTransform: "uppercase",
-                }}>{q}</h3>
-                <p style={{ fontSize: 14, color: "var(--txt2)", lineHeight: 1.7 }}>{a}</p>
+              <div key={q} className={`py-6 ${i < arr.length - 1 ? "border-b border-[var(--border)]" : ""}`}>
+                <h3 className="font-[family-name:'Barlow_Condensed',sans-serif] text-[18px] font-extrabold text-[var(--txt)] uppercase tracking-[0.3px] mb-2.5">{q}</h3>
+                <p className="text-[14px] text-[var(--txt2)] leading-[1.7]">{a}</p>
               </div>
             ))}
           </div>

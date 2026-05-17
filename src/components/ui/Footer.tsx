@@ -2,61 +2,53 @@ import Link from "next/link";
 
 function DIcon() {
   return (
-    <svg width={24} height={24} viewBox="0 0 40 40" fill="none">
-      <path d="M6 4H18C28 4 34 10 34 20C34 30 28 36 18 36H6V4Z" fill="none" stroke="#8B0F35" strokeWidth="3.5" strokeLinejoin="round"/>
-      <rect x="11" y="26" width="3.5" height="6" rx="1" fill="#8B0F35" opacity="0.7"/>
-      <rect x="16" y="21" width="3.5" height="11" rx="1" fill="#A31645" opacity="0.9"/>
-      <rect x="21" y="16" width="3.5" height="16" rx="1" fill="#A31645"/>
+    <svg width={24} height={28} viewBox="0 0 85 100" fill="none" aria-hidden="true">
+      <path d="M8 8 L8 92 L42 92 C68 92 78 76 78 50 C78 24 68 8 42 8 Z" fill="none" stroke="#8B0F35" strokeWidth="7" strokeLinejoin="round"/>
+      <path d="M42 8 L65 8 L78 22" fill="none" stroke="#8B0F35" strokeWidth="7" strokeLinejoin="round"/>
+      <rect x="22" y="68" width="8" height="16" rx="1.5" fill="#7A0F2E"/>
+      <rect x="34" y="56" width="8" height="28" rx="1.5" fill="#9B1535"/>
+      <rect x="46" y="44" width="8" height="40" rx="1.5" fill="#A31645"/>
+      <line x1="18" y1="44" x2="60" y2="28" stroke="#08080D" strokeWidth="3.5"/>
     </svg>
   );
 }
 
 export function Footer() {
   return (
-    <footer style={{ borderTop:"1px solid rgba(139,15,53,0.2)", background:"var(--surface)", padding:"40px 24px 32px", marginTop:"auto" }}>
-      <div className="wrap">
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(160px, 1fr))", gap:32, marginBottom:40 }}>
+    <footer className="border-t border-[rgba(139,15,53,0.2)] bg-[var(--surface)] px-10 pt-10 pb-8 mt-auto">
+      <div className="max-w-[1100px] mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           <div>
-            <Link href="/" style={{ display:"flex", alignItems:"center", gap:8, marginBottom:12 }}>
+            <Link href="/" className="flex items-center gap-2 mb-3">
               <DIcon />
-              <span style={{ fontFamily:"'Barlow Condensed', sans-serif", fontSize:15, fontWeight:800, letterSpacing:"1.5px", textTransform:"uppercase" }}>
-                <span style={{ color:"#F4F4F5" }}>DEMAND</span><span style={{ color:"#A31645" }}>PASS</span>
+              <span className="font-[family-name:'Barlow_Condensed',sans-serif] text-[16px] font-black tracking-[1.5px] uppercase italic">
+                <span className="text-[#F4F4F5]">DEMAND</span><span className="text-[#A31645]">PASS</span>
               </span>
             </Link>
-            <p style={{ fontSize:11, color:"var(--txt3)", lineHeight:1.7, maxWidth:200, fontFamily:"'Barlow Condensed', sans-serif", letterSpacing:"0.5px", textTransform:"uppercase" }}>
-              VERIFIED DEMAND. LIVE ACCESS.
-            </p>
-            <p style={{ fontSize:12, color:"var(--txt3)", lineHeight:1.7, maxWidth:200, marginTop:8 }}>
-              No vendemos entradas.
-            </p>
+            <p className="text-[11px] text-[var(--txt3)] font-[family-name:'Barlow_Condensed',sans-serif] tracking-[0.5px] uppercase mb-2">Verified Demand. Live Access.</p>
+            <p className="text-[12px] text-[var(--txt3)] leading-[1.7]">No vendemos entradas.</p>
           </div>
-          <div>
-            <p style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"1.5px", color:"var(--txt3)", marginBottom:12, fontFamily:"'Barlow Condensed', sans-serif" }}>Plataforma</p>
-            {[{label:"Campañas activas",href:"/campaigns"},{label:"Cómo funciona",href:"/#como-funciona"},{label:"Dashboard B2B",href:"/dashboard"}].map(({label,href})=>(
-              <Link key={label} href={href} style={{ display:"block", fontSize:13, color:"var(--txt2)", marginBottom:8 }}>{label}</Link>
-            ))}
-          </div>
-          <div>
-            <p style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"1.5px", color:"var(--txt3)", marginBottom:12, fontFamily:"'Barlow Condensed', sans-serif" }}>Legal</p>
-            {[{label:"Términos de uso",href:"/terms"},{label:"Política de privacidad",href:"/privacy"},{label:"Condiciones de reserva",href:"/conditions"}].map(({label,href})=>(
-              <Link key={label} href={href} style={{ display:"block", fontSize:13, color:"var(--txt2)", marginBottom:8 }}>{label}</Link>
-            ))}
-          </div>
-          <div>
-            <p style={{ fontSize:11, fontWeight:700, textTransform:"uppercase", letterSpacing:"1.5px", color:"var(--txt3)", marginBottom:12, fontFamily:"'Barlow Condensed', sans-serif" }}>Contacto</p>
-            <p style={{ fontSize:13, color:"var(--txt2)", marginBottom:6 }}>hola@demandpass.app</p>
-            <p style={{ fontSize:13, color:"var(--txt2)", marginBottom:6 }}>Partners:</p>
-            <p style={{ fontSize:13, color:"var(--burg3)" }}>partners@demandpass.app</p>
+          {[
+            { title: "Plataforma", links: [{ label: "Campañas activas", href: "/campaigns" }, { label: "Cómo funciona", href: "/#como-funciona" }, { label: "Dashboard B2B", href: "/dashboard" }] },
+            { title: "Legal", links: [{ label: "Términos de uso", href: "/terms" }, { label: "Privacidad", href: "/privacy" }, { label: "Condiciones de reserva", href: "/conditions" }] },
+            { title: "Contacto", links: [{ label: "hola@demandpass.app", href: "mailto:hola@demandpass.app" }, { label: "partners@demandpass.app", href: "mailto:partners@demandpass.app" }] },
+          ].map(({ title, links }) => (
+            <div key={title}>
+              <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[var(--txt3)] mb-3 font-[family-name:'Barlow_Condensed',sans-serif]">{title}</p>
+              {links.map(({ label, href }) => (
+                <Link key={label} href={href} className="block text-[13px] text-[var(--txt2)] mb-2 hover:text-[var(--txt)] transition-colors">{label}</Link>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div className="border-t border-[var(--border)] pt-5 flex items-center justify-between flex-wrap gap-3">
+          <p className="text-[12px] text-[var(--txt3)]">© 2025 DemandPass. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-1.5 bg-[var(--surface2)] border border-[var(--border)] rounded-full px-3 py-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--amber2)] inline-block" />
+            <span className="text-[11px] text-[var(--txt3)] font-medium">Demo — datos simulados</span>
           </div>
         </div>
-        <div style={{ borderTop:"1px solid var(--border)", paddingTop:20, display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:12 }}>
-          <p style={{ fontSize:12, color:"var(--txt3)" }}>© 2025 DemandPass. Todos los derechos reservados.</p>
-          <div style={{ display:"flex", alignItems:"center", gap:6, background:"var(--surface2)", border:"1px solid var(--border)", borderRadius:20, padding:"4px 12px" }}>
-            <span style={{ width:6, height:6, borderRadius:"50%", background:"var(--amber2)", display:"inline-block" }} />
-            <span style={{ fontSize:11, color:"var(--txt3)", fontWeight:500 }}>Demo — datos simulados</span>
-          </div>
-        </div>
-        <p style={{ fontSize:11, color:"var(--txt3)", marginTop:16, lineHeight:1.7, borderTop:"1px solid var(--border)", paddingTop:16 }}>
+        <p className="text-[11px] text-[var(--txt3)] mt-4 leading-[1.7] border-t border-[var(--border)] pt-4">
           DemandPass no es una ticketera ni vende entradas. Las reservas son condicionales y no garantizan la realización del evento. Si un show no se confirma, el monto nominal abonado es devuelto íntegramente.
         </p>
       </div>
