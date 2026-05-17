@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ── DemandPass Design System v3 ── */
 :root {
@@ -413,3 +413,55 @@ button { font-family: 'Barlow', sans-serif; cursor: pointer; }
   .countdown-urgent .num { animation: none; }
   .skeleton { animation: none; background: var(--surface2); }
 }
+
+/* ── Campaign card hover (server component safe) ── */
+.campaign-card {
+  display: block;
+  position: relative;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.campaign-card:hover {
+  border-color: rgba(139,15,53,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(139,15,53,0.12);
+}
+.btn-burg {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  border-radius: 4px;
+  background: var(--burg);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+}
+.btn-burg:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-ghost-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--txt2);
+  border: 1px solid var(--border2);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  letter-spacing: 0.5px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  min-height: 44px;
+}
+.btn-ghost-link:hover { border-color: var(--border3); color: var(--txt); }
