@@ -1,40 +1,47 @@
-# next-port v4 — Dashboard B2B (Productora)
+# next-port v5 — Auth (`/signin`) + Página de artista (`/artists/[slug]`)
 
-Rediseño completo de `/dashboard`. La pantalla más grande y densa del producto.
+Las 2 pantallas que faltaban del mockup. Cierran el set completo.
 
-## ✨ Lo que cambia
+## 📦 Lo que incluye
 
-**Antes** (dashboard actual): vista demo de UNA campaña (Lenny Kravitz) con KPIs, charts de city/price y export modal.
+### `/signin` — auth split-screen
+- Toggle **Fan / Productora** con descripción de cada uno
+- OAuth: **Google + Apple + Spotify** (Spotify solo para fans, marcado "Recomendado")
+- Email + password form, con campos extras para productora (nombre + país)
+- Toggle entre **"Crear cuenta"** y **"Ingresar"**
+- Panel visual a la derecha con caso de éxito (Lenny confirmado) + cards flotantes de campañas
+- Watermark gigante "DP" + grid background
 
-**Después** (rediseñado): **operations dashboard** estilo mission-control con visión multi-campaña:
-- **Sidebar** con org switcher (DF Entertainment · PRO) + 7 items de navegación (Overview, Campañas con badge "8", Demanda live, Fans, Forecasts, Venues, Integraciones) + indicador "System nominal"
-- **Sub-header** con switch Producción / Sandbox + buscador global con ⌘K + "Nueva campaña" CTA + notificaciones
-- **5 KPI cards** con sparklines: campañas activas, apoyos verificados, precio promedio, forecast tickets, probabilidad show
-- **Tabla de 7 campañas** con artist · ciudad · tipo · progress · precio · días · trend (sparkline inline) · probabilidad colorizada
-- **Demand pulse**: log estilo terminal mostrando eventos en tiempo real (NEW_SUPPORT, THRESHOLD, PRICE_SIGNAL, CONDITIONAL)
-- **Heatmap LATAM** con burbujas pulsantes + city ranking (Buenos Aires 14.2K, México 8.6K, Córdoba 3.4K…)
-- **Curva de precio** con sweet spot marcado (USD 84) + revenue estimado
-- **Lista de fans verificados** con tier Gold/Silver
+### `/artists/[slug]` — página de artista
+Rutas generadas estáticamente: `/artists/lenny-kravitz`, `/artists/sza`, `/artists/bad-bunny`.
 
-## 🗂️ Archivos (10 archivos · 1 reemplazo · 9 nuevos)
+- **Hero** con avatar 160×160 + initials, breadcrumb, nombre HUGE, géneros, CTAs (Seguir + Apoyar)
+- **Stat strip** (5 KPIs): Demanda LATAM, Países activos, Precio promedio, Probabilidad, Última visita
+- **Momentum chart** de 90 días con eventos anotados (Anuncio campaña, Spotify featured, Press release)
+- **"Sobre el tour"** — bio del artista
+- **Setlist probable** — 6 canciones con sparkline de frecuencia + Hit badge + duración + botón "Abrir en Spotify"
+- **Active campaign card** (sticky en la derecha) — link al detalle de la campaña
+- **Demand by country** — flags + cities + progress bars
+- **Related artists** — 4 artistas similares con género + estado
 
-| Origen | Destino | Acción |
-|---|---|---|
-| `next-port-v4/src/lib/dashboard-data.ts` | `src/lib/dashboard-data.ts` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/DashboardChrome.tsx` | `src/components/dashboard/DashboardChrome.tsx` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/KPIStrip.tsx` | `src/components/dashboard/KPIStrip.tsx` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/CampaignsTable.tsx` | `src/components/dashboard/CampaignsTable.tsx` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/DemandPulse.tsx` | `src/components/dashboard/DemandPulse.tsx` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/HeatmapPanel.tsx` | `src/components/dashboard/HeatmapPanel.tsx` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/PriceCurvePanel.tsx` | `src/components/dashboard/PriceCurvePanel.tsx` | ➕ Nuevo |
-| `next-port-v4/src/components/dashboard/RecentFans.tsx` | `src/components/dashboard/RecentFans.tsx` | ➕ Nuevo |
-| `next-port-v4/src/app/dashboard/page.tsx` | `src/app/dashboard/page.tsx` | 🔁 Reemplaza |
+## 🗂️ Archivos (6 nuevos)
+
+| Origen | Destino |
+|---|---|
+| `next-port-v5/src/lib/artists-data.ts` | `src/lib/artists-data.ts` |
+| `next-port-v5/src/components/marketing/AuthScreen.tsx` | `src/components/marketing/AuthScreen.tsx` |
+| `next-port-v5/src/app/signin/page.tsx` | `src/app/signin/page.tsx` |
+| `next-port-v5/src/components/marketing/ArtistDetail.tsx` | `src/components/marketing/ArtistDetail.tsx` |
+| `next-port-v5/src/components/marketing/ArtistMomentumChart.tsx` | `src/components/marketing/ArtistMomentumChart.tsx` |
+| `next-port-v5/src/app/artists/[slug]/page.tsx` | `src/app/artists/[slug]/page.tsx` |
 
 ## ⚙️ Compatibilidad
 
-- La global Navbar y Footer del layout root siguen ahí — el dashboard se renderiza debajo de la Navbar con sidebar+contenido
-- Tu `src/lib/data.ts` original NO se toca — `dashboardData` sigue ahí, simplemente queda sin uso (lo podés borrar después)
-- Nuevo data file `dashboard-data.ts` reemplaza esa info con un modelo más rico (multi-campaña + pulse events + recent fans)
+- **`/signin` es nueva ruta** — la navbar ya linkea a `/signin` desde la primera vez (v1 landing)
+- **`/artists/[slug]` es nueva ruta** — todavía no hay link directo desde el resto de la app. Probala manualmente con `/artists/lenny-kravitz`. Después podemos:
+  - Linkear el nombre del artista en cada card de campaña → su página
+  - Agregar una página índice `/artists` con grid de todos
+- Los formularios todavía no autentican de verdad — son visuales por ahora. Cuando definas el backend (Supabase, Clerk, NextAuth, etc) los conectamos.
 
 ## 🚀 Aplicarlo
 
@@ -42,19 +49,28 @@ Rediseño completo de `/dashboard`. La pantalla más grande y densa del producto
 cd $HOME\Downloads\demandpass\mi-repo
 git checkout main
 git pull origin main
-git checkout -b redesign/dashboard
-Copy-Item -Path ..\next-port-v4\* -Destination . -Recurse -Force
+git checkout -b redesign/auth-artists
+Copy-Item -Path ..\next-port-v5\* -Destination . -Recurse -Force
 git add .
-git commit -m "feat(dashboard): redesigned B2B producer dashboard"
-git push origin redesign/dashboard
+git commit -m "feat(auth+artists): signin page + artist detail pages"
+git push origin redesign/auth-artists
 ```
 
 PR → Vercel ✅ → Merge.
 
-## ⏭️ Siguiente
+## 🧪 Cómo testear
 
-Quedan 2 pantallas del mockup:
-1. **`/signin`** (login/signup, fan + productora) — nueva ruta
-2. **`/artists/[slug]`** (página de artista con momentum) — nueva ruta
+Después del deploy:
+1. **`/signin`** → toggle Fan/Productora, vas viendo cómo cambia el copy del título y los campos
+2. **`/artists/lenny-kravitz`** → ves toda la página con momentum chart, setlist con sparklines, campaign card sticky, related artists
+3. **`/artists/sza`** y **`/artists/bad-bunny`** también funcionan
+4. Click "Apoyar" desde el artist page → te lleva a la campaña activa de ese artista
 
-Decime cuál arrancamos cuando tengas el dashboard en producción.
+## ⏭️ Próximos pasos (cuando estén las 6 pantallas en producción)
+
+Ahí pasamos a la fase de **iteración + features**:
+1. Conectar auth real (Supabase / NextAuth)
+2. Agregar **listado de artistas `/artists`** (índice grid)
+3. Hacer que cada artist name en campañas linkee a su página
+4. Mejoras según feedback de productoras / fans reales
+5. Mobile polish del dashboard
