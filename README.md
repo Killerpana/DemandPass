@@ -1,91 +1,50 @@
-# DemandPass — Demo navegable
+# next-port v2 — Listado de campañas (`/campaigns`)
 
-Plataforma B2B2C de demanda verificada para conciertos y eventos en vivo.
+Rediseño completo de la página `/campaigns` con grid 4-columnas, filtros, búsqueda y dataset extendido (12 campañas en vez de 3).
 
-## Correr localmente
+## 🗂️ Archivos (4 archivos, 1 reemplazo, 3 nuevos)
 
-### Requisitos
-- Node.js 18+ 
-- npm o yarn
+| Origen | Destino en tu repo | Acción |
+|---|---|---|
+| `next-port-v2/src/lib/marketing-data.ts` | `src/lib/marketing-data.ts` | **🔁 Reemplaza** (extiende el v1 con extras + helper de género) |
+| `next-port-v2/src/components/marketing/CampaignsHero.tsx` | `src/components/marketing/CampaignsHero.tsx` | ➕ Nuevo |
+| `next-port-v2/src/components/marketing/CampaignsBrowser.tsx` | `src/components/marketing/CampaignsBrowser.tsx` | ➕ Nuevo |
+| `next-port-v2/src/app/campaigns/page.tsx` | `src/app/campaigns/page.tsx` | **🔁 Reemplaza** |
 
-### Instalación
+## ✨ Lo que cambia
 
-```bash
-# 1. Instalá las dependencias
-npm install
+- **12 campañas** (vs 3 actuales) con `genre` clasificado para filtrado
+- **Filtros funcionales** (cliente):
+  - Tipo: Todas / Oficiales / Fan demand / Alta demanda
+  - País: 5 países LATAM
+  - Género: 8 géneros
+  - Orden: Más populares / Cierran antes / Recientes / Cerca del objetivo
+  - Búsqueda: artista, ciudad, evento, país
+- **Estado vacío** cuando los filtros no matchean nada → botón "Limpiar filtros"
+- **Hero con stats reales** (total apoyos, países activos, # campañas)
+- Las cards reutilizan el `CampaignCard` del v1 — mismo look del landing
 
-# 2. Corré el servidor de desarrollo
-npm run dev
+## ⚙️ Compatibilidad
 
-# 3. Abrí en el browser
-# http://localhost:3000
+- Sigue compatible con `/campaigns/[id]` actual — los `id` 0/1/2 originales no cambian, los nuevos arrancan en 100+
+- No toca tu `src/lib/data.ts` original (las 3 campañas originales siguen igual)
+- No toca el detalle de campaña ni el wizard de votar — siguen funcionando
+
+## 🚀 Cómo aplicarlo (mismo flujo que la primera vez)
+
+```powershell
+cd $HOME\Downloads\demandpass\mi-repo
+git checkout main
+git pull origin main
+git checkout -b redesign/campaigns-list
+Copy-Item -Path ..\next-port-v2\* -Destination . -Recurse -Force
+git add .
+git commit -m "feat(campaigns): redesigned listing with filters + extended dataset"
+git push origin redesign/campaigns-list
 ```
 
-## Estructura del proyecto
+Después abrís el link del PR que te tira el `git push`, esperás que Vercel buildee ✅, y mergeás.
 
-```
-src/
-├── app/
-│   ├── layout.tsx          # Layout raíz con Navbar
-│   ├── globals.css         # Design tokens y estilos globales
-│   ├── page.tsx            # Landing page
-│   ├── campaigns/
-│   │   ├── page.tsx        # Listado de campañas
-│   │   └── [id]/
-│   │       ├── page.tsx    # Detalle de campaña
-│   │       ├── support/
-│   │       │   └── page.tsx  # Wizard de apoyo (6 pasos)
-│   │       └── token/
-│   │           └── page.tsx  # Claim Token generado
-│   └── dashboard/
-│       └── page.tsx        # Dashboard productora (B2B)
-├── components/
-│   └── ui/
-│       ├── Navbar.tsx      # Navegación global
-│       └── SupportWizard.tsx  # Wizard interactivo (client component)
-└── lib/
-    └── data.ts             # Datos mock de campañas, niveles, dashboard
-```
+## ⏭️ Siguiente pantalla sugerida
 
-## Flujo completo de la demo
-
-1. **Landing** → `/` — Hero, estadísticas, cómo funciona, campañas destacadas
-2. **Campañas** → `/campaigns` — Listado con métricas y progreso
-3. **Detalle** → `/campaigns/0` — Info completa, beneficios, legales
-4. **Wizard** → `/campaigns/0/support` — 6 pasos: ciudad, precio, entrada, beneficios, nivel, confirmación
-5. **Token** → `/campaigns/0/token?...` — Claim Token con prioridad simulada
-6. **Dashboard** → `/dashboard` — Vista productora con KPIs, gráficos y recomendación automática
-
-## Deploy en Vercel
-
-```bash
-# Opción 1: CLI
-npm install -g vercel
-vercel
-
-# Opción 2: GitHub
-# 1. Subí el proyecto a un repo de GitHub
-# 2. Entrá a vercel.com → New Project → importá el repo
-# 3. Vercel detecta Next.js automáticamente → Deploy
-```
-
-## Datos mock
-
-Todo el contenido vive en `src/lib/data.ts`. Para modificar campañas, precios, beneficios o datos del dashboard, editá ese archivo directamente.
-
-## Notas de diseño
-
-- Dark mode nativo (sin toggle, es la estética definitiva del producto)
-- Tipografía: Outfit (display) + JetBrains Mono (token codes)
-- Paleta: violeta `#7c3aed` + azul eléctrico `#2563eb` + blanco `#f0f0ff`
-- Mobile-first: todos los grids usan `auto-fit` con `minmax`
-- Sin dependencias de UI externas (cero shadcn, cero chakra) — todo custom
-
-## Próximos pasos sugeridos
-
-- [ ] Agregar filtros por ciudad/tipo en el listado de campañas  
-- [ ] Pantalla "Mis DemandPasses" con historial de tokens  
-- [ ] Integración real con Stripe para reservas condicionales  
-- [ ] Sistema de notificaciones cuando una campaña se confirma  
-- [ ] Auth con email magic link (sin contraseña)  
-- [ ] API routes para conectar con base de datos real
+**`/campaigns/[id]` — detalle + flujo de votar.** Es la que sigue al click "Apoyar" de cada card.
