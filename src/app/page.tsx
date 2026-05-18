@@ -8,6 +8,7 @@ import { Marquee }           from "@/components/marketing/Marquee";
 import { HowItWorks }        from "@/components/marketing/HowItWorks";
 import { FeaturedCampaigns } from "@/components/marketing/FeaturedCampaigns";
 import { B2BPreview }        from "@/components/marketing/B2BPreview";
+import { PlanesB2B }         from "@/components/marketing/PlanesB2B";
 import { SocialProof }       from "@/components/marketing/SocialProof";
 import { FAQ }               from "@/components/marketing/FAQ";
 
@@ -25,6 +26,7 @@ export default function HomePage() {
       <HowItWorks />
       <FeaturedCampaigns />
       <B2BPreview />
+      <PlanesB2B />
       <SocialProof />
       <FAQ />
     </>

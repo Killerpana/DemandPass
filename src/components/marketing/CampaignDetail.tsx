@@ -184,7 +184,21 @@ export function CampaignDetail({ c }: { c: Campaign }) {
   );
 }
 
+function demandScore(pct: number, certainty: number): number {
+  return Math.min(100, Math.round(pct * 0.6 + certainty * 0.4));
+}
+
 function DemandStatus({ c, pct, remaining }: { c: Campaign; pct: number; remaining: number }) {
+  const score = demandScore(pct, c.certainty);
+  const scoreColor =
+    score >= 75 ? "var(--color-emerald2)" :
+    score >= 50 ? "var(--color-amber2)" :
+    "var(--color-txt3)";
+  const scoreLabel = score >= 75 ? "Alto" : score >= 50 ? "Medio" : "Bajo";
+  const r = 20;
+  const circ = 2 * Math.PI * r;
+  const dash = (score / 100) * circ;
+
   return (
     <section
       className="rounded-xl p-7"
@@ -194,8 +208,8 @@ function DemandStatus({ c, pct, remaining }: { c: Campaign; pct: number; remaini
         boxShadow: "0 16px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.04)",
       }}
     >
-      <div className="flex items-baseline justify-between mb-4">
-        <div>
+      <div className="flex items-start justify-between mb-4 gap-4">
+        <div className="flex-1">
           <div
             className="text-[28px] font-bold leading-none tabular-nums"
             style={{ fontFamily: "var(--font-mono)" }}
@@ -207,6 +221,45 @@ function DemandStatus({ c, pct, remaining }: { c: Campaign; pct: number; remaini
             Apoyos verificados
           </div>
         </div>
+
+        {/* Demand Score grande con tooltip */}
+        <div className="relative group flex flex-col items-center gap-1 cursor-help shrink-0">
+          <div className="relative w-16 h-16 flex items-center justify-center">
+            <svg width="64" height="64" viewBox="0 0 64 64" className="-rotate-90" aria-hidden>
+              <circle cx="32" cy="32" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" />
+              <circle
+                cx="32" cy="32" r={r} fill="none"
+                stroke={scoreColor} strokeWidth="4"
+                strokeDasharray={`${dash} ${circ}`}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="absolute flex flex-col items-center">
+              <span className="text-[18px] font-extrabold tabular-nums leading-none" style={{ fontFamily: "var(--font-mono)", color: scoreColor }}>{score}</span>
+            </div>
+          </div>
+          <span className="text-[10px] uppercase tracking-[0.1em] font-bold" style={{ color: scoreColor }}>
+            Demand Score
+          </span>
+          <span className="text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--color-txt3)" }}>
+            {scoreLabel}
+          </span>
+
+          {/* Tooltip */}
+          <div
+            className="absolute bottom-full mb-2 right-0 w-56 p-3 rounded-lg text-[12px] leading-[1.5] opacity-0 group-hover:opacity-100 pointer-events-none z-20 transition-opacity"
+            style={{
+              background: "var(--color-surface3)",
+              border: "1px solid var(--color-border2)",
+              color: "var(--color-txt2)",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
+            }}
+          >
+            <p className="font-bold text-[var(--color-txt)] mb-1">¿Qué es el Demand Score?</p>
+            Combina el progreso de la campaña ({pct}%) con la certeza de confirmación ({c.certainty}%) para darte un índice accionable de 0 a 100.
+          </div>
+        </div>
+
         <div className="text-right">
           <div
             className="text-[28px] font-bold leading-none tabular-nums"
