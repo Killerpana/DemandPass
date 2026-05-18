@@ -74,13 +74,33 @@ export function CampaignCard({ c, hot }: { c: Campaign; hot?: boolean }) {
         boxShadow: "0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)",
       }}
     >
-      {/* Cover */}
+      {/* Cover — borde superior de color según tipo */}
       <div
         className="h-40 relative overflow-hidden flex items-center justify-center"
-        style={{ background: `linear-gradient(135deg, ${c.color}30 0%, ${c.color}90 100%)` }}
+        style={{
+          background: c.type === "official"
+            ? `linear-gradient(135deg, ${c.color}30 0%, ${c.color}90 100%)`
+            : `linear-gradient(135deg, #1a2a3a 0%, #0f1e2e 100%)`,
+          borderTop: c.type === "official"
+            ? "2px solid var(--color-burg3)"
+            : "2px solid #2563eb",
+        }}
       >
+        {/* Watermark tipo */}
         <div
-          className="leading-none uppercase select-none"
+          className="absolute inset-0 flex items-center justify-end pr-4 pointer-events-none select-none opacity-10"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: 80,
+            color: c.type === "official" ? "var(--color-burg3)" : "#2563eb",
+            letterSpacing: "-0.04em",
+          }}
+        >
+          {c.type === "official" ? "OFF" : "FAN"}
+        </div>
+
+        <div
+          className="leading-none uppercase select-none relative z-10"
           style={{
             fontFamily: "var(--font-display)",
             fontSize: 100,
@@ -90,13 +110,27 @@ export function CampaignCard({ c, hot }: { c: Campaign; hot?: boolean }) {
         >
           {c.img}
         </div>
-        <div className="absolute top-3 left-3 flex gap-1.5">
-          <Pill variant={c.type === "official" ? "live" : "info"} pulse={c.type === "official"}>
-            {c.type === "official" ? "Campaña oficial" : "Fan demand"}
-          </Pill>
+
+        <div className="absolute top-3 left-3 flex gap-1.5 z-10">
+          {c.type === "official" ? (
+            <span
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.08em]"
+              style={{ background: "var(--color-burg3)", color: "#fff" }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-white inline-block animate-pulse" />
+              Campaña oficial
+            </span>
+          ) : (
+            <span
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.08em]"
+              style={{ background: "rgba(37,99,235,0.85)", color: "#fff", border: "1px solid rgba(37,99,235,0.6)" }}
+            >
+              ◈ Fan demand
+            </span>
+          )}
           {isHot && <Pill variant="hot" glyph="▲">Alta demanda</Pill>}
         </div>
-        <div className="absolute bottom-3 right-3">
+        <div className="absolute bottom-3 right-3 z-10">
           <Sparkline data={trendFor(pct)} width={60} height={24} color="rgba(255,255,255,0.7)" filled={false} />
         </div>
       </div>
