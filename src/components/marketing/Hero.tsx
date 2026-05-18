@@ -7,7 +7,7 @@ import { trustStats } from "@/lib/marketing-data";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-[var(--color-border)]">
+    <section className="relative overflow-hidden">
       {/* Grid + glow backgrounds */}
       <div
         className="absolute inset-0 opacity-50 pointer-events-none"

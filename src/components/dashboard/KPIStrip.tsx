@@ -43,6 +43,7 @@ export function KPIStrip() {
               >
                 {arrow} {k.d}
               </span>
+              <span className="text-[10px] text-[var(--color-txt3)]">esta semana</span>
               <Sparkline data={[...k.sd]} width={60} height={18} color={deltaColor} />
             </div>
           </div>

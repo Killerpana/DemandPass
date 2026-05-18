@@ -25,7 +25,7 @@ export function Navbar() {
         }}
         aria-label="Navegación principal"
       >
-        <Logo height={26} href="/" />
+        <Logo height={36} href="/" />
 
         <div className="flex gap-1 ml-6">
           <NavLink href="/campaigns" active={path.startsWith("/campaigns")}>Campañas</NavLink>

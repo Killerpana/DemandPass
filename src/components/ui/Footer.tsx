@@ -42,7 +42,7 @@ export function Footer() {
           ))}
         </div>
         <div className="border-t border-[var(--border)] pt-5 flex items-center justify-between flex-wrap gap-3">
-          <p className="text-[12px] text-[var(--txt3)]">© 2025 DemandPass. Todos los derechos reservados.</p>
+          <p className="text-[12px] text-[var(--txt3)]">© 2026 DemandPass. Todos los derechos reservados.</p>
           <div className="flex items-center gap-1.5 bg-[var(--surface2)] border border-[var(--border)] rounded-full px-3 py-1">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--amber2)] inline-block" />
             <span className="text-[11px] text-[var(--txt3)] font-medium">Demo — datos simulados</span>
