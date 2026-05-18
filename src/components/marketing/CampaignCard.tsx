@@ -15,9 +15,55 @@ function trendFor(pct: number): number[] {
   });
 }
 
+// Demand Score: weighted combo of campaign progress (60%) + certainty (40%)
+function demandScore(pct: number, certainty: number): number {
+  return Math.min(100, Math.round(pct * 0.6 + certainty * 0.4));
+}
+
+function DemandScoreBadge({ score }: { score: number }) {
+  const color =
+    score >= 75 ? "var(--color-emerald2)" :
+    score >= 50 ? "var(--color-amber2)" :
+    "var(--color-txt3)";
+  const label =
+    score >= 75 ? "Alto" :
+    score >= 50 ? "Medio" :
+    "Bajo";
+  // Arc SVG: radius 14, circumference ~88
+  const r = 14;
+  const circ = 2 * Math.PI * r;
+  const dash = (score / 100) * circ;
+  return (
+    <div className="flex flex-col items-center gap-0.5">
+      <div className="relative w-10 h-10 flex items-center justify-center">
+        <svg width="40" height="40" viewBox="0 0 40 40" className="-rotate-90" aria-hidden>
+          <circle cx="20" cy="20" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3" />
+          <circle
+            cx="20" cy="20" r={r} fill="none"
+            stroke={color} strokeWidth="3"
+            strokeDasharray={`${dash} ${circ}`}
+            strokeLinecap="round"
+            style={{ transition: "stroke-dasharray 0.6s ease" }}
+          />
+        </svg>
+        <span
+          className="absolute text-[11px] font-extrabold tabular-nums"
+          style={{ fontFamily: "var(--font-mono)", color }}
+        >
+          {score}
+        </span>
+      </div>
+      <span className="text-[9px] uppercase tracking-[0.1em] font-semibold" style={{ color: "var(--color-txt3)" }}>
+        {label}
+      </span>
+    </div>
+  );
+}
+
 export function CampaignCard({ c, hot }: { c: Campaign; hot?: boolean }) {
   const pct = Math.min(100, Math.round((c.current / c.goal) * 100));
   const isHot = hot ?? pct >= 70;
+  const score = demandScore(pct, c.certainty);
   return (
     <Link
       href={`/campaigns/${c.id}`}
@@ -87,7 +133,7 @@ export function CampaignCard({ c, hot }: { c: Campaign; hot?: boolean }) {
 
         {/* Meta */}
         <div
-          className="grid grid-cols-2 gap-0 mt-auto py-3 border-t"
+          className="grid grid-cols-3 gap-0 mt-auto py-3 border-t items-center"
           style={{ borderColor: "var(--color-border)" }}
         >
           <div>
@@ -109,6 +155,15 @@ export function CampaignCard({ c, hot }: { c: Campaign; hot?: boolean }) {
               }}
             >
               {c.days} días
+            </div>
+          </div>
+          {/* Demand Score */}
+          <div className="flex justify-end">
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="text-[9px] uppercase tracking-[0.1em] font-semibold text-[var(--color-txt3)] mb-0.5">
+                Demand Score
+              </div>
+              <DemandScoreBadge score={score} />
             </div>
           </div>
         </div>
