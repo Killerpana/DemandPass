@@ -3,11 +3,16 @@
 import Link from "next/link";
 import { Pill } from "@/components/ui/Pill";
 import { DemandConsole } from "./DemandConsole";
+import { BackgroundPaths } from "@/components/ui/BackgroundPaths";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { trustStats } from "@/lib/marketing-data";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
+      {/* Background Paths animadas */}
+      <BackgroundPaths />
+
       {/* Grid + glow backgrounds */}
       <div
         className="absolute inset-0 opacity-50 pointer-events-none"
@@ -81,7 +86,12 @@ export function Hero() {
                     className="uppercase tabular-nums leading-none"
                     style={{ fontFamily: "var(--font-display)", fontSize: 36, letterSpacing: "1px" }}
                   >
-                    {s.v}
+                    <AnimatedCounter
+                      value={s.n}
+                      suffix={s.suffix}
+                      decimals={s.suffix === "M" ? 1 : 0}
+                      duration={1600}
+                    />
                   </div>
                   <div className="text-[12px] mt-1 font-semibold text-[var(--color-txt)]">{s.l}</div>
                   <div className="text-[11px] mt-0.5 text-[var(--color-txt3)]">{s.d}</div>

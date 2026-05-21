@@ -24,9 +24,9 @@ export const marqueeItems = [
 ] as const;
 
 export const trustStats = [
-  { v: "127",  l: "Shows medidos",       d: "desde 2024" },
-  { v: "4.2M", l: "Apoyos verificados",  d: "sin bots" },
-  { v: "83%",  l: "Forecast accuracy",   d: "vs venta real" },
+  { v: "127",  n: 127,      suffix: "",  l: "Shows medidos",       d: "desde 2024" },
+  { v: "4.2M", n: 4.2,      suffix: "M", l: "Apoyos verificados",  d: "sin bots" },
+  { v: "83%",  n: 83,       suffix: "%", l: "Forecast accuracy",   d: "vs venta real" },
 ] as const;
 
 export const howItWorksSteps = [
