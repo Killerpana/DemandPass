@@ -1,10 +1,9 @@
 "use client";
-// src/components/ui/Navbar.tsx — inspirado en Header1 de 21st.dev/efferd
-// Mejoras: scroll blur dinámico, active indicator animado, mobile menu
+// src/components/ui/Navbar.tsx — navbar con scroll blur, active indicator, mobile menu corregido
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Logo } from "@/components/ui/Logo";
 
 const NAV_LINKS = [
@@ -25,12 +24,16 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  // Cerrar al cambiar de ruta (navegación entre páginas)
   useEffect(() => { setMenuOpen(false); }, [path]);
 
+  // Bloquear scroll del body cuando menú abierto
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   const isActive = (href: string) => {
     if (href.startsWith("/#")) return false;
@@ -40,10 +43,7 @@ export function Navbar() {
 
   return (
     <>
-      <a
-        href="#main-content"
-        className="absolute top-[-40px] left-0 bg-[var(--color-burg)] text-white px-4 py-2 rounded-br-lg text-[13px] font-semibold z-[9999] focus:top-0 transition-all"
-      >
+      <a href="#main-content" className="absolute top-[-40px] left-0 bg-[var(--color-burg)] text-white px-4 py-2 rounded-br-lg text-[13px] font-semibold z-[9999] focus:top-0 transition-all">
         Ir al contenido
       </a>
 
@@ -58,9 +58,10 @@ export function Navbar() {
         }}
         aria-label="Navegación principal"
       >
-        <Logo height={36} href="/" />
+        <Logo height={32} href="/" />
 
-        <div className="hidden md:flex gap-1 ml-4">
+        {/* Links desktop */}
+        <div className="hidden md:flex gap-1 ml-8">
           {NAV_LINKS.map((l) => (
             <NavLink key={l.href} href={l.href} active={isActive(l.href)}>
               {l.label}
@@ -68,6 +69,7 @@ export function Navbar() {
           ))}
         </div>
 
+        {/* CTAs desktop */}
         <div className="hidden md:flex ml-auto items-center gap-3">
           <Link
             href="/signin"
@@ -79,15 +81,13 @@ export function Navbar() {
           <Link
             href="/campaigns"
             className="px-4 py-2 rounded-md text-[12px] font-bold uppercase tracking-[0.06em] text-white transition-transform hover:-translate-y-0.5"
-            style={{
-              background: "var(--color-burg3)",
-              boxShadow: "0 6px 18px rgba(196,38,78,0.32), inset 0 1px 0 rgba(255,255,255,0.18)",
-            }}
+            style={{ background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32), inset 0 1px 0 rgba(255,255,255,0.18)" }}
           >
             Empezar
           </Link>
         </div>
 
+        {/* Hamburguesa mobile */}
         <button
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
@@ -102,33 +102,57 @@ export function Navbar() {
         </button>
       </nav>
 
-      {menuOpen && (
-        <div className="fixed inset-0 z-[199] md:hidden flex flex-col pt-16" style={{ background: "rgba(8,8,13,0.98)", backdropFilter: "blur(20px)" }}>
-          <div className="flex flex-col px-6 pt-6 gap-1">
-            {NAV_LINKS.map((l, i) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="py-4 text-[22px] font-bold uppercase tracking-[0.04em] border-b flex items-center justify-between"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  borderColor: "var(--color-border)",
-                  color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)",
-                  animationDelay: `${i * 60}ms`,
-                  animation: "dp-vt-fade-in 0.3s ease both",
-                }}
-              >
-                {l.label}
-                <span style={{ color: "var(--color-burg3)" }}>→</span>
-              </Link>
-            ))}
-            <div className="flex flex-col gap-3 mt-8">
-              <Link href="/signin" className="w-full py-3.5 text-center rounded-md text-[13px] font-bold uppercase tracking-[0.06em] border" style={{ borderColor: "var(--color-border2)", color: "var(--color-txt)" }}>Ingresar</Link>
-              <Link href="/campaigns" className="w-full py-3.5 text-center rounded-md text-[13px] font-bold uppercase tracking-[0.06em] text-white" style={{ background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }}>Empezar ahora</Link>
-            </div>
+      {/* Mobile menu — overlay pantalla completa */}
+      <div
+        className="fixed inset-0 z-[199] md:hidden flex flex-col pt-16 transition-all duration-300"
+        style={{
+          background: "rgba(8,8,13,0.98)",
+          backdropFilter: "blur(20px)",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "all" : "none",
+          transform: menuOpen ? "translateY(0)" : "translateY(-8px)",
+        }}
+        aria-hidden={!menuOpen}
+      >
+        <div className="flex flex-col px-6 pt-6 gap-1">
+          {NAV_LINKS.map((l, i) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={closeMenu}  // ← FIX: cerrar siempre al hacer click
+              className="py-4 text-[22px] font-bold uppercase tracking-[0.04em] border-b flex items-center justify-between transition-colors"
+              style={{
+                fontFamily: "var(--font-display)",
+                borderColor: "var(--color-border)",
+                color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)",
+                transitionDelay: menuOpen ? `${i * 50}ms` : "0ms",
+              }}
+            >
+              {l.label}
+              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace" }}>→</span>
+            </Link>
+          ))}
+
+          <div className="flex flex-col gap-3 mt-8">
+            <Link
+              href="/signin"
+              onClick={closeMenu}
+              className="w-full py-3.5 text-center rounded-md text-[13px] font-bold uppercase tracking-[0.06em] border"
+              style={{ borderColor: "var(--color-border2)", color: "var(--color-txt)" }}
+            >
+              Ingresar
+            </Link>
+            <Link
+              href="/campaigns"
+              onClick={closeMenu}
+              className="w-full py-3.5 text-center rounded-md text-[13px] font-bold uppercase tracking-[0.06em] text-white"
+              style={{ background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }}
+            >
+              Empezar ahora
+            </Link>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
