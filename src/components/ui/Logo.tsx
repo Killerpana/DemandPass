@@ -38,9 +38,10 @@ export function Logo({
         : "/brand/lockup-horizontal-dark.svg";
   }
 
-  // Ratio lockup sin tagline ≈ 1037.5 / 138 ≈ 7.5:1
-  // Ratio lockup con tagline ≈ 1037.5 / 178.6 ≈ 5.8:1
-  const aspectRatio = compact ? (202 / 209) : showTagline ? 5.8 : 7.5;
+  // Nuevo SVG: 705x128 — wordmark en y:0-75, tagline en y:94-113
+  // Sin tagline: ratio = 705/75 ≈ 9.4, multiplicador altura = 128/75 ≈ 1.707
+  // Con tagline: ratio = 705/128 ≈ 5.5 (SVG completo)
+  const aspectRatio = compact ? (202 / 209) : showTagline ? 5.5 : 9.4;
   const width = Math.round(height * aspectRatio);
 
   const img = (
@@ -57,7 +58,7 @@ export function Logo({
         src={src}
         alt="DemandPass"
         style={{
-          height: showTagline ? height : Math.round(height * (178.6 / 138)),
+          height: showTagline ? height : Math.round(height * (128 / 75)),
           width: "auto",
           display: "block",
           maxWidth: "none",
