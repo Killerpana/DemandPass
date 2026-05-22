@@ -1,42 +1,69 @@
 "use client";
-// src/components/dashboard/HeatmapPanel.tsx — mapa real de LATAM con burbujas
+// src/components/dashboard/HeatmapPanel.tsx
+// Mapa de LATAM con dotted-map (inspirado en 21st.dev/shailendrakumar19999/map)
+import { useMemo } from "react";
 import { Progress } from "@/components/ui/Progress";
 import { heatmapCities } from "@/lib/dashboard-data";
 import { MapPin } from "lucide-react";
 
-// Ciudades con coordenadas reales en el viewBox 0 0 400 500
-const MAP_CITIES = [
-  { x: 185, y: 360, r: 22, l: "BUE", name: "Buenos Aires",      col: "#C4264E" },
-  { x: 108, y: 118, r: 16, l: "MEX", name: "Ciudad de México",  col: "#C4264E" },
-  { x: 172, y: 320, r: 11, l: "SCL", name: "Santiago",          col: "#e06090" },
-  { x: 148, y: 185, r: 10, l: "BOG", name: "Bogotá",            col: "#f59e0b" },
-  { x: 148, y: 250, r: 10, l: "LIM", name: "Lima",              col: "#f59e0b" },
-  { x: 176, y: 345, r:  8, l: "ROS", name: "Rosario",           col: "#f59e0b" },
+// Ciudades con coordenadas lat/lng reales
+const CITIES = [
+  { lat: -34.6, lng: -58.4, r: 6,  label: "BUE", color: "#C4264E" },  // Buenos Aires
+  { lat: 19.4,  lng: -99.1, r: 5,  label: "MEX", color: "#C4264E" },  // Ciudad de México
+  { lat: -31.4, lng: -64.2, r: 3.5,label: "CBA", color: "#e06090" },  // Córdoba
+  { lat: -33.4, lng: -70.7, r: 3,  label: "SCL", color: "#f59e0b" },  // Santiago
+  { lat:  4.7,  lng: -74.1, r: 3,  label: "BOG", color: "#f59e0b" },  // Bogotá
+  { lat: -12.0, lng: -77.0, r: 2.8,label: "LIM", color: "#f59e0b" },  // Lima
+  { lat: -32.9, lng: -60.7, r: 2.5,label: "ROS", color: "#f59e0b" },  // Rosario
 ];
 
-// Path simplificado pero reconocible de América del Sur + México/Centroamérica
-const SOUTH_AMERICA = `
-  M 148 180 L 160 170 L 175 165 L 195 168 L 210 175 L 225 185
-  L 235 200 L 240 220 L 238 245 L 230 265 L 220 285 L 215 305
-  L 205 325 L 198 345 L 195 365 L 190 385 L 185 400 L 178 415
-  L 170 425 L 162 420 L 158 405 L 160 390 L 165 375 L 162 360
-  L 155 345 L 150 325 L 145 305 L 140 280 L 135 260 L 132 240
-  L 128 220 L 125 200 L 128 185 L 135 178 L 148 180 Z
+// Convierte lat/lng a coordenadas SVG para un recorte de LATAM
+// viewBox: lng -120...-30, lat 35...-60 → x: 0..300, y: 0..285
+function project(lat: number, lng: number) {
+  const x = ((lng - (-120)) / ((-30) - (-120))) * 300;
+  const y = ((35 - lat) / (35 - (-60))) * 285;
+  return { x, y };
+}
+
+// Path real de Sudamérica (simplificado pero reconocible)
+const SA_PATH = `
+M 185 48 L 200 44 L 218 46 L 232 52 L 244 62 L 252 76 L 258 94
+L 262 114 L 260 134 L 254 152 L 244 168 L 236 182 L 228 196
+L 222 212 L 218 228 L 216 244 L 210 258 L 200 270 L 188 278
+L 176 280 L 164 276 L 156 266 L 152 252 L 154 238 L 158 224
+L 156 210 L 150 196 L 144 180 L 140 164 L 138 148 L 136 132
+L 134 116 L 132 100 L 136 84 L 144 70 L 156 58 L 172 50 Z
 `;
 
-const MEXICO = `
-  M 80 95 L 95 88 L 115 85 L 130 90 L 140 98 L 138 108
-  L 128 115 L 115 118 L 100 120 L 88 115 L 80 107 L 80 95 Z
+// México
+const MX_PATH = `
+M 46 16 L 62 10 L 80 8 L 96 12 L 108 18 L 112 28 L 106 36
+L 92 42 L 76 46 L 60 44 L 48 38 L 42 28 Z
 `;
 
-const CENTRAL_AM = `
-  M 128 115 L 138 108 L 145 112 L 148 120 L 145 128
-  L 140 132 L 132 130 L 128 122 L 128 115 Z
+// Centroamérica + Colombia
+const CA_PATH = `
+M 106 36 L 116 42 L 122 52 L 124 64 L 118 72
+L 110 70 L 104 60 L 100 50 Z
 `;
 
 export function HeatmapPanel() {
+  const svgContent = useMemo(() => {
+    // Genera puntos de dotted-map manualmente como SVG
+    const dots: { x: number; y: number }[] = [];
+    for (let lat = 35; lat > -60; lat -= 2.8) {
+      for (let lng = -120; lng < -30; lng += 2.8) {
+        dots.push(project(lat, lng));
+      }
+    }
+    return dots;
+  }, []);
+
   return (
-    <div className="rounded-xl overflow-hidden" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+    <div
+      className="rounded-xl overflow-hidden"
+      style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
+    >
       <div className="px-5 py-4 border-b border-[var(--color-border)]">
         <div className="flex justify-between items-center mb-1">
           <div className="text-[14px] font-bold flex items-center gap-2">
@@ -54,52 +81,87 @@ export function HeatmapPanel() {
       </div>
 
       <div className="p-4 flex gap-4">
-        {/* Mapa */}
-        <svg viewBox="80 80 175 360" width="140" height="280" className="shrink-0" aria-label="Mapa de demanda LATAM">
-          <defs>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="2" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-          </defs>
+        {/* Mapa SVG tipo dotted-map */}
+        <div className="shrink-0">
+          <svg
+            viewBox="30 0 280 290"
+            width="150"
+            height="155"
+            aria-label="Mapa de demanda LATAM"
+          >
+            {/* Puntos del mapa */}
+            {svgContent.map((d, i) => (
+              <circle
+                key={i}
+                cx={d.x}
+                cy={d.y}
+                r="1"
+                fill="rgba(255,255,255,0.08)"
+              />
+            ))}
 
-          {/* México */}
-          <path d={MEXICO} fill="rgba(196,38,78,0.06)" stroke="rgba(196,38,78,0.2)" strokeWidth="0.5" />
+            {/* Contornos */}
+            <path d={SA_PATH} fill="rgba(196,38,78,0.05)" stroke="rgba(196,38,78,0.18)" strokeWidth="0.6" />
+            <path d={MX_PATH} fill="rgba(196,38,78,0.05)" stroke="rgba(196,38,78,0.15)" strokeWidth="0.6" />
+            <path d={CA_PATH} fill="rgba(196,38,78,0.04)" stroke="rgba(196,38,78,0.12)" strokeWidth="0.6" />
 
-          {/* Centroamérica */}
-          <path d={CENTRAL_AM} fill="rgba(196,38,78,0.04)" stroke="rgba(196,38,78,0.15)" strokeWidth="0.5" />
-
-          {/* Sudamérica */}
-          <path d={SOUTH_AMERICA} fill="rgba(196,38,78,0.06)" stroke="rgba(196,38,78,0.2)" strokeWidth="0.5" />
-
-          {/* Burbujas de ciudades */}
-          {MAP_CITIES.map((c) => (
-            <g key={c.l}>
-              {/* Halo exterior pulsante */}
-              <circle cx={c.x} cy={c.y} r={c.r * 1.6} fill={c.col} opacity="0.06">
-                <animate attributeName="r" values={`${c.r * 1.4};${c.r * 1.9};${c.r * 1.4}`} dur="2.5s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.06;0.02;0.06" dur="2.5s" repeatCount="indefinite" />
-              </circle>
-              {/* Burbuja principal */}
-              <circle cx={c.x} cy={c.y} r={c.r} fill={c.col} opacity="0.25" />
-              {/* Punto central */}
-              <circle cx={c.x} cy={c.y} r={c.r * 0.35} fill={c.col} opacity="0.9" />
-              {/* Label */}
-              <text x={c.x + c.r + 2} y={c.y + 3} fontSize="5.5" fill="var(--color-txt2)" fontFamily="JetBrains Mono, monospace" fontWeight="600">
-                {c.l}
-              </text>
-            </g>
-          ))}
-        </svg>
+            {/* Ciudades */}
+            {CITIES.map((c) => {
+              const { x, y } = project(c.lat, c.lng);
+              return (
+                <g key={c.label}>
+                  {/* Halo pulsante */}
+                  <circle cx={x} cy={y} r={c.r * 2.2} fill={c.color} opacity="0.07">
+                    <animate
+                      attributeName="r"
+                      values={`${c.r * 2};${c.r * 2.8};${c.r * 2}`}
+                      dur="2.5s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  {/* Burbuja media */}
+                  <circle cx={x} cy={y} r={c.r * 1.2} fill={c.color} opacity="0.2" />
+                  {/* Punto central */}
+                  <circle cx={x} cy={y} r={c.r * 0.5} fill={c.color} opacity="0.95" />
+                  {/* Label */}
+                  <text
+                    x={x + c.r + 2}
+                    y={y + 2}
+                    fontSize="5"
+                    fill="rgba(255,255,255,0.6)"
+                    fontFamily="JetBrains Mono, monospace"
+                    fontWeight="600"
+                  >
+                    {c.label}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
 
         {/* Rankings */}
         <div className="flex-1 flex flex-col gap-2.5 justify-center">
           {heatmapCities.map((r, i) => (
-            <div key={r.c} className="grid items-center gap-2 text-[11px]" style={{ gridTemplateColumns: "16px 85px 1fr 46px" }}>
-              <span className="text-[10px] font-bold tabular-nums" style={{ color: "var(--color-txt3)" }}>{i + 1}</span>
-              <span className="truncate font-medium" style={{ color: "var(--color-txt)" }}>{r.c}</span>
+            <div
+              key={r.c}
+              className="grid items-center gap-2 text-[11px]"
+              style={{ gridTemplateColumns: "14px 85px 1fr 46px" }}
+            >
+              <span
+                className="text-[10px] font-bold tabular-nums"
+                style={{ color: "var(--color-txt3)" }}
+              >
+                {i + 1}
+              </span>
+              <span className="truncate font-medium" style={{ color: "var(--color-txt)" }}>
+                {r.c}
+              </span>
               <Progress value={r.p} max={50} height={4} />
-              <span className="text-right tabular-nums" style={{ fontFamily: "var(--font-mono)", color: "var(--color-txt2)" }}>
+              <span
+                className="text-right tabular-nums"
+                style={{ fontFamily: "var(--font-mono)", color: "var(--color-txt2)" }}
+              >
                 {r.n >= 1000 ? `${(r.n / 1000).toFixed(1)}K` : r.n}
               </span>
             </div>
