@@ -1,17 +1,21 @@
 "use client";
-// src/components/dashboard/DashboardChrome.tsx — rediseñado con personalidad musical
+// src/components/dashboard/DashboardChrome.tsx — íconos Lucide profesionales
 import Link from "next/link";
 import { useState } from "react";
 import { orgInfo } from "@/lib/dashboard-data";
+import {
+  LayoutDashboard, Mic2, TrendingUp, Ticket, Zap,
+  Building2, Plug, Search, Plus, Circle
+} from "lucide-react";
 
 const NAV_ITEMS = [
-  { id: "overview",     icon: "🎯", l: "Overview" },
-  { id: "campaigns",    icon: "🎤", l: "Campañas",         n: 8 },
-  { id: "demand",       icon: "📈", l: "Demanda live" },
-  { id: "fans",         icon: "🎟", l: "Fans verificados" },
-  { id: "forecasts",    icon: "⚡", l: "Forecasts" },
-  { id: "venues",       icon: "🏟", l: "Venues" },
-  { id: "integrations", icon: "🔗", l: "Integraciones" },
+  { id: "overview",     icon: LayoutDashboard, l: "Overview" },
+  { id: "campaigns",    icon: Mic2,            l: "Campañas",         n: 8 },
+  { id: "demand",       icon: TrendingUp,      l: "Demanda live" },
+  { id: "fans",         icon: Ticket,          l: "Fans verificados" },
+  { id: "forecasts",    icon: Zap,             l: "Forecasts" },
+  { id: "venues",       icon: Building2,       l: "Venues" },
+  { id: "integrations", icon: Plug,            l: "Integraciones" },
 ];
 
 export function DashboardSidebar({ active = "overview" }: { active?: string }) {
@@ -44,6 +48,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
       <nav className="flex flex-col gap-0.5">
         {NAV_ITEMS.map((it) => {
           const sel = active === it.id;
+          const Icon = it.icon;
           return (
             <button
               key={it.id}
@@ -57,7 +62,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
                 borderLeft: sel ? "2px solid var(--color-burg3)" : "2px solid transparent",
               }}
             >
-              <span className="text-[16px]">{it.icon}</span>
+              <Icon size={15} style={{ color: sel ? "var(--color-burg3)" : "var(--color-txt3)" }} />
               <span className="flex-1">{it.l}</span>
               {it.n && (
                 <span
@@ -72,10 +77,10 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
         })}
       </nav>
 
-      {/* Footer */}
+      {/* Footer status */}
       <div className="mt-auto pt-4 border-t border-[var(--color-border)]">
         <div className="flex items-center gap-2 px-3 py-2">
-          <span className="text-[14px]">🟢</span>
+          <Circle size={8} fill="var(--color-emerald2)" style={{ color: "var(--color-emerald2)" }} />
           <div>
             <div className="text-[11px] font-semibold" style={{ color: "var(--color-emerald2)" }}>Sistema operativo</div>
             <div className="text-[10px]" style={{ color: "var(--color-txt3)" }}>34.2K apoyos en vivo</div>
@@ -114,7 +119,7 @@ export function DashboardSubHeader() {
         className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg max-w-sm"
         style={{ background: "var(--color-surface2)", border: "1px solid var(--color-border)" }}
       >
-        <span className="text-[13px]">🔍</span>
+        <Search size={13} style={{ color: "var(--color-txt3)" }} />
         <span className="text-[12px]" style={{ color: "var(--color-txt3)" }}>Buscar campaña, artista, ciudad...</span>
       </div>
 
@@ -124,7 +129,8 @@ export function DashboardSubHeader() {
           className="px-4 py-1.5 rounded-lg text-[12px] font-bold uppercase tracking-[0.06em] flex items-center gap-1.5 text-white transition-transform hover:-translate-y-0.5"
           style={{ background: "var(--color-burg3)", boxShadow: "0 4px 12px rgba(196,38,78,0.3)" }}
         >
-          <span>+</span> Nueva campaña
+          <Plus size={13} />
+          Nueva campaña
         </button>
       </div>
     </div>
