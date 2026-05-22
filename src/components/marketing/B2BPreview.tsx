@@ -183,29 +183,36 @@ function B2BDashPreview() {
   );
 }
 
+import { AR_SVG_PATH } from "@/lib/ar-path";
+
 function ARMap() {
+  // Ciudades proyectadas sobre el mismo viewBox del path (lng -73..-53, lat -22..-55 → 0..100 x 0..140)
   const cities = [
-    { x: 56, y: 78, r: 22, l: "BA" },
-    { x: 50, y: 60, r: 14, l: "CB" },
-    { x: 52, y: 70, r: 10, l: "RO" },
-    { x: 36, y: 64, r: 8, l: "MZ" },
-    { x: 56, y: 36, r: 5, l: "SA" },
-    { x: 65, y: 105, r: 5, l: "BB" },
+    { x: 68, y: 103, r: 12, l: "BA" },   // Buenos Aires
+    { x: 55, y: 79,  r:  8, l: "CB" },   // Córdoba
+    { x: 62, y: 97,  r:  6, l: "RO" },   // Rosario
+    { x: 24, y: 75,  r:  5, l: "MZ" },   // Mendoza
+    { x: 60, y: 47,  r:  4, l: "SA" },   // Salta
+    { x: 72, y: 118, r:  4, l: "BB" },   // Bahía Blanca
   ];
   return (
     <svg viewBox="0 0 100 140" width="100%" height="180" style={{ display: "block" }} aria-hidden>
+      {/* Mapa real de Argentina */}
       <path
-        d="M55 4 L62 12 L66 22 L60 32 L66 42 L60 52 L66 62 L62 72 L56 80 L62 88 L58 96 L62 104 L56 112 L60 120 L52 128 L46 122 L48 112 L42 104 L46 96 L42 88 L46 78 L40 70 L46 60 L42 52 L48 42 L44 30 L50 18 L48 8 Z"
+        d={AR_SVG_PATH}
         fill="rgba(196,38,78,0.08)"
-        stroke="var(--color-border2)"
+        stroke="rgba(196,38,78,0.3)"
         strokeWidth="0.5"
+        strokeLinejoin="round"
       />
       {cities.map((c) => (
         <g key={c.l}>
-          <circle cx={c.x} cy={c.y} r={c.r} fill="var(--color-burg3)" opacity="0.18" />
-          <circle cx={c.x} cy={c.y} r={c.r * 0.5} fill="var(--color-burg3)" opacity="0.5" />
-          <circle cx={c.x} cy={c.y} r="1.5" fill="#E43A66" />
-          <text x={c.x + c.r + 2} y={c.y + 2} fontSize="4" fill="var(--color-txt)" fontFamily="JetBrains Mono">
+          <circle cx={c.x} cy={c.y} r={c.r * 1.6} fill="var(--color-burg3)" opacity="0.08">
+            <animate attributeName="r" values={`${c.r * 1.4};${c.r * 2};${c.r * 1.4}`} dur="2.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx={c.x} cy={c.y} r={c.r} fill="var(--color-burg3)" opacity="0.22" />
+          <circle cx={c.x} cy={c.y} r={c.r * 0.4} fill="#E43A66" opacity="0.95" />
+          <text x={c.x + c.r + 1.5} y={c.y + 1.8} fontSize="4" fill="rgba(255,255,255,0.65)" fontFamily="JetBrains Mono">
             {c.l}
           </text>
         </g>
