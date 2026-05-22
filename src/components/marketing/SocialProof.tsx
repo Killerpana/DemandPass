@@ -1,5 +1,6 @@
 // src/components/marketing/SocialProof.tsx
 import { testimonials } from "@/lib/marketing-data";
+import { StaggerReveal } from "@/components/ui/ScrollReveal";
 
 export function SocialProof() {
   return (
@@ -27,7 +28,12 @@ export function SocialProof() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <StaggerReveal
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          staggerMs={100}
+          variant="slide-up"
+          duration={550}
+        >
           {testimonials.map((t) => (
             <article
               key={t.co}
@@ -71,7 +77,7 @@ export function SocialProof() {
               </div>
             </article>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

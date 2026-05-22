@@ -1,6 +1,7 @@
 // src/components/marketing/HowItWorks.tsx
 import { Pill } from "@/components/ui/Pill";
 import { howItWorksSteps, trustPoints } from "@/lib/marketing-data";
+import { StaggerReveal, ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function HowItWorks() {
   return (
@@ -37,7 +38,13 @@ export function HowItWorks() {
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <StaggerReveal
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          staggerMs={120}
+          baseDelay={100}
+          variant="slide-up"
+          duration={600}
+        >
           {howItWorksSteps.map((s) => (
             <div
               key={s.n}
@@ -89,7 +96,7 @@ export function HowItWorks() {
               </ul>
             </div>
           ))}
-        </div>
+        </StaggerReveal>
 
         {/* Trust points */}
         <div
