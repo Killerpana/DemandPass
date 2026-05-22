@@ -1,30 +1,34 @@
 // src/components/ui/Logo.tsx
-// DemandPass primary lockup, using the brand PNG.
-// Uses mix-blend-mode: screen so the PNG's black bg disappears on any dark surface.
+// Usa el lockup vectorial oficial del Brand Kit v1.0
 import Image from "next/image";
 import Link from "next/link";
 
-const SRC = "/brand/logo-demandpass.png";
-const SRC_W = 1150;
-const SRC_H = 370;
+interface LogoProps {
+  height?: number;
+  href?: string;
+  variant?: "dark" | "mono-white";
+}
 
-export function Logo({ height = 32, href, className = "" }: { height?: number; href?: string; className?: string }) {
-  const width = Math.round(height * (SRC_W / SRC_H));
+export function Logo({ height = 36, href = "/", variant = "dark" }: LogoProps) {
+  const src = `/brand/lockup-horizontal-dark.svg`;
+  // Ratio del lockup horizontal: aprox 5.2:1
+  const width = Math.round(height * 5.2);
+
   const img = (
     <Image
-      src={SRC}
+      src={src}
       alt="DemandPass"
       width={width}
       height={height}
       priority
-      style={{ height, width: "auto", display: "block", mixBlendMode: "screen" }}
+      style={{ height, width: "auto", display: "block" }}
     />
   );
-  return href ? (
-    <Link href={href} aria-label="DemandPass — Inicio" className={`inline-flex items-center ${className}`}>
+
+  if (!href) return img;
+  return (
+    <Link href={href} aria-label="DemandPass — inicio" className="shrink-0">
       {img}
     </Link>
-  ) : (
-    <span className={`inline-flex items-center ${className}`}>{img}</span>
   );
 }
