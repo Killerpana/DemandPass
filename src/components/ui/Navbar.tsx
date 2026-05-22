@@ -58,7 +58,7 @@ export function Navbar() {
         }}
         aria-label="Navegación principal"
       >
-        <Logo height={32} href="/" />
+        <Logo height={28} href="/" />
 
         {/* Links desktop */}
         <div className="hidden md:flex gap-1 ml-8">
