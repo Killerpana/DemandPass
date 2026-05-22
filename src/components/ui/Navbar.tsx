@@ -72,11 +72,11 @@ export function Navbar() {
         {/* CTAs desktop */}
         <div className="hidden md:flex ml-auto items-center gap-3">
           <Link
-            href="/signin"
+            href="/perfil"
             className="px-3.5 py-2 rounded-md text-[12px] font-bold uppercase tracking-[0.06em] border text-[var(--color-txt)] transition-colors hover:border-[var(--color-burg3)]"
             style={{ borderColor: "var(--color-border2)" }}
           >
-            Ingresar
+            Mi perfil
           </Link>
           <Link
             href="/campaigns"
