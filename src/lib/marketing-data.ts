@@ -104,7 +104,7 @@ export const extraCampaigns: EnrichedCampaign[] = [
     genre: "R&B",
   },
   {
-    id: 101, img: "BD", artist: "Bad Bunny", event: "Más Tarde Tour",
+    id: 101, img: "BD", tourImg: "/brand/tours/bad-bunny.jpg", artist: "Bad Bunny", event: "Más Tarde Tour",
     city: "Ciudad de México", country: "México", type: "official",
     days: 4, goal: 15000, current: 14200, price: "USD 70–130",
     certainty: 99, benefit: "Confirmación inminente",
@@ -154,7 +154,7 @@ export const extraCampaigns: EnrichedCampaign[] = [
     genre: "Hip-Hop",
   },
   {
-    id: 106, img: "BL", artist: "Billie Eilish", event: "Hit Me Hard and Soft Tour",
+    id: 106, img: "BL", tourImg: "/brand/tours/billie.jpg", artist: "Billie Eilish", event: "Hit Me Hard and Soft Tour",
     city: "Buenos Aires", country: "Argentina", type: "official",
     days: 7, goal: 12000, current: 11200, price: "USD 95–160",
     certainty: 96, benefit: "Preventa + Soundcheck",

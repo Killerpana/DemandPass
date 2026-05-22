@@ -4,6 +4,7 @@ export type Level = "Bronce" | "Plata" | "Oro";
 export interface Campaign {
   id: number;
   img: string;
+  tourImg?: string;   // imagen oficial del tour (solo campañas oficiales)
   artist: string;
   event: string;
   city: string;
@@ -33,6 +34,7 @@ export const campaigns: Campaign[] = [
   {
     id: 0,
     img: "LK",
+    tourImg: "/brand/tours/lenny.webp",
     artist: "Lenny Kravitz",
     event: "Raise Vibration Tour",
     city: "Buenos Aires",
@@ -82,20 +84,21 @@ export const campaigns: Campaign[] = [
   },
   {
     id: 2,
-    img: "GD",
-    artist: "Global DJ",
-    event: "Electronic Night",
-    city: "Córdoba",
+    img: "TI",
+    tourImg: "/brand/tours/tini.webp",
+    artist: "Tini",
+    event: "Futttura Tour",
+    city: "Buenos Aires",
     country: "Argentina",
     type: "official",
     days: 28,
     goal: 4000,
     current: 2900,
     price: "USD 60–90",
-    certainty: 65,
+    certainty: 78,
     benefit: "Fila prioritaria + preventa",
     reserve: "15%",
-    color: "#9d6ef8",
+    color: "#e879a8",
     perks: [
       "Posición en fila exclusiva el día del evento (si se confirma)",
       "Acceso a preventa 48 hs antes del público general",
@@ -103,7 +106,7 @@ export const campaigns: Campaign[] = [
       "Devolución del monto nominal si el evento no se confirma",
     ],
     description:
-      "Una noche de electrónica de primer nivel podría llegar a Córdoba. Apoyá ahora para registrar tu interés y quedar en lista prioritaria si el evento se confirma.",
+      "Tini trae el Futttura Tour a Buenos Aires. Apoyá ahora para registrar tu interés y quedar en lista prioritaria para la preventa.",
   },
 ];
 
