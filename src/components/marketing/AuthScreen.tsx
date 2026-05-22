@@ -249,9 +249,9 @@ export function AuthScreen({ initialMode = "signup" }: { initialMode?: Mode }) {
 
         <div className="relative z-10 flex flex-col gap-3 max-w-[420px]">
           {[
-            { c: "LK", a: "Lenny Kravitz", stat: "CONFIRMADO",    val: "8.245 fans con acceso",       col: "var(--color-emerald2)" },
-            { c: "KP", a: "K-Pop Night",   stat: "EN CAMPAÑA",    val: "9.850 / 12.000 apoyos",       col: "var(--color-burg3)" },
-            { c: "SZ", a: "SZA",           stat: "ALTA DEMANDA",  val: "+580 esta semana",            col: "var(--color-amber2)" },
+            { c: "LK", a: "Lenny Kravitz", stat: "CONFIRMADO",   val: "8.245 fans con acceso",   col: "var(--color-emerald2)" },
+            { c: "BL", a: "Billie Eilish",  stat: "EN CAMPAÑA",   val: "11.200 / 12.000 apoyos",  col: "var(--color-burg3)" },
+            { c: "SZ", a: "SZA",            stat: "ALTA DEMANDA", val: "+580 esta semana",         col: "var(--color-amber2)" },
           ].map((c) => (
             <div
               key={c.a}
