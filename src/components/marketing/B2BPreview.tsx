@@ -188,12 +188,12 @@ import { AR_SVG_PATH } from "@/lib/ar-path";
 function ARMap() {
   // Ciudades proyectadas sobre el mismo viewBox del path (lng -73..-53, lat -22..-55 → 0..100 x 0..140)
   const cities = [
-    { x: 68, y: 103, r: 12, l: "BA" },   // Buenos Aires
-    { x: 55, y: 79,  r:  8, l: "CB" },   // Córdoba
-    { x: 62, y: 97,  r:  6, l: "RO" },   // Rosario
-    { x: 24, y: 75,  r:  5, l: "MZ" },   // Mendoza
-    { x: 60, y: 47,  r:  4, l: "SA" },   // Salta
-    { x: 72, y: 118, r:  4, l: "BB" },   // Bahía Blanca
+    { x: 73,   y: 53.5, r: 10, l: "BA" },   // Buenos Aires
+    { x: 44,   y: 39.9, r:  7, l: "CB" },   // Córdoba
+    { x: 61.5, y: 46.2, r:  5, l: "RO" },   // Rosario
+    { x: 21,   y: 46.2, r:  4, l: "MZ" },   // Mendoza
+    { x: 38,   y: 11.9, r:  3, l: "SA" },   // Salta
+    { x: 53.5, y: 70.8, r:  3, l: "BB" },   // Bahía Blanca
   ];
   return (
     <svg viewBox="0 0 100 140" width="100%" height="180" style={{ display: "block" }} aria-hidden>
