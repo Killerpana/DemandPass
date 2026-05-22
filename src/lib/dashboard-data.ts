@@ -24,9 +24,9 @@ export type CampaignRow = {
 
 export const dashboardCampaigns: CampaignRow[] = [
   { c: "LK", a: "Lenny Kravitz",     city: "BUE", s: "oficial", sup: 5420,  tg: 8000,  pct: 68, price: 84,  days: 47, trend: [22, 28, 35, 42, 48, 56, 62, 65, 68],  prob: 91 },
-  { c: "KP", a: "K-Pop Night",       city: "BUE", s: "fan",     sup: 9850,  tg: 12000, pct: 82, price: 75,  days: 12, trend: [38, 45, 58, 64, 72, 78, 80, 82, 82],  prob: 96 },
+  { c: "BL", a: "Billie Eilish",      city: "BUE", s: "oficial", sup: 11200, tg: 12000, pct: 93, price: 120, days: 7,  trend: [38, 45, 58, 64, 72, 78, 80, 82, 93],  prob: 96 },
   { c: "SZ", a: "SZA",               city: "BUE", s: "fan",     sup: 7280,  tg: 10000, pct: 73, price: 118, days: 22, trend: [20, 28, 38, 48, 55, 62, 68, 70, 73],  prob: 82 },
-  { c: "GD", a: "Global DJ",         city: "CBA", s: "oficial", sup: 2900,  tg: 4000,  pct: 73, price: 58,  days: 28, trend: [22, 28, 38, 45, 52, 58, 64, 68, 73],  prob: 76 },
+  { c: "TI", a: "Tini",              city: "BUE", s: "oficial", sup: 2900,  tg: 4000,  pct: 73, price: 70,  days: 28, trend: [22, 28, 38, 45, 52, 58, 64, 68, 73],  prob: 76 },
   { c: "TY", a: "Tyler the Creator", city: "BUE", s: "fan",     sup: 1240,  tg: 6000,  pct: 21, price: 92,  days: 62, trend: [4, 6, 8, 10, 12, 14, 17, 19, 21],     prob: 38 },
   { c: "BD", a: "Bad Bunny",         city: "MEX", s: "oficial", sup: 14200, tg: 15000, pct: 95, price: 96,  days: 4,  trend: [60, 68, 75, 82, 86, 88, 91, 93, 95],  prob: 99 },
   { c: "JB", a: "Justin Bieber",     city: "BUE", s: "oficial", sup: 4680,  tg: 9000,  pct: 52, price: 102, days: 34, trend: [12, 18, 24, 30, 36, 42, 46, 50, 52],  prob: 64 },
