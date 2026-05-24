@@ -13,8 +13,7 @@ export function Footer() {
                 style={{ height: 28, width: "auto" }}
               />
             </Link>
-            <p className="text-[11px] text-[var(--txt3)] font-[family-name:'Barlow_Condensed',sans-serif] tracking-[0.5px] uppercase mb-2">Verified Demand. Live Access.</p>
-            <p className="text-[12px] text-[var(--txt3)] leading-[1.7]">No vendemos entradas.</p>
+            <p className="text-[12px] text-[var(--txt3)] leading-[1.7] mt-2">No vendemos entradas.<br/>Convertimos demanda en datos.</p>
           </div>
           {[
             { title: "Plataforma", links: [{ label: "Campañas activas", href: "/campaigns" }, { label: "Cómo funciona", href: "/#como-funciona" }, { label: "Dashboard B2B", href: "/dashboard" }] },

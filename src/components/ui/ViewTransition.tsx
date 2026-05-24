@@ -29,8 +29,8 @@ export function useViewTransition() {
       // Solo links internos (empiezan con /)
       if (!href.startsWith("/")) return;
 
-      // No interceptar links con modificadores
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      // No interceptar anchor links (/#seccion) — dejar que scroll-behavior: smooth los maneje
+      if (href.includes("#")) return;
 
       // No interceptar si tiene target="_blank"
       if (anchor.target === "_blank") return;
