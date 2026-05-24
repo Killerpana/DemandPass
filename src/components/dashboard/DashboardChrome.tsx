@@ -21,7 +21,7 @@ const NAV_ITEMS = [
 export function DashboardSidebar({ active = "overview" }: { active?: string }) {
   return (
     <aside
-      className="w-[220px] shrink-0 flex flex-col py-5 px-3"
+      className="hidden md:flex w-[220px] shrink-0 flex-col py-5 px-3"
       style={{
         background: "var(--color-surface)",
         borderRight: "1px solid var(--color-border)",
@@ -95,7 +95,7 @@ export function DashboardSubHeader() {
   const [env, setEnv] = useState<"prod" | "sand">("prod");
   return (
     <div
-      className="h-12 px-6 flex items-center gap-4 border-b"
+      className="h-12 px-3 md:px-6 flex items-center gap-2 md:gap-4 border-b overflow-x-auto"
       style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }}
     >
       <div className="flex gap-1 p-0.5 rounded-lg" style={{ background: "var(--color-surface2)" }}>
@@ -116,7 +116,7 @@ export function DashboardSubHeader() {
       </div>
 
       <div
-        className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg max-w-sm"
+        className="hidden sm:flex flex-1 items-center gap-2 px-3 py-1.5 rounded-lg max-w-sm shrink-0"
         style={{ background: "var(--color-surface2)", border: "1px solid var(--color-border)" }}
       >
         <Search size={13} style={{ color: "var(--color-txt3)" }} />

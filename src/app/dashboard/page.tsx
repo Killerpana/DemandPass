@@ -18,7 +18,7 @@ export default function DashboardPage() {
       <div className="flex-1 min-w-0 flex flex-col">
         <DashboardSubHeader />
 
-        <main className="flex-1 p-7 overflow-x-hidden">
+        <main className="flex-1 p-4 md:p-7 overflow-x-hidden">
           <DashboardPageHeader
             title="Campañas activas"
             breadcrumbs={[

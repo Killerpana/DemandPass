@@ -73,7 +73,7 @@ export function CampaignsBrowser({ campaigns }: { campaigns: EnrichedCampaign[] 
   return (
     <>
       {/* Filter bar */}
-      <section className="px-12 py-5 border-b border-[var(--color-border)]" style={{ background: "var(--color-surface)" }}>
+      <section className="px-5 md:px-12 py-5 border-b border-[var(--color-border)]" style={{ background: "var(--color-surface)" }}>
         <div className="max-w-[1344px] mx-auto flex flex-wrap items-center justify-between gap-6">
           <div className="flex flex-wrap items-center gap-5">
             {/* Type chips */}
@@ -149,7 +149,7 @@ export function CampaignsBrowser({ campaigns }: { campaigns: EnrichedCampaign[] 
       </section>
 
       {/* Grid */}
-      <section className="px-12 py-8">
+      <section className="px-5 md:px-12 py-8">
         <div className="max-w-[1344px] mx-auto">
           {/* Result count */}
           <div className="mb-6 flex items-baseline justify-between">

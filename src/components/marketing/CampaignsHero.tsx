@@ -6,7 +6,7 @@ export function CampaignsHero({ campaigns }: { campaigns: EnrichedCampaign[] }) 
   const countries = new Set(campaigns.map((c) => c.country)).size;
 
   return (
-    <section className="relative overflow-hidden border-b border-[var(--color-border)] px-12 py-12">
+    <section className="relative overflow-hidden border-b border-[var(--color-border)] px-5 md:px-12 py-8 md:py-12">
       <div
         className="absolute -top-32 -right-32 w-[520px] h-[520px] pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(196,38,78,0.12), transparent 65%)" }}
