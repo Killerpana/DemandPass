@@ -200,26 +200,26 @@
 }
 
 ::view-transition-old(root) {
-  animation: 220ms cubic-bezier(0.4, 0, 1, 1) both dp-vt-fade-out;
+  animation: 120ms ease-in both dp-vt-fade-out;
 }
 ::view-transition-new(root) {
-  animation: 280ms cubic-bezier(0, 0, 0.2, 1) both dp-vt-fade-in;
+  animation: 180ms ease-out 120ms both dp-vt-fade-in;
 }
 
 /* Transición específica para hero de campaña */
 ::view-transition-old(campaign-hero) {
-  animation: 200ms ease both dp-vt-slide-out;
+  animation: 120ms ease both dp-vt-slide-out;
 }
 ::view-transition-new(campaign-hero) {
-  animation: 300ms ease both dp-vt-slide-in;
+  animation: 200ms ease 120ms both dp-vt-slide-in;
 }
 
 /* Transición para tarjetas */
 ::view-transition-old(campaign-card) {
-  animation: 180ms ease both dp-vt-fade-out;
+  animation: 100ms ease both dp-vt-fade-out;
 }
 ::view-transition-new(campaign-card) {
-  animation: 260ms ease both dp-vt-fade-in;
+  animation: 160ms ease 100ms both dp-vt-fade-in;
 }
 
 /* ── animate-appear (inspirado en 21st.dev/mikolajdobrucki) ── */
