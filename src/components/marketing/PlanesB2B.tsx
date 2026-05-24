@@ -73,7 +73,7 @@ export function PlanesB2B() {
   return (
     <section
       id="planes"
-      className="py-[120px] px-12 border-b border-[var(--color-border)]"
+      className="py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]"
       style={{ background: "var(--color-bg)" }}
     >
       <div className="max-w-[1100px] mx-auto">

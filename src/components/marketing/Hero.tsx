@@ -27,8 +27,8 @@ export function Hero() {
         style={{ background: "radial-gradient(circle, rgba(196,38,78,0.18), transparent 65%)" }}
       />
 
-      <div className="relative max-w-[1344px] mx-auto px-12 pt-16 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-16 items-start pt-8">
+      <div className="relative max-w-[1344px] mx-auto px-5 md:px-12 pt-10 md:pt-16 pb-8 md:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-16 items-start pt-4 md:pt-8">
           {/* Left — copy */}
           <div>
             <Pill variant="live" pulse>Plataforma activa · LATAM</Pill>
@@ -37,7 +37,7 @@ export function Hero() {
               className="uppercase mt-6 mb-7"
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(56px, 7vw, 96px)",
+                fontSize: "clamp(38px, 9vw, 96px)",
                 lineHeight: 0.92,
                 letterSpacing: "0.005em",
               }}
@@ -76,15 +76,15 @@ export function Hero() {
             </div>
 
             {/* Trust strip */}
-            <div className="grid grid-cols-3 gap-0 pt-8 border-t border-[var(--color-border2)]">
+            <div className="grid grid-cols-3 gap-0 pt-6 md:pt-8 border-t border-[var(--color-border2)]">
               {trustStats.map((s, i) => (
                 <div
                   key={s.l}
-                  className={`px-6 ${i > 0 ? "border-l border-[var(--color-border2)]" : ""}`}
+                  className={`px-2 md:px-6 ${i > 0 ? "border-l border-[var(--color-border2)]" : ""}`}
                 >
                   <div
                     className="uppercase tabular-nums leading-none"
-                    style={{ fontFamily: "var(--font-display)", fontSize: 36, letterSpacing: "1px" }}
+                    style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 5vw, 36px)", letterSpacing: "1px" }}
                   >
                     <AnimatedCounter
                       value={s.n}

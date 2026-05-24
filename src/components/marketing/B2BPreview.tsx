@@ -8,13 +8,13 @@ import { b2bFeatures } from "@/lib/marketing-data";
 
 export function B2BPreview() {
   return (
-    <section className="relative overflow-hidden py-[120px] px-12 border-b border-[var(--color-border)]">
+    <section className="relative overflow-hidden py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]">
       <div
         className="absolute top-1/2 -left-52 w-[500px] h-[500px] -translate-y-1/2 pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(196,38,78,0.12), transparent 65%)" }}
       />
       <div className="max-w-[1344px] mx-auto relative">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-center">
           {/* Left */}
           <div>
             <div
@@ -121,7 +121,7 @@ function B2BDashPreview() {
       <div className="p-5">
         {/* KPI strip */}
         <div
-          className="grid grid-cols-4 mb-5 rounded-md"
+          className="grid grid-cols-2 md:grid-cols-4 mb-5 rounded-md"
           style={{ background: "var(--color-surface2)", border: "1px solid var(--color-border)" }}
         >
           {([
@@ -155,7 +155,7 @@ function B2BDashPreview() {
         </div>
 
         {/* Heatmap + price */}
-        <div className="grid grid-cols-[1.4fr_1fr] gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-4">
           <div
             className="p-3.5 rounded-md"
             style={{ background: "var(--color-surface2)", border: "1px solid var(--color-border)" }}

@@ -5,7 +5,7 @@ import { StaggerReveal, ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="py-[120px] px-12 border-b border-[var(--color-border)]">
+    <section id="como-funciona" className="py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]">
       <div className="max-w-[1344px] mx-auto">
         {/* Header */}
         <div className="flex flex-col lg:flex-row items-end justify-between gap-12 mb-16">

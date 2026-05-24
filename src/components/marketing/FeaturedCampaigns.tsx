@@ -5,7 +5,7 @@ import { CampaignCard } from "./CampaignCard";
 
 export function FeaturedCampaigns() {
   return (
-    <section className="py-[120px] px-12 border-b border-[var(--color-border)]">
+    <section className="py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]">
       <div className="max-w-[1344px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>

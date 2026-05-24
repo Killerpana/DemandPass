@@ -4,7 +4,7 @@ import { StaggerReveal } from "@/components/ui/ScrollReveal";
 
 export function SocialProof() {
   return (
-    <section className="py-[120px] px-12 border-b border-[var(--color-border)]">
+    <section className="py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]">
       <div className="max-w-[1344px] mx-auto">
         <div className="mb-14 text-center">
           <div
