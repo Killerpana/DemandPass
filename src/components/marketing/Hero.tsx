@@ -49,8 +49,9 @@ export function Hero() {
             </h1>
 
             <p className="text-lg max-w-[540px] mb-9 leading-[1.55] text-[var(--color-txt2)]">
-              Los fans expresan su interés antes de que el show se confirme.
-              Las productoras reciben datos reales de demanda — cuánta gente, dónde, a qué precio —{" "}
+              Los <strong className="text-[var(--color-txt)]">fans</strong> expresan demanda real.
+              Los <strong className="text-[var(--color-txt)]">artistas</strong> entienden su mercado.
+              Las <strong className="text-[var(--color-txt)]">productoras</strong> deciden con datos —{" "}
               <strong className="text-[var(--color-txt)]">antes de gastar un peso en producción</strong>.
             </p>
 
