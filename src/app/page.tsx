@@ -10,6 +10,7 @@ import { PlanesB2B }         from "@/components/marketing/PlanesB2B";
 import { SocialProof }       from "@/components/marketing/SocialProof";
 import { FAQ }               from "@/components/marketing/FAQ";
 import { ScrollReveal }      from "@/components/ui/ScrollReveal";
+import { TresRamas }        from "@/components/marketing/TresRamas";
 
 export const metadata: Metadata = {
   title: "DemandPass — Demanda verificada para eventos en vivo",
@@ -31,6 +32,9 @@ export default function HomePage() {
       {/* Cómo funciona — slide desde abajo */}
       <ScrollReveal variant="slide-up" duration={700} delay={100}>
         <HowItWorks />
+
+        {/* Tres ramas */}
+        <TresRamas />
       </ScrollReveal>
 
       {/* Campañas destacadas — zoom sutil */}

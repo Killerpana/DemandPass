@@ -73,6 +73,13 @@ export function Hero() {
               >
                 Soy productora
               </Link>
+              <Link
+                href="/artistas"
+                className="inline-flex items-center px-6 py-4 rounded-md text-[14px] font-bold uppercase tracking-[0.06em] border text-[var(--color-txt)] hover:bg-white/[0.02]"
+                style={{ borderColor: "var(--color-border2)", fontFamily: "var(--font-sans)" }}
+              >
+                Soy artista
+              </Link>
             </div>
 
             {/* Trust strip */}
