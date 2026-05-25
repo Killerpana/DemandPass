@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { campaigns } from "@/lib/data";
 import { enrichCampaign, extraCampaigns } from "@/lib/marketing-data";
-import { CampaignsBrowser } from "@/components/marketing/CampaignsBrowser";
 import { CampaignsHero } from "@/components/marketing/CampaignsHero";
+import { CampaignsBrowser } from "@/components/marketing/CampaignsBrowser";
 
 export const metadata: Metadata = { title: "Descubrir" };
 
@@ -10,7 +10,7 @@ export default function FanDescubrirPage() {
   const all = [...campaigns.map(enrichCampaign), ...extraCampaigns];
   return (
     <>
-      <CampaignsHero />
+      <CampaignsHero campaigns={all} />
       <CampaignsBrowser campaigns={all} />
     </>
   );
