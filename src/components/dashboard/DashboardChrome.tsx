@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { id: "overview",      icon: LayoutDashboard, l: "Overview",          href: "/dashboard"                   },
+  { id: "overview",      icon: LayoutDashboard, l: "Overview",          href: "/dashboard/overview"          },
   { id: "campaigns",     icon: Mic2,            l: "Campañas",    n: 8, href: "/dashboard"                   },
   { id: "demand",        icon: TrendingUp,      l: "Demanda live",      href: "/dashboard/demanda-live"      },
   { id: "fans",          icon: Ticket,          l: "Fans verificados",  href: "/dashboard/fans-verificados"  },
@@ -49,7 +49,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
 
       <nav className="flex flex-col gap-0.5">
         {NAV_ITEMS.map((it) => {
-          const sel = it.href === "/dashboard" ? path === "/dashboard" : path.startsWith(it.href);
+          const sel = it.href === "/dashboard" ? path === "/dashboard" : (it.href === "/dashboard/overview" ? path === "/dashboard/overview" : path.startsWith(it.href));
           const Icon = it.icon;
           return (
             <Link

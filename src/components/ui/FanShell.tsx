@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Compass, Ticket, Search, Bell, Clock, User, Settings, LogOut, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import { Logo } from "@/components/ui/Logo";
 
 const NAV = [
@@ -20,6 +21,8 @@ const BOTTOM = [
 
 export function FanShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
+  const [sideOpen, setSideOpen] = useState(false);
+
 
   const isActive = (href: string) =>
     path === href || path.startsWith(href + "/");
@@ -28,7 +31,7 @@ export function FanShell({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen" style={{ background: "var(--color-bg)" }}>
 
       {/* Sidebar */}
-      <aside className="hidden md:flex w-[220px] shrink-0 flex-col border-r"
+      <aside className="sidebar-desktop hidden md:flex w-[220px] shrink-0 flex-col border-r"
         style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}>
 
         {/* Logo + usuario */}
@@ -92,6 +95,19 @@ export function FanShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Content */}
+
+      {/* Mobile header */}
+      <div className="sidebar-desktop-inverse md:hidden flex items-center justify-between px-4 py-3 border-b"
+        style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }}>
+        <Logo height={18} href="/" />
+        <button onClick={() => setSideOpen(v => !v)}
+          className="w-8 h-8 flex flex-col justify-center items-center gap-1.5 rounded-lg"
+          style={{ background: sideOpen ? "var(--color-surface2)" : "transparent" }}>
+          <span className="block w-4 h-[1.5px] rounded-full" style={{ background: "var(--color-txt)", transform: sideOpen ? "translateY(5px) rotate(45deg)" : "none", transition: "all 200ms" }} />
+          <span className="block w-4 h-[1.5px] rounded-full" style={{ background: "var(--color-txt)", opacity: sideOpen ? 0 : 1, transition: "all 200ms" }} />
+          <span className="block w-4 h-[1.5px] rounded-full" style={{ background: "var(--color-txt)", transform: sideOpen ? "translateY(-5px) rotate(-45deg)" : "none", transition: "all 200ms" }} />
+        </button>
+      </div>
       <main className="flex-1 overflow-x-hidden"><div key={path} className="animate-fadein">{children}</div></main>
     </div>
   );

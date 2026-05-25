@@ -95,7 +95,7 @@ export function Navbar() {
         <Logo height={22} href="/" />
 
         {/* Links desktop */}
-        <div className="hidden md:flex items-center gap-0.5 ml-6">
+        <div className="nav-desktop-links hidden md:flex items-center gap-0.5 ml-6">
           {/* Inicio dropdown */}
           <div ref={dropRef} className="relative">
             <button onClick={() => setDropOpen(v => !v)}
@@ -129,7 +129,7 @@ export function Navbar() {
         </div>
 
         {/* CTAs desktop */}
-        <div className="hidden md:flex ml-auto items-center gap-2.5">
+        <div className="nav-desktop-ctas hidden md:flex ml-auto items-center gap-2.5">
           <div ref={userRef} className="relative">
             <button onClick={() => setUserOpen(v => !v)}
               className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors hover:bg-white/5"
@@ -162,7 +162,7 @@ export function Navbar() {
 
         {/* Hamburguesa mobile */}
         <button type="button" onClick={() => setMenuOpen(v => !v)}
-          className="ml-auto md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-md"
+          className="nav-hamburger ml-auto md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-md"
           style={{ background: menuOpen ? "var(--color-surface2)" : "transparent" }}
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen}>
           <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300"
@@ -175,7 +175,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      <div className="fixed inset-0 z-[199] md:hidden flex flex-col pt-16 transition-all duration-300"
+      <div className="nav-mobile-menu fixed inset-0 z-[199] md:hidden flex flex-col pt-16 transition-all duration-300"
         style={{ background: "rgba(8,8,13,0.98)", backdropFilter: "blur(20px)", opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "all" : "none", transform: menuOpen ? "translateY(0)" : "translateY(-8px)" }}
         aria-hidden={!menuOpen}>
         <div className="flex flex-col px-6 pt-4 gap-0">

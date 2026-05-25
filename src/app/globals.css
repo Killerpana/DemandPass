@@ -263,3 +263,15 @@
 .animate-fadein {
   animation: dp-fadein 180ms ease-out both;
 }
+
+/* ── Mobile nav fixes ── */
+@media (max-width: 767px) {
+  .nav-desktop-links  { display: none !important; }
+  .nav-desktop-ctas   { display: none !important; }
+  .nav-hamburger      { display: flex !important; }
+  .sidebar-desktop    { display: none !important; }
+}
+@media (min-width: 768px) {
+  .nav-hamburger      { display: none !important; }
+  .nav-mobile-menu    { display: none !important; }
+}
