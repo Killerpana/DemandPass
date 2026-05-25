@@ -7,7 +7,7 @@ import { faqItems } from "@/lib/marketing-data";
 export function FAQ() {
   const [open, setOpen] = useState(0);
   return (
-    <section className="py-[120px] px-12 border-b border-[var(--color-border)]">
+    <section id="faq" className="py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]">
       <div className="max-w-[960px] mx-auto">
         <div
           className="text-[11px] uppercase tracking-[0.14em] font-semibold mb-3.5 text-center"

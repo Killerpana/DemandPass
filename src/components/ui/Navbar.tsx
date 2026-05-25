@@ -5,29 +5,37 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Logo } from "@/components/ui/Logo";
 
-const MAIN_LINKS = [
-  { label: "Campañas",        href: "/campaigns" },
-  { label: "Para artistas",   href: "/artistas" },
-  { label: "Para productoras", href: "/dashboard" },
+const INICIO_LINKS = [
+  { label: "Cómo funciona", href: "/#como-funciona", desc: "El flujo en 3 pasos" },
+  { label: "Planes",        href: "/#planes",        desc: "Fan, Artista y Productora" },
+  { label: "FAQ",           href: "/#faq",           desc: "Preguntas frecuentes" },
 ];
 
-const MORE_LINKS = [
-  { label: "Cómo funciona", href: "/#como-funciona", desc: "El flujo en 3 pasos" },
-  { label: "Planes",         href: "/#planes",        desc: "Fan y B2B" },
-  { label: "FAQ",            href: "/#faq",           desc: "Preguntas frecuentes" },
+const BRANCH_LINKS = [
+  { label: "Fans",        href: "/fans" },
+  { label: "Artistas",    href: "/artistas" },
+  { label: "Productoras", href: "/productoras" },
 ];
+
+const NAV_STYLE = {
+  fontFamily: "var(--font-display)",
+  fontSize: "15px",
+  fontWeight: 700,
+  letterSpacing: "0.05em",
+  textTransform: "uppercase" as const,
+};
 
 export function Navbar() {
   const path = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [dropOpen, setDropOpen] = useState(false);
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const [dropOpen, setDropOpen]   = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
+    const fn = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   useEffect(() => { setMenuOpen(false); setDropOpen(false); }, [path]);
@@ -37,20 +45,17 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // Cerrar dropdown al clickear afuera
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
+    const fn = (e: MouseEvent) => {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node))
         setDropOpen(false);
-      }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("mousedown", fn);
+    return () => document.removeEventListener("mousedown", fn);
   }, []);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
-
-  const isActive = (href: string) => {
+  const isActive  = (href: string) => {
     if (href.startsWith("/#")) return false;
     if (href === "/") return path === "/";
     return path.startsWith(href);
@@ -63,7 +68,7 @@ export function Navbar() {
       </a>
 
       <nav
-        className="sticky top-0 z-[200] h-16 px-6 md:px-10 flex items-center gap-6 transition-all duration-300"
+        className="sticky top-0 z-[200] h-16 px-6 md:px-10 flex items-center gap-1 transition-all duration-300"
         style={{
           background: scrolled ? "rgba(8,8,13,0.96)" : "rgba(8,8,13,0.72)",
           backdropFilter: scrolled ? "blur(24px) saturate(200%)" : "blur(8px)",
@@ -75,172 +80,111 @@ export function Navbar() {
       >
         <Logo height={22} href="/" />
 
-        {/* Links desktop */}
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-0.5 ml-6">
-          {MAIN_LINKS.map((l) => (
-            <NavLink key={l.href} href={l.href} active={isActive(l.href)}>
-              {l.label}
-            </NavLink>
-          ))}
 
-          {/* Dropdown Más */}
+          {/* Inicio ▾ dropdown */}
           <div ref={dropRef} className="relative">
             <button
-              onClick={() => setDropOpen((v) => !v)}
-              className="relative flex items-center gap-1 px-4 py-2 rounded-md transition-colors"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "15px",
-                fontWeight: 700,
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                color: dropOpen ? "var(--color-txt)" : "var(--color-txt2)",
-                background: dropOpen ? "rgba(255,255,255,0.06)" : "transparent",
-              }}
+              onClick={() => setDropOpen(v => !v)}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-md transition-colors hover:bg-white/5"
+              style={{ ...NAV_STYLE, color: dropOpen ? "var(--color-txt)" : "var(--color-txt2)" }}
             >
-              Más
-              <svg
-                width="10" height="10" viewBox="0 0 10 10" fill="none"
-                style={{ transition: "transform 200ms", transform: dropOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-              >
-                <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              Inicio
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none"
+                style={{ transition: "transform 200ms", transform: dropOpen ? "rotate(180deg)" : "none" }}>
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
 
             {dropOpen && (
-              <div
-                className="absolute top-full left-0 mt-2 w-52 rounded-xl overflow-hidden"
+              <div className="absolute top-full left-0 mt-2 w-52 rounded-xl overflow-hidden"
                 style={{
-                  background: "rgba(17,17,24,0.98)",
-                  backdropFilter: "blur(20px)",
+                  background: "rgba(14,14,20,0.99)",
+                  backdropFilter: "blur(24px)",
                   border: "1px solid rgba(255,255,255,0.1)",
-                  boxShadow: "0 16px 40px rgba(0,0,0,0.6)",
-                }}
-              >
-                {MORE_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setDropOpen(false)}
-                    className="flex flex-col px-4 py-3 transition-colors hover:bg-white/5 group"
-                  >
-                    <span
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "13px",
-                        fontWeight: 700,
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        color: "var(--color-txt)",
-                      }}
-                    >
-                      {l.label}
-                    </span>
-                    <span className="text-[11px] mt-0.5" style={{ color: "var(--color-txt3)" }}>
-                      {l.desc}
-                    </span>
+                  boxShadow: "0 20px 48px rgba(0,0,0,0.7)",
+                }}>
+                {INICIO_LINKS.map(l => (
+                  <Link key={l.href} href={l.href} onClick={() => setDropOpen(false)}
+                    className="flex flex-col px-4 py-3 transition-colors hover:bg-white/5">
+                    <span style={{ ...NAV_STYLE, fontSize: "13px", color: "var(--color-txt)" }}>{l.label}</span>
+                    <span className="text-[11px] mt-0.5" style={{ color: "var(--color-txt3)" }}>{l.desc}</span>
                   </Link>
                 ))}
               </div>
             )}
           </div>
+
+          {/* Separador */}
+          <div className="w-px h-4 mx-2" style={{ background: "rgba(255,255,255,0.12)" }} />
+
+          {/* Fans / Artistas / Productoras */}
+          {BRANCH_LINKS.map(l => (
+            <NavLink key={l.href} href={l.href} active={isActive(l.href)}>{l.label}</NavLink>
+          ))}
         </div>
 
         {/* CTAs desktop */}
         <div className="hidden md:flex ml-auto items-center gap-2.5">
-          <Link
-            href="/perfil"
+          <Link href="/signin"
             className="px-4 py-2 rounded-md transition-colors hover:bg-white/5"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "14px",
-              fontWeight: 700,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              color: "var(--color-txt2)",
-              border: "1px solid var(--color-border2)",
-            }}
-          >
-            Mi perfil
+            style={{ ...NAV_STYLE, fontSize: "13px", color: "var(--color-txt2)", border: "1px solid var(--color-border2)" }}>
+            Entrar
           </Link>
-          <Link
-            href="/signin"
+          <Link href="/signin"
             className="px-5 py-2 rounded-md text-white transition-transform hover:-translate-y-0.5"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "14px",
-              fontWeight: 700,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              background: "var(--color-burg3)",
-              boxShadow: "0 6px 18px rgba(196,38,78,0.35), inset 0 1px 0 rgba(255,255,255,0.18)",
-            }}
-          >
+            style={{ ...NAV_STYLE, fontSize: "13px", background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.35), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
             Empezar
           </Link>
         </div>
 
         {/* Hamburguesa mobile */}
-        <button
-          type="button"
-          onClick={() => setMenuOpen((v) => !v)}
+        <button type="button" onClick={() => setMenuOpen(v => !v)}
           className="ml-auto md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-md"
           style={{ background: menuOpen ? "var(--color-surface2)" : "transparent" }}
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuOpen}
-        >
-          <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300" style={{ background: "var(--color-txt)", transform: menuOpen ? "translateY(5px) rotate(45deg)" : "none" }} />
-          <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300" style={{ background: "var(--color-txt)", opacity: menuOpen ? 0 : 1 }} />
-          <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300" style={{ background: "var(--color-txt)", transform: menuOpen ? "translateY(-5px) rotate(-45deg)" : "none" }} />
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen}>
+          <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300"
+            style={{ background: "var(--color-txt)", transform: menuOpen ? "translateY(5px) rotate(45deg)" : "none" }} />
+          <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300"
+            style={{ background: "var(--color-txt)", opacity: menuOpen ? 0 : 1 }} />
+          <span className="block w-5 h-[1.5px] rounded-full transition-all duration-300"
+            style={{ background: "var(--color-txt)", transform: menuOpen ? "translateY(-5px) rotate(-45deg)" : "none" }} />
         </button>
       </nav>
 
       {/* Mobile menu */}
-      <div
-        className="fixed inset-0 z-[199] md:hidden flex flex-col pt-16 transition-all duration-300"
+      <div className="fixed inset-0 z-[199] md:hidden flex flex-col pt-16 transition-all duration-300"
         style={{
           background: "rgba(8,8,13,0.98)",
           backdropFilter: "blur(20px)",
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "all" : "none",
           transform: menuOpen ? "translateY(0)" : "translateY(-8px)",
-        }}
-        aria-hidden={!menuOpen}
-      >
-        <div className="flex flex-col px-6 pt-6 gap-0">
-          {[...MAIN_LINKS, ...MORE_LINKS].map((l, i) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={closeMenu}
-              className="py-4 border-b flex items-center justify-between transition-colors"
+        }} aria-hidden={!menuOpen}>
+        <div className="flex flex-col px-6 pt-4 gap-0">
+          {[...BRANCH_LINKS, ...INICIO_LINKS].map((l, i) => (
+            <Link key={l.href} href={l.href} onClick={closeMenu}
+              className="py-4 border-b flex items-center justify-between"
               style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "22px",
-                fontWeight: 700,
-                letterSpacing: "0.03em",
-                textTransform: "uppercase",
+                ...NAV_STYLE, fontSize: "20px",
                 borderColor: "var(--color-border)",
                 color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)",
-                transitionDelay: menuOpen ? `${i * 40}ms` : "0ms",
-              }}
-            >
+                transitionDelay: menuOpen ? `${i * 35}ms` : "0ms",
+              }}>
               {l.label}
-              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace", fontSize: "16px" }}>→</span>
+              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace", fontSize: "14px" }}>→</span>
             </Link>
           ))}
-
           <div className="flex flex-col gap-3 mt-8">
-            <Link href="/perfil" onClick={closeMenu}
+            <Link href="/signin" onClick={closeMenu}
               className="w-full py-3.5 text-center rounded-md border"
-              style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", borderColor: "var(--color-border2)", color: "var(--color-txt)" }}
-            >
-              Mi perfil
+              style={{ ...NAV_STYLE, fontSize: "13px", borderColor: "var(--color-border2)", color: "var(--color-txt)" }}>
+              Entrar
             </Link>
             <Link href="/signin" onClick={closeMenu}
               className="w-full py-3.5 text-center rounded-md text-white"
-              style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }}
-            >
+              style={{ ...NAV_STYLE, fontSize: "13px", background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }}>
               Empezar ahora
             </Link>
           </div>
@@ -252,29 +196,12 @@ export function Navbar() {
 
 function NavLink({ href, active, children }: { href: string; active: boolean; children: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      className="relative px-4 py-2 rounded-md transition-colors hover:bg-white/5 group"
-      style={{
-        fontFamily: "var(--font-display)",
-        fontSize: "15px",
-        fontWeight: 700,
-        letterSpacing: "0.04em",
-        textTransform: "uppercase",
-        color: active ? "var(--color-txt)" : "var(--color-txt2)",
-      }}
-    >
+    <Link href={href} aria-current={active ? "page" : undefined}
+      className="relative px-4 py-2 rounded-md transition-colors hover:bg-white/5"
+      style={{ ...NAV_STYLE, fontSize: "15px", color: active ? "var(--color-txt)" : "var(--color-txt2)" }}>
       {children}
-      <span
-        className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full transition-all duration-300"
-        style={{
-          background: "var(--color-burg3)",
-          opacity: active ? 1 : 0,
-          transform: active ? "scaleX(1)" : "scaleX(0)",
-          transformOrigin: "center",
-        }}
-      />
+      <span className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full transition-all duration-300"
+        style={{ background: "var(--color-burg3)", opacity: active ? 1 : 0, transform: active ? "scaleX(1)" : "scaleX(0)", transformOrigin: "center" }} />
     </Link>
   );
 }
