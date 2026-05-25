@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Users, Music2, Building2 } from "lucide-react";
 
 type Role = "fan" | "artista" | "productora";
 
-const ROLES: { id: Role; label: string; desc: string; dest: string }[] = [
-  { id: "fan",        label: "Soy fan",        desc: "Quiero apoyar artistas",   dest: "/perfil"    },
-  { id: "artista",    label: "Soy artista",     desc: "Quiero medir mi demanda",  dest: "/artistas"  },
-  { id: "productora", label: "Soy productora",  desc: "Quiero datos de booking",  dest: "/dashboard" },
+const ROLES: { id: Role; label: string; desc: string; dest: string; Icon: React.ElementType }[] = [
+  { id: "fan",        label: "Soy fan",        desc: "Quiero apoyar artistas",   dest: "/perfil",    Icon: Users     },
+  { id: "artista",    label: "Soy artista",     desc: "Quiero medir mi demanda",  dest: "/artistas",  Icon: Music2    },
+  { id: "productora", label: "Soy productora",  desc: "Quiero datos de booking",  dest: "/dashboard", Icon: Building2 },
 ];
 
 const DEMO = { email: "demo@demandpass.app", pass: "demo1234" };
@@ -36,77 +37,63 @@ export function AuthScreen() {
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr]"
       style={{ background: "var(--color-bg)", minHeight: "calc(100vh - 64px)" }}>
 
-      {/* Left */}
       <div className="flex items-center justify-center px-8 sm:px-14 py-14">
         <div className="w-full max-w-[400px]">
-
           <h1 className="font-[family-name:var(--font-display)] text-[clamp(38px,5vw,54px)] font-black uppercase leading-[0.93] mb-8"
             style={{ letterSpacing: "0.005em" }}>
             EMPEZÁ<br />
             <span style={{ color: "var(--color-burg3)" }}>HOY MISMO.</span>
           </h1>
 
-          {/* Rol */}
           <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-2.5" style={{ color: "var(--color-txt3)" }}>
             ¿Quién sos?
           </p>
           <div className="flex flex-col gap-2 mb-6">
-            {ROLES.map(r => (
-              <button key={r.id} type="button" onClick={() => setRole(r.id)}
-                className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-left transition-all"
-                style={{
-                  background: role === r.id ? "rgba(163,22,69,0.1)" : "var(--color-surface)",
-                  border: role === r.id ? "1px solid rgba(163,22,69,0.5)" : "1px solid var(--color-border)",
-                }}>
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-[12px] font-bold shrink-0"
-                  style={{ background: role === r.id ? "var(--color-burg3)" : "var(--color-surface2)", color: role === r.id ? "white" : "var(--color-txt3)" }}>
-                  {r.id === "fan" ? "★" : r.id === "artista" ? "♪" : "◈"}
-                </div>
-                <div>
-                  <p className="font-[family-name:var(--font-display)] text-[14px] font-bold uppercase tracking-[0.04em]"
-                    style={{ color: role === r.id ? "var(--color-txt)" : "var(--color-txt2)" }}>
-                    {r.label}
-                  </p>
-                  <p className="text-[11px]" style={{ color: "var(--color-txt3)" }}>{r.desc}</p>
-                </div>
-                {role === r.id && (
-                  <span className="ml-auto text-[11px] font-bold" style={{ color: "var(--color-burg3)" }}>→ {r.dest}</span>
-                )}
-              </button>
-            ))}
+            {ROLES.map(({ id, label, desc, dest: d, Icon }) => {
+              const active = role === id;
+              return (
+                <button key={id} type="button" onClick={() => setRole(id)}
+                  className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-left transition-all"
+                  style={{
+                    background: active ? "rgba(163,22,69,0.1)" : "var(--color-surface)",
+                    border: active ? "1px solid rgba(163,22,69,0.5)" : "1px solid var(--color-border)",
+                  }}>
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ background: active ? "var(--color-burg3)" : "var(--color-surface2)" }}>
+                    <Icon size={16} color={active ? "white" : "var(--color-txt3)"} strokeWidth={2} />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-[family-name:var(--font-display)] text-[14px] font-bold uppercase tracking-[0.04em]"
+                      style={{ color: active ? "var(--color-txt)" : "var(--color-txt2)" }}>{label}</p>
+                    <p className="text-[11px]" style={{ color: "var(--color-txt3)" }}>{desc}</p>
+                  </div>
+                  {active && <span className="text-[11px] font-bold font-mono" style={{ color: "var(--color-burg3)" }}>→ {d}</span>}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Demo banner */}
           <button type="button" onClick={() => { setEmail(DEMO.email); setPass(DEMO.pass); }}
             className="w-full flex items-center justify-between px-4 py-3 rounded-xl mb-5 transition-all hover:brightness-110"
             style={{ background: "rgba(163,22,69,0.08)", border: "1px dashed rgba(163,22,69,0.4)" }}>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.1em] mb-0.5" style={{ color: "var(--color-burg3)" }}>
-                ◆ Acceso demo
+                Acceso demo
               </p>
-              <p className="text-[12px]" style={{ color: "var(--color-txt2)" }}>
-                {DEMO.email} · {DEMO.pass}
-              </p>
+              <p className="text-[12px]" style={{ color: "var(--color-txt2)" }}>{DEMO.email} · {DEMO.pass}</p>
             </div>
             <span className="text-[11px] font-bold uppercase tracking-[0.06em] px-3 py-1.5 rounded-lg shrink-0"
-              style={{ background: "var(--color-burg3)", color: "white" }}>
-              Usar
-            </span>
+              style={{ background: "var(--color-burg3)", color: "white" }}>Usar</span>
           </button>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-1.5"
-                style={{ color: "var(--color-txt2)" }}>Email</label>
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)}
-                placeholder="hola@ejemplo.com" style={inputStyle} />
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-1.5" style={{ color: "var(--color-txt2)" }}>Email</label>
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="hola@ejemplo.com" style={inputStyle} />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-1.5"
-                style={{ color: "var(--color-txt2)" }}>Contraseña</label>
-              <input type="password" value={pass} onChange={e => setPass(e.target.value)}
-                placeholder="••••••••" style={inputStyle} />
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.08em] mb-1.5" style={{ color: "var(--color-txt2)" }}>Contraseña</label>
+              <input type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="••••••••" style={inputStyle} />
             </div>
             <button type="submit"
               className="mt-1 w-full py-3.5 rounded-md font-[family-name:var(--font-display)] text-[14px] font-bold uppercase tracking-[0.06em] text-white transition-transform hover:-translate-y-0.5"
@@ -114,32 +101,30 @@ export function AuthScreen() {
               Empezar →
             </button>
           </form>
-
         </div>
       </div>
 
-      {/* Right — visual */}
       <div className="hidden lg:flex items-center justify-center relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #0d0d14 0%, #1a0812 100%)", borderLeft: "1px solid var(--color-border)" }}>
         <div className="absolute inset-0 opacity-20"
           style={{ background: "radial-gradient(ellipse at 50% 50%, #A31645 0%, transparent 65%)" }} />
         <div className="relative z-10 px-14 text-center">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-6" style={{ color: "var(--color-burg3)" }}>
-            DemandPass — Fase 0 Demo
+            DemandPass — Demo
           </p>
           <div className="space-y-3">
-            {ROLES.map(r => (
-              <div key={r.id} className="flex items-center gap-4 px-5 py-4 rounded-xl text-left"
+            {ROLES.map(({ id, label, desc, dest: d, Icon }) => (
+              <div key={id} className="flex items-center gap-4 px-5 py-4 rounded-xl text-left"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[16px] shrink-0"
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: "rgba(163,22,69,0.2)" }}>
-                  {r.id === "fan" ? "★" : r.id === "artista" ? "♪" : "◈"}
+                  <Icon size={16} color="#E43A66" strokeWidth={2} />
                 </div>
                 <div className="flex-1">
-                  <p className="font-[family-name:var(--font-display)] text-[13px] font-bold uppercase tracking-[0.04em]">{r.label}</p>
-                  <p className="text-[11px] mt-0.5" style={{ color: "var(--color-txt3)" }}>{r.desc}</p>
+                  <p className="font-[family-name:var(--font-display)] text-[13px] font-bold uppercase tracking-[0.04em]">{label}</p>
+                  <p className="text-[11px] mt-0.5" style={{ color: "var(--color-txt3)" }}>{desc}</p>
                 </div>
-                <span className="text-[11px] font-bold font-mono" style={{ color: "rgba(163,22,69,0.7)" }}>{r.dest}</span>
+                <span className="text-[11px] font-bold font-mono" style={{ color: "rgba(163,22,69,0.6)" }}>{d}</span>
               </div>
             ))}
           </div>
