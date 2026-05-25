@@ -113,65 +113,7 @@ export function ArtistDashboard() {
   }
 
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--color-bg)" }}>
-
-      {/* Sidebar */}
-      <aside className="hidden md:flex w-[200px] shrink-0 flex-col py-6 px-3 border-r"
-        style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}>
-
-        {/* Perfil artista */}
-        <div className="px-3 mb-6">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[13px] font-black"
-              style={{ background: "rgba(163,22,69,0.2)", color: "#E43A66", fontFamily: "var(--font-display)" }}>
-              {ARTIST.avatar}
-            </div>
-            <div className="min-w-0">
-              <p className="text-[12px] font-bold truncate">{ARTIST.name}</p>
-              <p className="text-[10px]" style={{ color: "var(--color-txt3)" }}>Plan {ARTIST.plan}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Logo */}
-        <div className="px-3 mb-2">
-          <Logo height={18} href="/" />
-        </div>
-
-        {/* Nav links */}
-        <nav className="flex flex-col gap-0.5 px-2 flex-1">
-          {SIDEBAR_MAIN.map(({ label, icon: Icon, active, badge }: any) => (
-            <button key={label} type="button"
-              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left transition-colors w-full"
-              style={{
-                background: active ? "rgba(163,22,69,0.1)" : "transparent",
-                color: active ? "var(--color-txt)" : "var(--color-txt3)",
-                borderLeft: active ? "2px solid var(--color-burg3)" : "2px solid transparent",
-              }}>
-              <Icon size={15} strokeWidth={active ? 2.2 : 1.8} />
-              <span className="text-[13px] font-semibold flex-1">{label}</span>
-              {badge && (
-                <span className="text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center"
-                  style={{ background: "var(--color-burg3)", color: "white" }}>{badge}</span>
-              )}
-            </button>
-          ))}
-        </nav>
-
-        <div className="px-2 py-3 border-t" style={{ borderColor: "var(--color-border)" }}>
-          {SIDEBAR_BOTTOM.map(({ label, icon: Icon }: any) => (
-            <button key={label} type="button"
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-colors"
-              style={{ color: "var(--color-txt3)" }}>
-              <Icon size={13} strokeWidth={1.8} />
-              <span className="text-[12px] font-semibold">{label}</span>
-            </button>
-          ))}
-        </div>
-      </aside>
-
-      {/* Main */}
-      <main className="flex-1 p-5 md:p-7 overflow-x-hidden">
+    <div className="p-5 md:p-7">
 
         {/* Header campaña */}
         <div className="flex items-start justify-between gap-4 mb-7 flex-wrap">
@@ -359,7 +301,6 @@ export function ArtistDashboard() {
           </div>
         </div>
 
-      </main>
     </div>
   );
 }

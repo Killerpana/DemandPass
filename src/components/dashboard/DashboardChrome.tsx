@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 // src/components/dashboard/DashboardChrome.tsx — íconos Lucide profesionales
 import Link from "next/link";
 import { useState } from "react";
@@ -9,13 +10,13 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { id: "overview",     icon: LayoutDashboard, l: "Overview" },
-  { id: "campaigns",    icon: Mic2,            l: "Campañas",         n: 8 },
-  { id: "demand",       icon: TrendingUp,      l: "Demanda live" },
-  { id: "fans",         icon: Ticket,          l: "Fans verificados" },
-  { id: "forecasts",    icon: Zap,             l: "Forecasts" },
-  { id: "venues",       icon: Building2,       l: "Venues" },
-  { id: "integrations", icon: Plug,            l: "Integraciones" },
+  { id: "overview",      icon: LayoutDashboard, l: "Overview",          href: "/dashboard"                   },
+  { id: "campaigns",     icon: Mic2,            l: "Campañas",    n: 8, href: "/dashboard"                   },
+  { id: "demand",        icon: TrendingUp,      l: "Demanda live",      href: "/dashboard/demanda-live"      },
+  { id: "fans",          icon: Ticket,          l: "Fans verificados",  href: "/dashboard/fans-verificados"  },
+  { id: "forecasts",     icon: Zap,             l: "Forecasts",         href: "/dashboard/forecasts"         },
+  { id: "venues",        icon: Building2,       l: "Venues",            href: "/dashboard/venues"            },
+  { id: "integrations",  icon: Plug,            l: "Integraciones",     href: "/dashboard/integraciones"     },
 ];
 
 export function DashboardSidebar({ active = "overview" }: { active?: string }) {
@@ -50,9 +51,9 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
           const sel = active === it.id;
           const Icon = it.icon;
           return (
-            <button
+            <Link
               key={it.id}
-              type="button"
+              href={it.href}
               className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all"
               style={{
                 background: sel ? "rgba(196,38,78,0.12)" : "transparent",
@@ -72,7 +73,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
                   {it.n}
                 </span>
               )}
-            </button>
+            </Link>
           );
         })}
       </nav>
