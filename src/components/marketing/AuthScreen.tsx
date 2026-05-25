@@ -105,71 +105,137 @@ export function AuthScreen() {
       </div>
 
       {/* Right — campaign preview */}
-      <div className="hidden lg:flex items-center justify-center relative overflow-hidden px-10"
-        style={{ background: "linear-gradient(135deg, #0d0d14 0%, #14080e 100%)", borderLeft: "1px solid var(--color-border)" }}>
-        <div className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 60% 40%, #A31645 0%, transparent 65%)" }} />
-        <div className="relative z-10 w-full max-w-[380px]">
-          <div className="flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.1em]" style={{ color: "var(--color-txt3)" }}>
-              demandpass.app/console/lenny-kravitz · LIVE
+      <div className="hidden lg:flex items-center justify-center relative overflow-hidden px-8"
+        style={{ background: "linear-gradient(135deg, #0a0a11 0%, #130610 100%)", borderLeft: "1px solid var(--color-border)" }}>
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at 70% 30%, rgba(163,22,69,0.18) 0%, transparent 60%)" }} />
+
+        <div className="relative z-10 w-full max-w-[400px]">
+          {/* URL bar */}
+          <div className="flex items-center gap-2.5 mb-5 px-3 py-2 rounded-lg"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+            <span className="text-[11px] font-mono flex-1 truncate" style={{ color: "rgba(255,255,255,0.4)" }}>
+              demandpass.app/console/lenny-kravitz
             </span>
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-[0.1em]"
+              style={{ background: "rgba(163,22,69,0.25)", color: "#E43A66" }}>LIVE</span>
           </div>
-          <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(17,17,24,0.95)", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 32px 64px rgba(0,0,0,0.6)" }}>
-            <div className="px-5 py-4 flex items-center gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-[13px] font-black shrink-0"
-                style={{ background: "#7a2a8a", fontFamily: "var(--font-display)", color: "rgba(255,255,255,0.9)" }}>LK</div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[9px] uppercase tracking-[0.1em] font-semibold" style={{ color: "var(--color-txt3)" }}>Artista</p>
-                <p className="font-[family-name:var(--font-display)] text-[15px] font-black uppercase">Lenny Kravitz</p>
-                <p className="text-[11px]" style={{ color: "var(--color-txt3)" }}>Raise Vibration Tour · 2026</p>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="text-[9px] uppercase tracking-[0.08em] font-semibold mb-0.5" style={{ color: "var(--color-txt3)" }}>Apoyos</p>
-                <p className="font-[family-name:var(--font-display)] text-[22px] font-black" style={{ color: "#A31645" }}>5.420</p>
-              </div>
-            </div>
-            <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-[9px] uppercase tracking-[0.1em] font-semibold" style={{ color: "var(--color-txt3)" }}>Demanda por ciudad</p>
-                <p className="text-[10px] font-semibold" style={{ color: "#10b981" }}>↑ +148 hoy</p>
-              </div>
-              {[
-                { city: "Buenos Aires", n: "5.420", w: "100%" },
-                { city: "Córdoba",      n: "1.860", w: "34%"  },
-                { city: "Rosario",      n: "1.120", w: "21%"  },
-                { city: "Mendoza",      n: "740",   w: "14%"  },
-              ].map(r => (
-                <div key={r.city} className="flex items-center gap-3 mb-2">
-                  <span className="text-[12px] w-24 shrink-0">{r.city}</span>
-                  <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
-                    <div className="h-full rounded-full" style={{ width: r.w, background: "#A31645" }} />
+
+          {/* Main card */}
+          <div className="rounded-2xl overflow-hidden"
+            style={{ background: "rgba(15,15,22,0.98)", border: "1px solid rgba(255,255,255,0.09)", boxShadow: "0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(163,22,69,0.1)" }}>
+
+            {/* Header */}
+            <div className="px-5 pt-5 pb-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <div className="flex items-start gap-3">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-[15px] font-black shrink-0"
+                  style={{ background: "linear-gradient(135deg, #7a2a8a, #4a1a6a)", fontFamily: "var(--font-display)", color: "white", boxShadow: "0 4px 12px rgba(122,42,138,0.4)" }}>
+                  LK
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--color-txt3)" }}>Artista</span>
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-[0.08em]"
+                      style={{ background: "rgba(163,22,69,0.2)", color: "#E43A66" }}>Oficial</span>
                   </div>
-                  <span className="text-[11px] w-9 text-right font-mono" style={{ color: "var(--color-txt3)" }}>{r.n}</span>
+                  <p className="font-[family-name:var(--font-display)] text-[17px] font-black uppercase leading-tight">Lenny Kravitz</p>
+                  <p className="text-[11px] mt-0.5" style={{ color: "var(--color-txt3)" }}>Raise Vibration Tour · 2026</p>
                 </div>
-              ))}
-            </div>
-            <div className="px-5 py-4 grid grid-cols-3 gap-3">
-              {[
-                { label: "Precio aceptado", value: "USD 84",         color: "var(--color-txt)" },
-                { label: "Forecast venue",  value: "Movistar Arena", color: "var(--color-txt)" },
-                { label: "Confianza",       value: "Alta · 91%",     color: "#10b981"          },
-              ].map(f => (
-                <div key={f.label}>
-                  <p className="text-[9px] uppercase tracking-[0.07em] font-semibold mb-1" style={{ color: "var(--color-txt3)" }}>{f.label}</p>
-                  <p className="text-[12px] font-bold" style={{ color: f.color }}>{f.value}</p>
+                <div className="text-right shrink-0">
+                  <p className="text-[9px] uppercase tracking-[0.08em] font-bold mb-1" style={{ color: "var(--color-txt3)" }}>Apoyos</p>
+                  <p className="font-[family-name:var(--font-display)] text-[26px] font-black leading-none" style={{ color: "#A31645" }}>5.423</p>
+                  <p className="text-[10px] font-semibold mt-0.5" style={{ color: "#10b981" }}>↑ +148 hoy</p>
                 </div>
-              ))}
+              </div>
+
+              {/* Progress bar */}
+              <div className="mt-4">
+                <div className="flex justify-between text-[10px] mb-1.5" style={{ color: "var(--color-txt3)" }}>
+                  <span>Progreso al objetivo</span>
+                  <span style={{ color: "#f59e0b" }}>67% · 2.577 restantes</span>
+                </div>
+                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+                  <div className="h-full rounded-full" style={{ width: "67%", background: "linear-gradient(90deg, #A31645, #E43A66)" }} />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3 mt-4">
-            <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-bold"
-              style={{ background: "rgba(163,22,69,0.12)", border: "1px solid rgba(163,22,69,0.25)", color: "#E43A66" }}>
-              Demand Score <span className="font-black ml-1">91</span>/100
+
+            {/* Demand Score + Demand Map */}
+            <div className="grid grid-cols-[auto_1fr] gap-0" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              {/* Score */}
+              <div className="px-5 py-4 flex flex-col items-center justify-center gap-1 border-r"
+                style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                <p className="text-[8px] font-bold uppercase tracking-[0.1em] text-center" style={{ color: "var(--color-txt3)" }}>Demand<br/>Score</p>
+                <div className="relative w-14 h-14 flex items-center justify-center">
+                  <svg viewBox="0 0 56 56" className="absolute inset-0 w-full h-full" style={{ transform: "rotate(-90deg)" }}>
+                    <circle cx="28" cy="28" r="22" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="4" />
+                    <circle cx="28" cy="28" r="22" fill="none" stroke="#f59e0b" strokeWidth="4"
+                      strokeDasharray={`${2 * 3.14159 * 22 * 0.91} ${2 * 3.14159 * 22}`}
+                      strokeLinecap="round" />
+                  </svg>
+                  <span className="font-[family-name:var(--font-display)] text-[18px] font-black" style={{ color: "#f59e0b" }}>91</span>
+                </div>
+                <p className="text-[9px] font-semibold" style={{ color: "#f59e0b" }}>Alto</p>
+              </div>
+
+              {/* Cities */}
+              <div className="px-4 py-4">
+                <p className="text-[9px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--color-txt3)" }}>Demand Map</p>
+                {[
+                  { city: "Buenos Aires", n: "5.420", w: "100%", trend: "↑" },
+                  { city: "Córdoba",      n: "1.860", w: "34%",  trend: "↑" },
+                  { city: "Rosario",      n: "1.120", w: "21%",  trend: "→" },
+                  { city: "Mendoza",      n: "740",   w: "14%",  trend: "↑" },
+                ].map(r => (
+                  <div key={r.city} className="flex items-center gap-2 mb-1.5">
+                    <span className="text-[11px] w-20 shrink-0 truncate">{r.city}</span>
+                    <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+                      <div className="h-full rounded-full" style={{ width: r.w, background: "#A31645" }} />
+                    </div>
+                    <span className="text-[10px] w-8 text-right font-mono" style={{ color: "var(--color-txt3)" }}>{r.n}</span>
+                    <span className="text-[10px] w-3" style={{ color: r.trend === "↑" ? "#10b981" : "#6b7280" }}>{r.trend}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+
+            {/* Fan Signals */}
+            <div className="px-5 py-3.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <p className="text-[9px] font-bold uppercase tracking-[0.1em] mb-2.5" style={{ color: "var(--color-txt3)" }}>Fan Signals</p>
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { label: "Prefieren campo",    value: "58%" },
+                  { label: "USD 70–120",         value: "52%" },
+                  { label: "Preventa 48hs",      value: "71%" },
+                ].map(s => (
+                  <div key={s.label} className="text-center p-2 rounded-lg" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <p className="font-[family-name:var(--font-display)] text-[16px] font-black" style={{ color: "#A31645" }}>{s.value}</p>
+                    <p className="text-[9px] mt-0.5 leading-tight" style={{ color: "var(--color-txt3)" }}>{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="px-5 py-3.5">
+              <div className="grid grid-cols-3 gap-3 mb-3">
+                {[
+                  { label: "Precio aceptado", value: "USD 84",         color: "var(--color-txt)" },
+                  { label: "Forecast venue",  value: "Movistar Arena", color: "var(--color-txt)", small: true },
+                  { label: "Confianza",       value: "Alta · 91%",     color: "#10b981"          },
+                ].map(f => (
+                  <div key={f.label}>
+                    <p className="text-[8px] uppercase tracking-[0.08em] font-bold mb-1" style={{ color: "var(--color-txt3)" }}>{f.label}</p>
+                    <p className={(f as any).small ? "text-[10px] font-bold leading-tight" : "text-[12px] font-bold"} style={{ color: f.color }}>{f.value}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.2)" }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block mr-1.5 opacity-80" />
+                Actualizado hace 6 seg · 12 productoras observando
+              </p>
+            </div>
           </div>
         </div>
       </div>
