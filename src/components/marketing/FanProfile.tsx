@@ -1,5 +1,7 @@
 "use client";
 
+import { FanShell } from "@/components/ui/FanShell";
+
 import Link from "next/link";
 import { useState } from "react";
 import { Bell, Ticket, TrendingUp, CheckCircle2, Clock, XCircle, ChevronRight, Star, Zap, Music2 } from "lucide-react";
@@ -50,6 +52,7 @@ export function FanProfile() {
   const level = LEVEL_CONFIG[FAN.level];
 
   return (
+    <FanShell>
     <div className="min-h-screen" style={{ background: "var(--color-bg)" }}>
       <div className="max-w-[1000px] mx-auto px-5 md:px-8 py-10">
 
@@ -266,5 +269,6 @@ export function FanProfile() {
 
       </div>
     </div>
+    </FanShell>
   );
 }

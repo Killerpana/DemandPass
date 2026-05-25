@@ -91,8 +91,8 @@ export function Navbar() {
     return path === href || path.startsWith(href + "/");
   };
 
-  // Productora: sin navbar superior (sidebar lo maneja todo)
-  if (mode === "productora") return null;
+  // Con sidebar propio: sin navbar superior
+  if (mode === "productora" || mode === "fan" || mode === "artista") return null;
 
   const navBg = scrolled
     ? "rgba(8,8,13,0.96)"

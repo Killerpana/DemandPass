@@ -5,8 +5,10 @@ import Link from "next/link";
 import {
   Users, MapPin, DollarSign, TrendingUp, Bell, Share2,
   Music2, MessageSquare, ChevronRight, BarChart2, Zap,
-  CheckCircle2, Clock, Send
+  CheckCircle2, Clock, Send, Settings, User, LogOut,
+  PlusCircle, Globe, HelpCircle
 } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 
 // ── Mock data ────────────────────────────────────────────────────────────────
 const ARTIST = {
@@ -60,12 +62,20 @@ const BENEFICIOS_OFRECIDOS = [
   { label: "Charla virtual",      activo: true  },
 ];
 
-const SIDEBAR_LINKS = [
-  { label: "Mi campaña",  icon: BarChart2,      active: true  },
-  { label: "Mis fans",    icon: Users,          active: false },
-  { label: "Actividad",   icon: Bell,           active: false },
-  { label: "Actualizar",  icon: MessageSquare,  active: false },
-  { label: "Compartir",   icon: Share2,         active: false },
+const SIDEBAR_MAIN = [
+  { label: "Mi campaña",    icon: BarChart2,     active: true  },
+  { label: "Mis fans",      icon: Users,         active: false },
+  { label: "Actividad",     icon: Bell,          active: false, badge: "5" },
+  { label: "Publicar",      icon: MessageSquare, active: false },
+  { label: "Compartir",     icon: Share2,        active: false },
+  { label: "Nueva campaña", icon: PlusCircle,    active: false },
+];
+const SIDEBAR_BOTTOM = [
+  { label: "Mi perfil",     icon: User,       },
+  { label: "Configuración", icon: Settings,   },
+  { label: "Ayuda",         icon: HelpCircle, },
+  { label: "Ver sitio",     icon: Globe,      },
+  { label: "Salir",         icon: LogOut,     },
 ];
 
 // ── Componentes pequeños ─────────────────────────────────────────────────────
@@ -123,27 +133,41 @@ export function ArtistDashboard() {
           </div>
         </div>
 
+        {/* Logo */}
+        <div className="px-3 mb-2">
+          <Logo height={18} href="/" />
+        </div>
+
         {/* Nav links */}
-        <nav className="flex flex-col gap-1 flex-1">
-          {SIDEBAR_LINKS.map(({ label, icon: Icon, active }) => (
+        <nav className="flex flex-col gap-0.5 px-2 flex-1">
+          {SIDEBAR_MAIN.map(({ label, icon: Icon, active, badge }: any) => (
             <button key={label} type="button"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors"
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left transition-colors w-full"
               style={{
                 background: active ? "rgba(163,22,69,0.1)" : "transparent",
                 color: active ? "var(--color-txt)" : "var(--color-txt3)",
                 borderLeft: active ? "2px solid var(--color-burg3)" : "2px solid transparent",
               }}>
               <Icon size={15} strokeWidth={active ? 2.2 : 1.8} />
-              <span className="text-[13px] font-semibold">{label}</span>
+              <span className="text-[13px] font-semibold flex-1">{label}</span>
+              {badge && (
+                <span className="text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                  style={{ background: "var(--color-burg3)", color: "white" }}>{badge}</span>
+              )}
             </button>
           ))}
         </nav>
 
-        <Link href="/artistas" className="flex items-center gap-2 px-3 py-2 text-[11px]"
-          style={{ color: "var(--color-txt3)" }}>
-          <ChevronRight size={12} style={{ rotate: "180deg" }} />
-          Volver a artistas
-        </Link>
+        <div className="px-2 py-3 border-t" style={{ borderColor: "var(--color-border)" }}>
+          {SIDEBAR_BOTTOM.map(({ label, icon: Icon }: any) => (
+            <button key={label} type="button"
+              className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-colors"
+              style={{ color: "var(--color-txt3)" }}>
+              <Icon size={13} strokeWidth={1.8} />
+              <span className="text-[12px] font-semibold">{label}</span>
+            </button>
+          ))}
+        </div>
       </aside>
 
       {/* Main */}
