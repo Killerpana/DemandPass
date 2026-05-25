@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { Copy, CheckCircle2, Twitter, Instagram, Share2 } from "lucide-react";
+import { Copy, CheckCircle2, Share2, MessageCircle, ExternalLink } from "lucide-react";
 
-const CAMPAIGN_URL = "https://demandpass.app/campaigns/lenny-planetas-sur";
+const CAMPAIGN_URL = "https://demandpass.app/campaigns/los-planetas-gira-2026";
 
 export default function ArtistCompartirPage() {
   const [copied, setCopied] = useState(false);
@@ -42,9 +42,9 @@ export default function ArtistCompartirPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--color-txt3)" }}>Compartir en redes</p>
           <div className="flex gap-3">
             {[
-              { Icon: Twitter,   label: "Twitter / X",  color: "#1d9bf0" },
-              { Icon: Instagram, label: "Instagram",     color: "#e1306c" },
-              { Icon: Share2,    label: "WhatsApp",      color: "#25d366" },
+              { Icon: ExternalLink,    label: "Twitter / X",  color: "#1d9bf0" },
+              { Icon: MessageCircle,   label: "WhatsApp",     color: "#25d366" },
+              { Icon: Share2,          label: "Más opciones", color: "#8b5cf6" },
             ].map(({ Icon, label, color }) => (
               <button key={label}
                 className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-[12px] font-semibold transition-all hover:-translate-y-0.5"
@@ -59,7 +59,7 @@ export default function ArtistCompartirPage() {
         <div className="p-5 rounded-xl" style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
           <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--color-txt3)" }}>Estadísticas del link</p>
           <div className="grid grid-cols-3 gap-4">
-            {[["Clicks", "342"], ["Conversión", "18%"], ["Compartidos", "67"]].map(([l, v]) => (
+            {[["342", "Clicks"], ["18%", "Conversión"], ["67", "Compartidos"]].map(([v, l]) => (
               <div key={l} className="text-center">
                 <p className="font-[family-name:var(--font-display)] text-[24px] font-black" style={{ color: "#8b5cf6" }}>{v}</p>
                 <p className="text-[11px]" style={{ color: "var(--color-txt3)" }}>{l}</p>
