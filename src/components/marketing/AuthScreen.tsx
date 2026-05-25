@@ -8,7 +8,7 @@ type Role = "fan" | "artista" | "productora";
 
 const ROLES: { id: Role; label: string; desc: string; dest: string; Icon: React.ElementType }[] = [
   { id: "fan",        label: "Soy fan",        desc: "Quiero apoyar artistas",   dest: "/perfil",    Icon: Users     },
-  { id: "artista",    label: "Soy artista",     desc: "Quiero medir mi demanda",  dest: "/artistas",  Icon: Music2    },
+  { id: "artista",    label: "Soy artista",     desc: "Quiero medir mi demanda",  dest: "/artistas/dashboard",  Icon: Music2    },
   { id: "productora", label: "Soy productora",  desc: "Quiero datos de booking",  dest: "/dashboard", Icon: Building2 },
 ];
 
