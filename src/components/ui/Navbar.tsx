@@ -31,7 +31,7 @@ const NAV_STYLE = {
 };
 
 // Rutas con sidebar propio — sin navbar superior
-const SIDEBAR_ROUTES = ["/perfil", "/artistas/dashboard", "/dashboard"];
+const SIDEBAR_ROUTES = ["/perfil", "/fan", "/artistas/dashboard", "/dashboard"];
 
 export function Navbar() {
   const path = usePathname();

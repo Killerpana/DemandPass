@@ -1,0 +1,5 @@
+import { FanShell } from "@/components/ui/FanShell";
+
+export default function FanLayout({ children }: { children: React.ReactNode }) {
+  return <FanShell>{children}</FanShell>;
+}
