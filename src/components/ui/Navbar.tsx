@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Users, Music2, Building2, UserCircle2 } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 
 const INICIO_LINKS = [
@@ -15,6 +16,13 @@ const BRANCH_LINKS = [
   { label: "Fans",        href: "/fans" },
   { label: "Artistas",    href: "/artistas" },
   { label: "Productoras", href: "/productoras" },
+];
+
+
+const USER_MENU = [
+  { label: "Mi perfil — Fan",        href: "/perfil",              Icon: Users    },
+  { label: "Mi campaña — Artista",   href: "/artistas/dashboard",  Icon: Music2   },
+  { label: "Mi dashboard — Productora", href: "/dashboard",        Icon: Building2 },
 ];
 
 const NAV_STYLE = {
@@ -31,6 +39,8 @@ export function Navbar() {
   const [menuOpen, setMenuOpen]   = useState(false);
   const [dropOpen, setDropOpen]   = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
+  const [userOpen, setUserOpen] = useState(false);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 10);
@@ -49,6 +59,8 @@ export function Navbar() {
     const fn = (e: MouseEvent) => {
       if (dropRef.current && !dropRef.current.contains(e.target as Node))
         setDropOpen(false);
+      if (userRef.current && !userRef.current.contains(e.target as Node))
+        setUserOpen(false);
     };
     document.addEventListener("mousedown", fn);
     return () => document.removeEventListener("mousedown", fn);
@@ -127,6 +139,31 @@ export function Navbar() {
 
         {/* CTAs desktop */}
         <div className="hidden md:flex ml-auto items-center gap-2.5">
+          {/* User menu */}
+          <div ref={userRef} className="relative">
+            <button onClick={() => setUserOpen(v => !v)}
+              className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors hover:bg-white/8"
+              style={{ border: "1px solid var(--color-border2)", background: userOpen ? "rgba(255,255,255,0.06)" : "transparent" }}
+              title="Mi cuenta">
+              <UserCircle2 size={18} color="var(--color-txt2)" strokeWidth={1.75} />
+            </button>
+            {userOpen && (
+              <div className="absolute top-full right-0 mt-2 w-56 rounded-xl overflow-hidden z-50"
+                style={{ background: "rgba(14,14,20,0.99)", backdropFilter: "blur(24px)", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 20px 48px rgba(0,0,0,0.7)" }}>
+                <p className="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.1em]" style={{ color: "var(--color-txt3)" }}>Acceder como</p>
+                {USER_MENU.map(({ label, href, Icon }) => (
+                  <Link key={href} href={href} onClick={() => setUserOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-white/5">
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ background: "rgba(163,22,69,0.15)" }}>
+                      <Icon size={13} color="#E43A66" strokeWidth={2} />
+                    </div>
+                    <span style={{ ...NAV_STYLE, fontSize: "12px", color: "var(--color-txt)" }}>{label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
           <Link href="/signin"
             className="px-5 py-2 rounded-md text-white transition-transform hover:-translate-y-0.5"
             style={{ ...NAV_STYLE, fontSize: "13px", background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.35), inset 0 1px 0 rgba(255,255,255,0.18)" }}>

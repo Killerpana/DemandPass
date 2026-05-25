@@ -64,10 +64,10 @@ export function Hero() {
                   fontFamily: "var(--font-sans)",
                 }}
               >
-                Apoyar un artista <span aria-hidden>→</span>
+                Ver campañas activas <span aria-hidden>→</span>
               </Link>
               <Link
-                href="/dashboard"
+                href="/productoras"
                 className="inline-flex items-center px-6 py-4 rounded-md text-[14px] font-bold uppercase tracking-[0.06em] border text-[var(--color-txt)] hover:bg-white/[0.02]"
                 style={{ borderColor: "var(--color-border2)" }}
               >
