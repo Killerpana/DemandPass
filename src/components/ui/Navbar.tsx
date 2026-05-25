@@ -127,12 +127,12 @@ export function Navbar() {
 
         {/* CTAs desktop */}
         <div className="hidden md:flex ml-auto items-center gap-2.5">
-          <Link href="/signin"
+          <Link href="/signin?mode=signin"
             className="px-4 py-2 rounded-md transition-colors hover:bg-white/5"
             style={{ ...NAV_STYLE, fontSize: "13px", color: "var(--color-txt2)", border: "1px solid var(--color-border2)" }}>
             Entrar
           </Link>
-          <Link href="/signin"
+          <Link href="/signin?mode=signup"
             className="px-5 py-2 rounded-md text-white transition-transform hover:-translate-y-0.5"
             style={{ ...NAV_STYLE, fontSize: "13px", background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.35), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
             Empezar
