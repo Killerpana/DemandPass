@@ -1,22 +1,28 @@
 "use client";
-// src/components/ui/Navbar.tsx — navbar con scroll blur, active indicator, mobile menu corregido
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Logo } from "@/components/ui/Logo";
 
-const NAV_LINKS = [
-  { label: "Campañas",      href: "/campaigns" },
-  { label: "Cómo funciona", href: "/#como-funciona" },
-  { label: "Productoras",   href: "/dashboard" },
-  { label: "Planes",        href: "/#planes" },
+const MAIN_LINKS = [
+  { label: "Campañas",        href: "/campaigns" },
+  { label: "Para artistas",   href: "/artistas" },
+  { label: "Para productoras", href: "/dashboard" },
+];
+
+const MORE_LINKS = [
+  { label: "Cómo funciona", href: "/#como-funciona", desc: "El flujo en 3 pasos" },
+  { label: "Planes",         href: "/#planes",        desc: "Fan y B2B" },
+  { label: "FAQ",            href: "/#faq",           desc: "Preguntas frecuentes" },
 ];
 
 export function Navbar() {
   const path = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropOpen, setDropOpen] = useState(false);
+  const dropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
@@ -24,14 +30,23 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Cerrar al cambiar de ruta (navegación entre páginas)
-  useEffect(() => { setMenuOpen(false); }, [path]);
+  useEffect(() => { setMenuOpen(false); setDropOpen(false); }, [path]);
 
-  // Bloquear scroll del body cuando menú abierto
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
+
+  // Cerrar dropdown al clickear afuera
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
+        setDropOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -48,40 +63,118 @@ export function Navbar() {
       </a>
 
       <nav
-        className="sticky top-0 z-[200] h-16 px-6 md:px-12 flex items-center gap-8 transition-all duration-300"
+        className="sticky top-0 z-[200] h-16 px-6 md:px-10 flex items-center gap-6 transition-all duration-300"
         style={{
-          background: scrolled ? "rgba(8,8,13,0.95)" : "rgba(8,8,13,0.7)",
-          backdropFilter: scrolled ? "blur(20px) saturate(200%)" : "blur(8px)",
-          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(200%)" : "blur(8px)",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(255,255,255,0.04)",
-          boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.4)" : "none",
+          background: scrolled ? "rgba(8,8,13,0.96)" : "rgba(8,8,13,0.72)",
+          backdropFilter: scrolled ? "blur(24px) saturate(200%)" : "blur(8px)",
+          WebkitBackdropFilter: scrolled ? "blur(24px) saturate(200%)" : "blur(8px)",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.09)" : "1px solid rgba(255,255,255,0.04)",
+          boxShadow: scrolled ? "0 4px 32px rgba(0,0,0,0.5)" : "none",
         }}
         aria-label="Navegación principal"
       >
         <Logo height={22} href="/" />
 
         {/* Links desktop */}
-        <div className="hidden md:flex gap-1 ml-8">
-          {NAV_LINKS.map((l) => (
+        <div className="hidden md:flex items-center gap-0.5 ml-6">
+          {MAIN_LINKS.map((l) => (
             <NavLink key={l.href} href={l.href} active={isActive(l.href)}>
               {l.label}
             </NavLink>
           ))}
+
+          {/* Dropdown Más */}
+          <div ref={dropRef} className="relative">
+            <button
+              onClick={() => setDropOpen((v) => !v)}
+              className="relative flex items-center gap-1 px-4 py-2 rounded-md transition-colors"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "15px",
+                fontWeight: 700,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
+                color: dropOpen ? "var(--color-txt)" : "var(--color-txt2)",
+                background: dropOpen ? "rgba(255,255,255,0.06)" : "transparent",
+              }}
+            >
+              Más
+              <svg
+                width="10" height="10" viewBox="0 0 10 10" fill="none"
+                style={{ transition: "transform 200ms", transform: dropOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+              >
+                <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+
+            {dropOpen && (
+              <div
+                className="absolute top-full left-0 mt-2 w-52 rounded-xl overflow-hidden"
+                style={{
+                  background: "rgba(17,17,24,0.98)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  boxShadow: "0 16px 40px rgba(0,0,0,0.6)",
+                }}
+              >
+                {MORE_LINKS.map((l) => (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setDropOpen(false)}
+                    className="flex flex-col px-4 py-3 transition-colors hover:bg-white/5 group"
+                  >
+                    <span
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        color: "var(--color-txt)",
+                      }}
+                    >
+                      {l.label}
+                    </span>
+                    <span className="text-[11px] mt-0.5" style={{ color: "var(--color-txt3)" }}>
+                      {l.desc}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* CTAs desktop */}
-        <div className="hidden md:flex ml-auto items-center gap-3">
+        <div className="hidden md:flex ml-auto items-center gap-2.5">
           <Link
             href="/perfil"
-            className="px-3.5 py-2 rounded-md text-[12px] font-bold uppercase tracking-[0.06em] border text-[var(--color-txt)] transition-colors hover:border-[var(--color-burg3)]"
-            style={{ borderColor: "var(--color-border2)" }}
+            className="px-4 py-2 rounded-md transition-colors hover:bg-white/5"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "14px",
+              fontWeight: 700,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: "var(--color-txt2)",
+              border: "1px solid var(--color-border2)",
+            }}
           >
             Mi perfil
           </Link>
           <Link
-            href="/campaigns"
-            className="px-4 py-2 rounded-md text-[12px] font-bold uppercase tracking-[0.06em] text-white transition-transform hover:-translate-y-0.5"
-            style={{ background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32), inset 0 1px 0 rgba(255,255,255,0.18)" }}
+            href="/signin"
+            className="px-5 py-2 rounded-md text-white transition-transform hover:-translate-y-0.5"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "14px",
+              fontWeight: 700,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              background: "var(--color-burg3)",
+              boxShadow: "0 6px 18px rgba(196,38,78,0.35), inset 0 1px 0 rgba(255,255,255,0.18)",
+            }}
           >
             Empezar
           </Link>
@@ -102,7 +195,7 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu — overlay pantalla completa */}
+      {/* Mobile menu */}
       <div
         className="fixed inset-0 z-[199] md:hidden flex flex-col pt-16 transition-all duration-300"
         style={{
@@ -114,39 +207,39 @@ export function Navbar() {
         }}
         aria-hidden={!menuOpen}
       >
-        <div className="flex flex-col px-6 pt-6 gap-1">
-          {NAV_LINKS.map((l, i) => (
+        <div className="flex flex-col px-6 pt-6 gap-0">
+          {[...MAIN_LINKS, ...MORE_LINKS].map((l, i) => (
             <Link
               key={l.href}
               href={l.href}
-              onClick={closeMenu}  // ← FIX: cerrar siempre al hacer click
-              className="py-4 text-[22px] font-bold uppercase tracking-[0.04em] border-b flex items-center justify-between transition-colors"
+              onClick={closeMenu}
+              className="py-4 border-b flex items-center justify-between transition-colors"
               style={{
                 fontFamily: "var(--font-display)",
+                fontSize: "22px",
+                fontWeight: 700,
+                letterSpacing: "0.03em",
+                textTransform: "uppercase",
                 borderColor: "var(--color-border)",
                 color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)",
-                transitionDelay: menuOpen ? `${i * 50}ms` : "0ms",
+                transitionDelay: menuOpen ? `${i * 40}ms` : "0ms",
               }}
             >
               {l.label}
-              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace" }}>→</span>
+              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace", fontSize: "16px" }}>→</span>
             </Link>
           ))}
 
           <div className="flex flex-col gap-3 mt-8">
-            <Link
-              href="/signin"
-              onClick={closeMenu}
-              className="w-full py-3.5 text-center rounded-md text-[13px] font-bold uppercase tracking-[0.06em] border"
-              style={{ borderColor: "var(--color-border2)", color: "var(--color-txt)" }}
+            <Link href="/perfil" onClick={closeMenu}
+              className="w-full py-3.5 text-center rounded-md border"
+              style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", borderColor: "var(--color-border2)", color: "var(--color-txt)" }}
             >
-              Ingresar
+              Mi perfil
             </Link>
-            <Link
-              href="/campaigns"
-              onClick={closeMenu}
-              className="w-full py-3.5 text-center rounded-md text-[13px] font-bold uppercase tracking-[0.06em] text-white"
-              style={{ background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }}
+            <Link href="/signin" onClick={closeMenu}
+              className="w-full py-3.5 text-center rounded-md text-white"
+              style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", background: "var(--color-burg3)", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }}
             >
               Empezar ahora
             </Link>
@@ -162,13 +255,25 @@ function NavLink({ href, active, children }: { href: string; active: boolean; ch
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className="relative px-3.5 py-2 rounded-md text-[13px] font-medium transition-colors group"
-      style={{ color: active ? "var(--color-txt)" : "var(--color-txt2)" }}
+      className="relative px-4 py-2 rounded-md transition-colors hover:bg-white/5 group"
+      style={{
+        fontFamily: "var(--font-display)",
+        fontSize: "15px",
+        fontWeight: 700,
+        letterSpacing: "0.04em",
+        textTransform: "uppercase",
+        color: active ? "var(--color-txt)" : "var(--color-txt2)",
+      }}
     >
       {children}
       <span
-        className="absolute bottom-0.5 left-3.5 right-3.5 h-[2px] rounded-full transition-all duration-300"
-        style={{ background: "var(--color-burg3)", opacity: active ? 1 : 0, transform: active ? "scaleX(1)" : "scaleX(0)", transformOrigin: "center" }}
+        className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full transition-all duration-300"
+        style={{
+          background: "var(--color-burg3)",
+          opacity: active ? 1 : 0,
+          transform: active ? "scaleX(1)" : "scaleX(0)",
+          transformOrigin: "center",
+        }}
       />
     </Link>
   );
