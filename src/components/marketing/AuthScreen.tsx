@@ -21,9 +21,7 @@ export function AuthScreen({ initialMode = "signup" }: { initialMode?: Mode }) {
     >
       {/* Left — form */}
       <div className="px-8 sm:px-16 py-10 flex flex-col">
-        <Logo height={28} href="/" />
-
-        <div className="flex-1 flex flex-col justify-center max-w-[440px] w-full mt-10">
+        <div className="flex-1 flex flex-col justify-center max-w-[440px] w-full mt-4">
           <div
             className="text-[11px] uppercase tracking-[0.14em] font-semibold mb-3.5"
             style={{ color: "var(--color-burg3)" }}

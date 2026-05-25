@@ -75,8 +75,7 @@ export function OnboardingFlow() {
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--color-bg)" }}>
       {/* Header */}
-      <header className="px-8 py-5 flex items-center justify-between border-b border-[var(--color-border)]">
-        <Logo height={28} />
+      <header className="px-8 py-5 flex items-center justify-end border-b border-[var(--color-border)]">
         <Link href="/perfil" className="text-[12px]" style={{ color: "var(--color-txt3)" }}>
           Completar después →
         </Link>
