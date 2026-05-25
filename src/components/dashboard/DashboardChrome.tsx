@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 // src/components/dashboard/DashboardChrome.tsx — íconos Lucide profesionales
 import Link from "next/link";
 import { useState } from "react";
