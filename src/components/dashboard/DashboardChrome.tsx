@@ -1,5 +1,6 @@
 "use client";
-// src/components/dashboard/DashboardChrome.tsx — íconos Lucide profesionales
+// src/components/dashboard/DashboardChrome.tsx
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { orgInfo } from "@/lib/dashboard-data";
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
 ];
 
 export function DashboardSidebar({ active = "overview" }: { active?: string }) {
+  const path = usePathname();
   return (
     <aside
       className="hidden md:flex w-[220px] shrink-0 flex-col py-5 px-3"
@@ -47,7 +49,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
 
       <nav className="flex flex-col gap-0.5">
         {NAV_ITEMS.map((it) => {
-          const sel = active === it.id;
+          const sel = it.href === "/dashboard" ? path === "/dashboard" : path.startsWith(it.href);
           const Icon = it.icon;
           return (
             <Link

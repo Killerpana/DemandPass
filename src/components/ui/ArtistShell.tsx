@@ -27,8 +27,10 @@ const NAV_BOTTOM = [
 export function ArtistShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
 
-  const isActive = (href: string) =>
-    path === href || (href !== "/artistas/dashboard" && path.startsWith(href));
+  const isActive = (href: string) => {
+    if (href === "/artistas/dashboard") return path === "/artistas/dashboard";
+    return path === href || path.startsWith(href + "/");
+  };
 
   return (
     <div className="flex min-h-screen" style={{ background: "var(--color-bg)" }}>
@@ -93,7 +95,7 @@ export function ArtistShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      <main className="flex-1 overflow-x-hidden">{children}</main>
+      <main className="flex-1 overflow-x-hidden"><div key={path} className="animate-fadein">{children}</div></main>
     </div>
   );
 }

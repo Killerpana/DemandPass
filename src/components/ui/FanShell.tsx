@@ -92,9 +92,7 @@ export function FanShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Content */}
-      <main className="flex-1 overflow-x-hidden">
-        {children}
-      </main>
+      <main className="flex-1 overflow-x-hidden"><div key={path} className="animate-fadein">{children}</div></main>
     </div>
   );
 }
