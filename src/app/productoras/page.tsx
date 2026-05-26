@@ -8,18 +8,69 @@ export const metadata: Metadata = {
 };
 
 const FEATURES = [
-  { Icon: TrendingUp, title: "Demand Score",                desc: "Índice accionable de la fuerza de demanda. No son likes — es inteligencia real." },
-  { Icon: Map,        title: "Demand Map",                  desc: "Mapa de demanda por ciudad y región. Sabé si Córdoba aguanta una fecha antes de confirmarla." },
-  { Icon: Route,      title: "Tour Expansion Intelligence", desc: "Evaluá si una gira puede expandirse a ciudades del interior o nuevos países." },
-  { Icon: LineChart,  title: "Price Intelligence",          desc: "Curva de precio óptima basada en lo que tus fans están dispuestos a pagar." },
-  { Icon: Zap,        title: "Fan Signals",                 desc: "Señales agregadas: ciudad, precio, tipo de entrada, beneficios, disposición a viajar." },
-  { Icon: Ticket,     title: "Priority Access",             desc: "Gestioná la preventa con tokens verificados — integración con ticketera oficial." },
+  { Icon: TrendingUp, title: "Demand Score",                desc: "Índice accionable de fuerza de demanda. No son likes — es inteligencia real." },
+  { Icon: Map,        title: "Demand Map",                  desc: "Mapa por ciudad y región. Sabé si Córdoba aguanta una fecha antes de confirmarla." },
+  { Icon: Route,      title: "Tour Expansion Intelligence", desc: "Evaluá expansión a ciudades del interior o nuevos países con datos verificados." },
+  { Icon: LineChart,  title: "Price Intelligence",          desc: "Curva de precio óptima basada en lo que los fans están dispuestos a pagar." },
+  { Icon: Zap,        title: "Fan Signals",                 desc: "Ciudad, precio, tipo de entrada, beneficios, disposición a viajar — agregado." },
+  { Icon: Ticket,     title: "Priority Access",             desc: "Tokens verificados para preventa — integración con ticketera oficial." },
 ];
 
 const PLANES = [
-  { nombre: "Standard",   desc: "Productoras medianas o campañas puntuales", items: ["Campañas oficiales", "Dashboard básico", "Demand por ciudad", "Rango de precio", "Export básico", "Encuestas limitadas"],                                                                                    highlight: false },
-  { nombre: "Premium",    desc: "Productoras grandes",                       items: ["Todo Standard", "Demand Score + Demand Map", "Price Intelligence", "Fan Signals avanzado", "Tour Expansion", "Análisis post-campaña", "Soporte prioritario"],                                                highlight: true  },
-  { nombre: "Enterprise", desc: "Ticketeras y grupos regionales",             items: ["Todo Premium", "Integración API", "Reportes regionales LATAM", "Benchmarks agregados", "Success fee negociado", "Account manager dedicado", "SLA garantizado"],                                             highlight: false },
+  {
+    nombre: "Standard",
+    precio: "USD 199",
+    sub: "/mes · USD 2.029,80/año",
+    desc: "Productora chica o campaña puntual",
+    items: [
+      "Campañas oficiales nativas con reservas",
+      "Dashboard básico",
+      "Señales de demanda por ciudad",
+      "Sensibilidad de precio y beneficios",
+      "2 créditos/mes incluidos (rollover máx. 3)",
+      "Reporte estándar + soporte estándar",
+    ],
+    cta: "Consultar", highlight: false,
+  },
+  {
+    nombre: "Premium",
+    precio: "USD 999",
+    sub: "/mes · USD 10.189,80/año",
+    desc: "Productora recurrente que opera a volumen",
+    items: [
+      "Todo Standard con más campañas",
+      "Demand Score + Demand Map completo",
+      "Price Intelligence + Tour Expansion",
+      "Encuestas custom + Fan Signals avanzado",
+      "Análisis post-campaña + exportables",
+      "6 créditos/mes incluidos (rollover máx. 9)",
+      "Soporte prioritario",
+    ],
+    cta: "Hablar con ventas", highlight: true,
+  },
+  {
+    nombre: "Enterprise",
+    precio: "desde USD 3.500",
+    sub: "/mes · desde USD 35.700/año",
+    desc: "Gran productora, ticketera o grupo multi-marca",
+    items: [
+      "Todo Premium con capacidad custom",
+      "APIs + dashboards custom + multi-país",
+      "Benchmarks + data layers avanzados",
+      "SLA garantizado + account manager",
+      "White-label / Powered by DemandPass",
+      "Créditos y campañas según contrato",
+      "Success fee negociado (0,5–2%)",
+    ],
+    cta: "Contactar", highlight: false,
+  },
+];
+
+const FEES = [
+  { label: "Campaña extra en Standard",  valor: "USD 150" },
+  { label: "Campaña extra en Premium",   valor: "USD 100" },
+  { label: "Reporte / survey / map one-off", valor: "USD 300–1.000" },
+  { label: "Integración API / setup Enterprise", valor: "desde USD 2.500" },
 ];
 
 function IconBox({ Icon }: { Icon: React.ElementType }) {
@@ -45,7 +96,7 @@ export default function ProductorasPage() {
             DECIDÍ CON DATOS,<br /><span style={{ color: "var(--color-burg3)" }}>NO CON INTUICIÓN.</span>
           </h1>
           <p className="text-[17px] leading-[1.65] max-w-[560px] mb-10" style={{ color: "var(--color-txt2)" }}>
-            La industria tiene streams y seguidores. Pero no tiene una forma confiable de saber cuánta gente va a comprar una entrada, a qué precio, en qué ciudad — antes de confirmar el show. DemandPass resuelve eso.
+            La industria tiene streams y seguidores. Pero no sabe cuánta gente va a comprar una entrada, a qué precio, en qué ciudad — antes de confirmar el show. DemandPass resuelve eso.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/dashboard"
@@ -64,6 +115,7 @@ export default function ProductorasPage() {
           style={{ background: "radial-gradient(ellipse at 80% 50%, #1a3a6e 0%, transparent 70%)" }} />
       </section>
 
+      {/* Features */}
       <section className="px-5 md:px-12 py-20" style={{ borderTop: "1px solid var(--color-border)" }}>
         <div className="max-w-[1100px] mx-auto">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: "var(--color-burg3)" }}>Módulos del producto</p>
@@ -82,15 +134,17 @@ export default function ProductorasPage() {
         </div>
       </section>
 
+      {/* Planes */}
       <section className="px-5 md:px-12 py-20" style={{ borderTop: "1px solid var(--color-border)", background: "var(--color-surface)" }}>
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: "var(--color-burg3)" }}>Planes B2B</p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(28px,4vw,48px)] font-black uppercase">
-              ESCALÁ SEGÚN<br /><span style={{ color: "var(--color-txt3)" }}>TU OPERACIÓN.</span>
+              CUOTA MENSUAL ALTA,<br /><span style={{ color: "var(--color-txt3)" }}>MENOR COSTO POR CAMPAÑA.</span>
             </h2>
+            <p className="text-[13px] mt-4" style={{ color: "var(--color-txt3)" }}>Planes anuales con 15% de descuento.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
             {PLANES.map(p => (
               <div key={p.nombre} className="relative p-7 rounded-xl flex flex-col"
                 style={{ background: p.highlight ? "rgba(163,22,69,0.08)" : "var(--color-bg)", border: p.highlight ? "1px solid rgba(163,22,69,0.5)" : "1px solid var(--color-border)" }}>
@@ -99,24 +153,39 @@ export default function ProductorasPage() {
                     style={{ background: "var(--color-burg3)" }}>Más elegido</div>
                 )}
                 <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-1" style={{ color: "var(--color-burg3)" }}>{p.nombre}</p>
-                <p className="text-[12px] mb-5" style={{ color: "var(--color-txt3)" }}>{p.desc}</p>
+                <p className="text-[11px] mb-4" style={{ color: "var(--color-txt3)" }}>{p.desc}</p>
+                <span className="font-[family-name:var(--font-display)] text-[26px] font-black mb-1">{p.precio}</span>
+                <p className="text-[11px] mb-5" style={{ color: "var(--color-txt3)" }}>{p.sub}</p>
                 <ul className="flex flex-col gap-2.5 flex-1 mb-7">
                   {p.items.map(item => (
-                    <li key={item} className="flex items-start gap-2.5 text-[13px]" style={{ color: "var(--color-txt2)" }}>
+                    <li key={item} className="flex items-start gap-2.5 text-[12px]" style={{ color: "var(--color-txt2)" }}>
                       <span style={{ color: "var(--color-burg3)", flexShrink: 0 }}>✓</span>{item}
                     </li>
                   ))}
                 </ul>
-                <Link href="/signin" className="w-full py-3 text-center rounded-md font-[family-name:var(--font-display)] text-[13px] font-bold uppercase tracking-[0.06em]"
+                <Link href="/signin" className="w-full py-3 text-center rounded-md font-[family-name:var(--font-display)] text-[13px] font-bold uppercase tracking-[0.06em] mt-auto"
                   style={p.highlight ? { background: "var(--color-burg3)", color: "white", boxShadow: "0 6px 18px rgba(196,38,78,0.3)" } : { border: "1px solid var(--color-border2)", color: "var(--color-txt)" }}>
-                  {p.nombre === "Enterprise" ? "Contactar" : "Hablar con ventas"}
+                  {p.cta}
                 </Link>
               </div>
             ))}
           </div>
-          <p className="text-center text-[11px] mt-6" style={{ color: "var(--color-txt3)" }}>
-            Fase inicial: pilotos gratuitos para primeras productoras. Contactanos.
-          </p>
+
+          {/* Fees */}
+          <div className="p-5 rounded-xl" style={{ background: "rgba(163,22,69,0.06)", border: "1px solid rgba(163,22,69,0.2)" }}>
+            <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--color-burg3)" }}>Fees adicionales</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {FEES.map(f => (
+                <div key={f.label} className="flex items-center justify-between gap-2">
+                  <span className="text-[12px]" style={{ color: "var(--color-txt2)" }}>{f.label}</span>
+                  <span className="text-[13px] font-bold shrink-0" style={{ color: "var(--color-txt)" }}>{f.valor}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[11px] mt-3" style={{ color: "var(--color-txt3)" }}>
+              Activación de reservas incluida en todos los planes. Fase inicial: pilotos bonificados para primeras productoras.
+            </p>
+          </div>
         </div>
       </section>
     </main>

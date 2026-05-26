@@ -8,31 +8,83 @@ export const metadata: Metadata = {
 };
 
 const PASOS = [
-  { n: "01", title: "Elegí tu artista",     desc: "Encontrá campañas activas o creá una Fan Demand para un artista que querés ver en tu ciudad." },
-  { n: "02", title: "Registrá tu demanda",  desc: "Indicá ciudad, precio y tipo de entrada. Podés hacer una reserva condicional en campañas oficiales." },
-  { n: "03", title: "Obtené tu token",      desc: "Tu DemandPass token te da acceso prioritario a la preventa si el show se confirma oficialmente." },
+  { n: "01", title: "Elegí tu artista",    desc: "Encontrá campañas activas o apoyá una Fan Demand para un artista que querés ver en tu ciudad." },
+  { n: "02", title: "Registrá tu demanda", desc: "Indicá ciudad, precio y tipo de entrada. Podés hacer una reserva condicional en campañas oficiales." },
+  { n: "03", title: "Obtené tu token",     desc: "Tu DemandPass token te da acceso prioritario a la preventa si el show se confirma oficialmente." },
 ];
 
 const BENEFICIOS = [
   { Icon: Search,      title: "Descubrí antes",       desc: "Accedé a campañas antes de que el show se anuncie públicamente." },
-  { Icon: ShieldCheck, title: "Demanda verificada",    desc: "Sin bots, sin cuentas falsas. Cada apoyo es real." },
-  { Icon: Ticket,      title: "Prioridad de acceso",   desc: "Tu token te da ventana de preventa antes que el público general." },
-  { Icon: Star,        title: "Niveles de prioridad",  desc: "Bronce, Plata y Oro. Más nivel, mejor posición en la fila." },
-  { Icon: Bell,        title: "Alertas a tiempo",      desc: "Te avisamos cuando se confirma un show que apoyaste." },
-  { Icon: Globe,       title: "LATAM y más",           desc: "Argentina, México, Chile, Colombia, Perú y creciendo." },
+  { Icon: ShieldCheck, title: "Demanda verificada",   desc: "Sin bots ni cuentas falsas. Cada apoyo es real y verificado." },
+  { Icon: Ticket,      title: "Prioridad de acceso",  desc: "Tu token te da ventana de preventa antes que el público general." },
+  { Icon: Star,        title: "Mejor posición",       desc: "Bronce, Plata y Oro acceden a sectores exclusivos cuando el show se confirma." },
+  { Icon: Bell,        title: "Alertas a tiempo",     desc: "Te avisamos cuando se confirma un show que apoyaste." },
+  { Icon: Globe,       title: "LATAM y más",          desc: "Argentina, México, Chile, Colombia y creciendo." },
 ];
 
 const PLANES = [
-  { nombre: "Free",   precio: "Gratis",  items: ["Ver campañas", "Apoyar Fan Demand", "Alertas básicas"],                                                              highlight: false },
-  { nombre: "Bronce", precio: "USD 4",   sub: "/mes", items: ["Todo Free", "Badge Bronce", "Acceso a cupos liberados", "Beneficios en eventos"],                        highlight: false },
-  { nombre: "Plata",  precio: "USD 9",   sub: "/mes", items: ["Todo Bronce", "Mejor posición en preventa", "Acceso anticipado a campañas", "Perks digitales"],          highlight: true  },
-  { nombre: "Oro",    precio: "USD 19",  sub: "/mes", items: ["Todo Plata", "Mayor prioridad en cupos", "Impulsar bloques de demanda", "Beneficios premium en eventos"], highlight: false },
+  {
+    nombre: "Free", precio: "Gratis", sub: null,
+    rol: "Descubrimiento y señal",
+    items: [
+      "Ver todas las campañas",
+      "Seguir artistas (con límite)",
+      "Apoyar Fan Demand (con límite)",
+      "Reservar si la campaña lo habilita",
+      "Alertas básicas",
+    ],
+    nota: "Sin beneficios físicos por membresía. Sin acceso a cupos liberados.",
+    highlight: false, cta: "Crear cuenta",
+  },
+  {
+    nombre: "Bronce", precio: "USD 2,49", sub: "/mes · USD 25,40/año",
+    rol: "Fan activo — digital",
+    items: [
+      "Límites mucho más altos que Free",
+      "Más campañas para apoyar",
+      "Badge Bronce verificado",
+      "Alertas mejoradas y personalizadas",
+      "Acceso a sectores exclusivos Bronce+ cuando el show se confirma",
+      "Cupos liberados (detrás de Oro y Plata)",
+    ],
+    nota: "Sin beneficios físicos por membresía. El acceso a sectores y cupos depende de disponibilidad.",
+    highlight: false, cta: "Empezar",
+  },
+  {
+    nombre: "Plata", precio: "USD 5,99", sub: "/mes · USD 61,10/año",
+    rol: "Fan frecuente — beneficios reales",
+    items: [
+      "Todo Bronce con límites más altos",
+      "Descuentos en entradas y merch*",
+      "Fast-lane en eventos participantes*",
+      "Fanzone y upgrades/sorteos*",
+      "Mejor posición en cupos liberados",
+      "Acceso anticipado a ciertas campañas",
+      "Perks de partners participantes",
+    ],
+    nota: "*En eventos y campañas participantes y/o hasta agotar stock.",
+    highlight: true, cta: "Empezar",
+  },
+  {
+    nombre: "Oro", precio: "USD 10,99", sub: "/mes · USD 112,10/año",
+    rol: "Superfan — experiencia premium",
+    items: [
+      "Todo Plata con los mejores límites",
+      "Máxima prioridad secundaria (tras reservantes)",
+      "Fast-lane y Fanzone prioritarios*",
+      "Mejores upgrades y sorteos*",
+      "Soporte prioritario",
+      "Acceso a funciones beta",
+    ],
+    nota: "*En eventos y campañas participantes y/o hasta agotar stock.",
+    highlight: false, cta: "Empezar",
+  },
 ];
 
-function IconBox({ Icon, active = false }: { Icon: React.ElementType; active?: boolean }) {
+function IconBox({ Icon }: { Icon: React.ElementType }) {
   return (
     <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-      style={{ background: active ? "rgba(163,22,69,0.15)" : "rgba(255,255,255,0.05)", border: "1px solid rgba(163,22,69,0.2)" }}>
+      style={{ background: "rgba(163,22,69,0.12)", border: "1px solid rgba(163,22,69,0.2)" }}>
       <Icon size={18} color="#E43A66" strokeWidth={1.75} />
     </div>
   );
@@ -55,7 +107,7 @@ export default function FansPage() {
             Expresá demanda real antes de que el show se confirme. Si llega al objetivo, obtenés acceso prioritario a la preventa oficial — antes que todos.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/campaigns"
+            <Link href="/fan/campaigns"
               className="px-7 py-3.5 rounded-md text-white font-[family-name:var(--font-display)] text-[15px] font-bold uppercase tracking-[0.05em] transition-transform hover:-translate-y-0.5"
               style={{ background: "var(--color-burg3)", boxShadow: "0 8px 24px rgba(196,38,78,0.38), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
               Ver campañas →
@@ -71,6 +123,7 @@ export default function FansPage() {
           style={{ background: "radial-gradient(ellipse at 80% 50%, #A31645 0%, transparent 70%)" }} />
       </section>
 
+      {/* Pasos */}
       <section className="px-5 md:px-12 py-20" style={{ borderTop: "1px solid var(--color-border)" }}>
         <div className="max-w-[1100px] mx-auto">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: "var(--color-burg3)" }}>Cómo funciona</p>
@@ -89,6 +142,7 @@ export default function FansPage() {
         </div>
       </section>
 
+      {/* Beneficios */}
       <section className="px-5 md:px-12 py-20" style={{ borderTop: "1px solid var(--color-border)", background: "var(--color-surface)" }}>
         <div className="max-w-[1100px] mx-auto">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: "var(--color-burg3)" }}>Beneficios</p>
@@ -107,6 +161,7 @@ export default function FansPage() {
         </div>
       </section>
 
+      {/* Planes */}
       <section className="px-5 md:px-12 py-20" style={{ borderTop: "1px solid var(--color-border)" }}>
         <div className="max-w-[1100px] mx-auto">
           <div className="text-center mb-14">
@@ -114,6 +169,7 @@ export default function FansPage() {
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(28px,4vw,48px)] font-black uppercase">
               EMPEZÁ GRATIS.<br /><span style={{ color: "var(--color-txt3)" }}>SUBÍ TU PRIORIDAD.</span>
             </h2>
+            <p className="text-[13px] mt-4" style={{ color: "var(--color-txt3)" }}>Planes anuales con 15% de descuento.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {PLANES.map(p => (
@@ -123,27 +179,33 @@ export default function FansPage() {
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.1em] text-white"
                     style={{ background: "var(--color-burg3)" }}>Más elegido</div>
                 )}
-                <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-2" style={{ color: "var(--color-burg3)" }}>{p.nombre}</p>
-                <div className="flex items-baseline gap-1 mb-5">
-                  <span className="font-[family-name:var(--font-display)] text-[28px] font-black">{p.precio}</span>
-                  {"sub" in p && <span className="text-[12px]" style={{ color: "var(--color-txt3)" }}>{p.sub}</span>}
+                <p className="text-[11px] font-bold uppercase tracking-[0.1em] mb-1" style={{ color: "var(--color-burg3)" }}>{p.nombre}</p>
+                <p className="text-[10px] mb-3" style={{ color: "var(--color-txt3)" }}>{p.rol}</p>
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className="font-[family-name:var(--font-display)] text-[26px] font-black">{p.precio}</span>
                 </div>
-                <ul className="flex flex-col gap-2 flex-1 mb-6">
+                {p.sub && <p className="text-[10px] mb-4" style={{ color: "var(--color-txt3)" }}>{p.sub}</p>}
+                {!p.sub && <div className="mb-4" />}
+                <ul className="flex flex-col gap-2 flex-1 mb-3">
                   {p.items.map(item => (
                     <li key={item} className="flex items-start gap-2 text-[12px]" style={{ color: "var(--color-txt2)" }}>
                       <span style={{ color: "var(--color-burg3)", flexShrink: 0 }}>✓</span>{item}
                     </li>
                   ))}
                 </ul>
-                <Link href="/signin" className="w-full py-2.5 text-center rounded-md font-[family-name:var(--font-display)] text-[12px] font-bold uppercase tracking-[0.06em]"
+                {p.nota && (
+                  <p className="text-[10px] mb-4 leading-[1.5]" style={{ color: "var(--color-txt3)" }}>{p.nota}</p>
+                )}
+                <Link href="/signin" className="w-full py-2.5 text-center rounded-md font-[family-name:var(--font-display)] text-[12px] font-bold uppercase tracking-[0.06em] transition-all mt-auto"
                   style={p.highlight ? { background: "var(--color-burg3)", color: "white" } : { border: "1px solid var(--color-border2)", color: "var(--color-txt)" }}>
-                  Empezar
+                  {p.cta}
                 </Link>
               </div>
             ))}
           </div>
           <p className="text-center text-[11px] mt-6" style={{ color: "var(--color-txt3)" }}>
-            Ningún plan supera a quien hizo reserva condicional — la máxima prioridad siempre es del reservante.
+            Regla de prioridad: Reservantes condicionales → Oro → Plata → Bronce → Free.
+            La reserva condicional supera siempre a cualquier plan.
           </p>
         </div>
       </section>
