@@ -67,7 +67,7 @@ export function AuthScreen() {
                       style={{ color: active ? "var(--color-txt)" : "var(--color-txt2)" }}>{label}</p>
                     <p className="text-[11px]" style={{ color: "var(--color-txt3)" }}>{desc}</p>
                   </div>
-                  {active && <span className="text-[11px] font-bold font-mono" style={{ color: "var(--color-burg3)" }}>→ {d}</span>}
+                  {active && <span className="text-[11px] font-bold font-mono shrink-0" style={{ color: "var(--color-burg3)" }}>→</span>}
                 </button>
               );
             })}

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { MapPin, DollarSign, BarChart2, Map, Gift, LayoutDashboard } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Para artistas independientes — DemandPass",
+  title: "Para artistas independientes",
   description: "Medí demanda real antes de confirmar tu show.",
 };
 
@@ -42,7 +42,7 @@ const PLANES = [
       "Hasta 1 campaña con reserva (tras validación)",
       "Demand Score + comparación de ciudades",
       "Testeo de precio y exportables",
-      "Tour-lite (planificación básica multi-ciudad)",
+      "Tour básico (planificación multi-ciudad)",
       "3 créditos/mes incluidos (rollover máx. 5)",
     ],
     nota: null,
@@ -54,10 +54,10 @@ const PLANES = [
     sub: "/mes · USD 1.019,90/año",
     rol: "Artista profesional o manager que planifica mini-giras",
     items: [
-      "8 campañas activas o hasta 3 con reserva",
+      "8 campañas exploratorias o hasta 3 con reserva",
       "Demand Map avanzado + benchmark pricing",
-      "Tour mode completo (multi-ciudad)",
-      "Servicios operativos (venue, merch, ads)",
+      "Tour mode completo multi-ciudad",
+      "Gestión de venue, merch y pauta digital",
       "Soporte prioritario y revisión rápida",
       "8 créditos/mes incluidos (rollover máx. 12)",
     ],

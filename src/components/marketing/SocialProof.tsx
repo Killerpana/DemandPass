@@ -11,7 +11,7 @@ export function SocialProof() {
             className="text-[11px] uppercase tracking-[0.14em] font-semibold mb-3.5"
             style={{ color: "var(--color-burg3)" }}
           >
-            Productoras que ya miden
+            Fans, artistas y productoras que ya lo usan
           </div>
           <h2
             className="uppercase"
@@ -22,14 +22,14 @@ export function SocialProof() {
               letterSpacing: "0.005em",
             }}
           >
-            Datos en la mesa.
+            Resultados reales.
             <br />
-            <span style={{ color: "var(--color-txt3)" }}>Decisiones más rápidas.</span>
+            <span style={{ color: "var(--color-txt3)" }}>De los tres lados.</span>
           </h2>
         </div>
 
         <StaggerReveal
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5"
           staggerMs={100}
           variant="slide-up"
           duration={550}

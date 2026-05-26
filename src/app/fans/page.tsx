@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Search, ShieldCheck, Ticket, Star, Bell, Globe } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Para fans — DemandPass",
+  title: "Para fans",
   description: "Expresá demanda real. Obtené prioridad de acceso cuando el show se confirme.",
 };
 
@@ -60,7 +60,7 @@ const PLANES = [
       "Fanzone y upgrades/sorteos*",
       "Mejor posición en cupos liberados",
       "Acceso anticipado a ciertas campañas",
-      "Perks de partners participantes",
+      "Beneficios en eventos participantes",
     ],
     nota: "*En eventos y campañas participantes y/o hasta agotar stock.",
     highlight: true, cta: "Empezar",

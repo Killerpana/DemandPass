@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { TrendingUp, Map, Route, LineChart, Zap, Ticket } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Para productoras y promotores — DemandPass",
+  title: "Para productoras y promotores",
   description: "Inteligencia de demanda verificada para booking, ciudad, precio y preventa.",
 };
 
@@ -42,7 +42,7 @@ const PLANES = [
       "Demand Score + Demand Map completo",
       "Price Intelligence + Tour Expansion",
       "Encuestas custom + Fan Signals avanzado",
-      "Análisis post-campaña + exportables",
+      "Análisis post-campaña + descarga de reportes y datos",
       "6 créditos/mes incluidos (rollover máx. 9)",
       "Soporte prioritario",
     ],
@@ -56,7 +56,7 @@ const PLANES = [
     items: [
       "Todo Premium con capacidad custom",
       "APIs + dashboards custom + multi-país",
-      "Benchmarks + data layers avanzados",
+      "Benchmarks + capas de datos avanzadas",
       "SLA garantizado + account manager",
       "White-label / Powered by DemandPass",
       "Créditos y campañas según contrato",
