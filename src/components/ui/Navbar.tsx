@@ -180,16 +180,6 @@ export function Navbar() {
         style={{ background: "rgba(8,8,13,0.98)", backdropFilter: "blur(20px)", opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "all" : "none", transform: menuOpen ? "translateY(0)" : "translateY(-8px)" }}
         aria-hidden={!menuOpen}>
         <div className="flex flex-col px-6 pt-4 gap-0">
-          {/* Branch links */}
-          {BRANCH_LINKS.map((l, i) => (
-            <Link key={l.href} href={l.href} onClick={closeMenu}
-              className="py-4 border-b flex items-center justify-between"
-              style={{ ...NAV_STYLE, fontSize: "20px", borderColor: "var(--color-border)", color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)" }}>
-              {l.label}
-              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace", fontSize: "14px" }}>→</span>
-            </Link>
-          ))}
-
           {/* Inicio acordeón */}
           <button type="button" onClick={() => setInicioOpen(v => !v)}
             className="py-4 border-b flex items-center justify-between w-full"
@@ -217,6 +207,16 @@ export function Navbar() {
               </Link>
             ))}
           </div>
+
+          {/* Branch links */}
+          {BRANCH_LINKS.map((l) => (
+            <Link key={l.href} href={l.href} onClick={closeMenu}
+              className="py-4 border-b flex items-center justify-between"
+              style={{ ...NAV_STYLE, fontSize: "20px", borderColor: "var(--color-border)", color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)" }}>
+              {l.label}
+              <span style={{ color: "var(--color-burg3)", fontFamily: "monospace", fontSize: "14px" }}>→</span>
+            </Link>
+          ))}
 
           <div className="flex flex-col gap-3 mt-8">
             <Link href="/signin" onClick={closeMenu}
