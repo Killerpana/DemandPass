@@ -30,7 +30,7 @@ export const trustStats = [
 ] as const;
 
 export const howItWorksSteps = [
-  { n: "01", t: "Los fans apoyan",         d: "Indican ciudad, rango de precio y tipo de entrada. Cada apoyo se verifica por identidad y geolocalización — sin bots, sin duplicados.", points: ["Verificación por email + país", "Reserva condicional opcional", "Acceso prioritario garantizado"] },
+  { n: "01", t: "Los fans apoyan",         d: "Indican ciudad, rango de precio y tipo de entrada. Cada apoyo se verifica por identidad y geolocalización con controles anti-fraude.", points: ["Verificación por email + país", "Reserva condicional opcional", "Priority Pass si el show se confirma"] },
   { n: "02", t: "Se mide la demanda",      d: "Datos en tiempo real por ciudad, precio aceptado y perfil del fan. La señal se cruza con históricos de eventos comparables.",            points: ["Mapa de calor por país", "Curva de precio óptima", "Forecast a 48 hs"] },
   { n: "03", t: "Las productoras deciden", d: "Dashboard con forecast, venue recomendado y lista de fans verificados. La productora confirma el show — o no — con datos, no intuición.", points: ["Venue auto-recomendado", "Lista de fans con prioridad", "Reservas condicionales devueltas"] },
 ] as const;
@@ -53,7 +53,7 @@ export const testimonials = [
   { logo: "MC", co: "Move Concerts",       name: "Esteban G.", role: "Country Manager AR",       q: "Para un artista internacional, justificar una segunda fecha en interior dejó de ser una conversación de fe. Tiramos data en la mesa y el promotor local accede.",                                                                     kpi: "+2 fechas interior",       kpiL: "Q4 2025"                 },
   { logo: "IN", co: "Industry 360",        name: "Luciana A.", role: "Head of Strategy",         q: "La lista de fans verificados es oro. Esa preventa convierte 4x mejor que cualquier base de mail genérica. Y los fans se acuerdan que apostaron por el artista.",                                                                      kpi: "4× conversión preventa",   kpiL: "vs base general"         },
   { logo: "VS", co: "Los Planetas del Sur", name: "Valentín S.", role: "Artista independiente",  q: "Siempre supe que tenía fans en Córdoba, pero no podía probarlo. Con DemandPass armé mi primera campaña exploratoria, llegué al umbral en 3 semanas y confirmé la fecha. El show se agotó en 48 horas.",                              kpi: "100% sold out",            kpiL: "1ra fecha confirmada"    },
-  { logo: "ML", co: "Martina L.",          name: "Martina L.", role: "Fan Oro · Buenos Aires",   q: "Apoyé la campaña de mi artista favorito cuatro meses antes del anuncio. Cuando confirmaron el show, recibí mi token y tuve acceso a preventa 48 horas antes. Nunca estuve tan adelante en una fila.",                               kpi: "48 hs antes",              kpiL: "que venta general"       },
+  { logo: "ML", co: "Martina L.",          name: "Martina L.", role: "Fan Oro · Buenos Aires",   q: "Apoyé la campaña de mi artista favorito cuatro meses antes del anuncio. Cuando confirmaron el show, recibí mi Priority Pass y tuve acceso a preventa 48 horas antes. Nunca estuve tan adelante en una fila.",                               kpi: "48 hs antes",              kpiL: "que venta general"       },
   { logo: "IN", co: "Industry 360",     name: "Luciana A.", role: "Head of Strategy",    q: "La lista de fans verificados es oro. Esa preventa convierte 4x mejor que cualquier base de mail genérica. Y los fans se acuerdan que apostaron por el artista.",        kpi: "4× conversión preventa",  kpiL: "vs base general" },
 ] as const;
 
@@ -61,7 +61,7 @@ export const faqItems = [
   { q: "¿DemandPass me garantiza una entrada?",                       a: "No. DemandPass registra tu interés y te da prioridad de acceso si el show se confirma. La compra de la entrada ocurre siempre en la ticketera oficial." },
   { q: "¿Qué pasa si el show no se confirma?",                        a: "Si hiciste una reserva condicional y el show no se confirma, el monto nominal abonado se devuelve íntegramente. Sin descuentos, sin penalidades." },
   { q: "¿Qué diferencia hay entre Campaña Oficial y Fan Demand?",     a: "Las oficiales son impulsadas por la productora e incluyen reserva condicional. Las Fan Demand son iniciadas por fans — si se alcanza el objetivo, la productora evalúa confirmarlo." },
-  { q: "¿Para qué sirve el DemandPass token?",                        a: "El token es tu registro de prioridad. Si el show se confirma, te permite acceder a la preventa antes que el público general, según el nivel elegido." },
+  { q: "¿Para qué sirve el DemandPass Priority Pass?",               a: "El Priority Pass es tu registro de prioridad. Si el show se confirma, te permite acceder a la preventa antes que el público general, según campaña, membresía y disponibilidad." },
   { q: "¿En qué países opera la plataforma?",                         a: "Argentina, México, Colombia, Chile y Perú al lanzamiento. Próximamente Uruguay, Brasil y España." },
   { q: "¿Cómo se verifica que la demanda es real?",                   a: "Cada apoyo se verifica por identidad (email + país), geolocalización y heurísticas anti-bot. Las reservas condicionales requieren método de pago válido." },
 ] as const;

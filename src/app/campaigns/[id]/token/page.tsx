@@ -124,7 +124,7 @@ export default async function TokenPage({
             fontSize: 28, lineHeight: 1, letterSpacing: "0.005em",
           }}
         >
-          Tu DemandPass está listo
+          Tu Priority Pass está listo
         </h1>
         <p className="text-[12px] text-[var(--color-txt3)] mb-4">
           {c.artist} · {c.city}
@@ -171,7 +171,7 @@ export default async function TokenPage({
                 className="text-[11px] uppercase tracking-[2px] font-bold text-[var(--color-txt3)] mb-2.5"
                 style={{ fontFamily: "var(--font-condensed)" }}
               >
-                Claim Token — Demo
+                Priority Pass — Demo
               </div>
               <div
                 className="text-[20px] font-medium tracking-[3px] break-all"
@@ -244,7 +244,7 @@ export default async function TokenPage({
             Importante — leé antes de guardar
           </div>
           <ul className="list-none pl-0 m-0 flex flex-col gap-1.5 text-[12px] text-[var(--color-txt2)] leading-[1.7]">
-            <li>· Este token <strong className="text-[var(--color-txt)]">no es una entrada</strong> ni garantiza el acceso al show.</li>
+            <li>· Este Priority Pass <strong className="text-[var(--color-txt)]">no es una entrada</strong>. Otorga prioridad de acceso si el show se confirma.</li>
             <li>· El evento <strong className="text-[var(--color-txt)]">no está confirmado</strong>. Esta es una reserva condicional de demo.</li>
             <li>· Si el show no se confirma, el monto nominal se devuelve íntegro.</li>
             <li>· La compra real ocurre en la <strong className="text-[var(--color-txt)]">ticketera oficial</strong>, no en DemandPass.</li>

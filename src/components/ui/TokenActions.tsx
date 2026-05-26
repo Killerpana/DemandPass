@@ -28,7 +28,7 @@ export function CopyTokenButton({ token }: { token: string }) {
         fontFamily: "Outfit, sans-serif",
       }}
     >
-      {copied ? "✓ Copiado" : "Copiar token"}
+      {copied ? "✓ Copiado" : "Copiar código"}
     </button>
   );
 }
