@@ -140,7 +140,7 @@ export default function ProductorasPage() {
           <div className="text-center mb-14">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: "var(--color-burg3)" }}>Planes B2B</p>
             <h2 className="font-[family-name:var(--font-display)] text-[clamp(28px,4vw,48px)] font-black uppercase">
-              CUOTA MENSUAL ALTA,<br /><span style={{ color: "var(--color-txt3)" }}>MENOR COSTO POR CAMPAÑA.</span>
+              INTELIGENCIA QUE<br /><span style={{ color: "var(--color-txt3)" }}>CONVIERTE SEÑALES EN SHOWS.</span>
             </h2>
             <p className="text-[13px] mt-4" style={{ color: "var(--color-txt3)" }}>Planes anuales con 15% de descuento.</p>
           </div>
