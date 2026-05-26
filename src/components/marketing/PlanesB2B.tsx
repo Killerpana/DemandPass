@@ -1,190 +1,174 @@
 "use client";
-// src/components/marketing/PlanesB2B.tsx
-// Sección de planes para productoras con toggle Mensual / Anual
 
+import Link from "next/link";
 import { useState } from "react";
+import { Users, Music2, Building2, ChevronRight } from "lucide-react";
 
-const planes = [
+const RAMAS = [
   {
-    name: "Standard",
-    priceMes: "USD 199",
-    precioAnual: "USD 169",
-    numMes: 199,
-    numAnual: 169,
-    sub: "por mes",
-    color: "var(--color-border2)",
-    features: [
-      "Campañas oficiales con reservas nativas",
-      "Dashboard básico de demanda",
-      "Señales por ciudad",
-      "Sensibilidad de precio",
-      "2 créditos/mes incluidos",
-      "Soporte estándar",
+    id: "fan",
+    Icon: Users,
+    label: "Soy fan",
+    color: "#A31645",
+    bg: "rgba(163,22,69,0.08)",
+    border: "rgba(163,22,69,0.35)",
+    headline: "Apoyá antes. Entrá primero.",
+    desc: "Expresá demanda real por tus artistas favoritos. Si el show se confirma, obtenés prioridad de acceso a la preventa antes que el público general.",
+    puntos: [
+      "Apoyá campañas oficiales y Fan Demand",
+      "Token de acceso prioritario a preventa",
+      "Mejor posición en sectores exclusivos",
+      "Alertas cuando tu artista está en campaña",
+      "Planes Free, Bronce, Plata y Oro",
     ],
-    cta: "Consultar",
-    ctaVariant: "outline" as const,
-    popular: false,
+    cta: "Ver planes para fans",
+    href: "/fans",
+    plans: "Free · Bronce · Plata · Oro",
   },
   {
-    name: "Premium",
-    priceMes: "USD 999",
-    precioAnual: "USD 849",
-    numMes: 999,
-    numAnual: 849,
-    sub: "por mes",
-    color: "var(--color-burg3)",
-    features: [
-      "Todo Standard con más campañas",
-      "Demand Score + Demand Map completo",
-      "Price Intelligence + Tour Expansion",
-      "Encuestas custom + Fan Signals",
-      "Análisis post-campaña + exportables",
-      "6 créditos/mes incluidos",
-      "Soporte prioritario",
+    id: "artista",
+    Icon: Music2,
+    label: "Soy artista",
+    color: "#8b5cf6",
+    bg: "rgba(139,92,246,0.08)",
+    border: "rgba(139,92,246,0.35)",
+    headline: "Sabé dónde están tus fans antes de confirmar.",
+    desc: "Medí demanda real por ciudad y precio. DemandPass te dice si existe el show antes de que gastes un peso en producción.",
+    puntos: [
+      "Campañas exploratorias por ciudad",
+      "Demand Map — fans y precio por ciudad",
+      "Fan Signals — qué beneficios valoran",
+      "Reserva condicional tras validación",
+      "Tour mode para mini-giras",
     ],
-    cta: "Hablar con ventas",
-    ctaVariant: "solid" as const,
-    popular: true,
+    cta: "Ver planes para artistas",
+    href: "/artistas",
+    plans: "Starter · Indie · Pro",
   },
   {
-    name: "Enterprise",
-    priceMes: "desde USD 3.500",
-    precioAnual: "desde USD 2.975",
-    numMes: null,
-    numAnual: null,
-    sub: "por mes",
-    color: "var(--color-amber2)",
-    features: [
-      "Todo Premium con capacidad custom",
-      "APIs + dashboards multi-país",
-      "White-label / Powered by DemandPass",
-      "SLA garantizado + account manager",
-      "Success fee negociado (0,5–2%)",
-      "Créditos según contrato",
+    id: "productora",
+    Icon: Building2,
+    label: "Soy productora",
+    color: "#3b82f6",
+    bg: "rgba(59,130,246,0.08)",
+    border: "rgba(59,130,246,0.35)",
+    headline: "Confirmá shows con datos, no con intuición.",
+    desc: "Demand Score, Demand Map y Tour Expansion Intelligence para tomar decisiones de booking antes de firmar contratos.",
+    puntos: [
+      "Demand Score accionable por campaña",
+      "Demand Map por ciudad y región LATAM",
+      "Price Intelligence — curva de precio óptima",
+      "Tour Expansion — expandí la gira con datos",
+      "Integración con ticketeras oficiales",
     ],
-    cta: "Contactar",
-    ctaVariant: "outline" as const,
-    popular: false,
+    cta: "Ver planes para productoras",
+    href: "/productoras",
+    plans: "Standard · Premium · Enterprise",
   },
 ];
 
 export function PlanesB2B() {
-  const [anual, setAnual] = useState(false);
+  const [active, setActive] = useState<"fan" | "artista" | "productora">("fan");
+  const rama = RAMAS.find(r => r.id === active)!;
 
   return (
-    <section
-      id="planes"
-      className="py-[80px] md:py-[120px] px-5 md:px-12 border-b border-[var(--color-border)]"
-      style={{ background: "var(--color-bg)" }}
-    >
+    <section id="planes" className="py-20 px-5 md:px-12 border-b border-[var(--color-border)]">
       <div className="max-w-[1100px] mx-auto">
+
         {/* Header */}
-        <div className="text-[11px] uppercase tracking-[0.14em] font-semibold mb-3.5 text-center" style={{ color: "var(--color-burg3)" }}>
-          Para productoras
-        </div>
-        <h2
-          className="uppercase mb-4 text-center"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 4vw, 56px)", lineHeight: 0.95, letterSpacing: "0.005em" }}
-        >
-          Planes que escalan<br />
-          <span style={{ color: "var(--color-burg3)" }}>con tu operación.</span>
-        </h2>
-        <p className="text-center text-[16px] text-[var(--color-txt2)] max-w-[560px] mx-auto mb-10 leading-[1.55]">
-          Desde tu primera campaña hasta operaciones a escala regional. Sin costos fijos si no confirmás el show.
-        </p>
-
-        {/* Toggle Mensual / Anual */}
-        <div className="flex items-center justify-center gap-3 mb-12">
-          <span className="text-[13px] font-semibold" style={{ color: anual ? "var(--color-txt3)" : "var(--color-txt)" }}>
-            Mensual
-          </span>
-          <button
-            type="button"
-            onClick={() => setAnual((v) => !v)}
-            className="relative w-12 h-6 rounded-full transition-colors duration-300"
-            style={{ background: anual ? "var(--color-burg3)" : "var(--color-border2)" }}
-            aria-label="Cambiar a facturación anual"
-          >
-            <span
-              className="absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-all duration-300"
-              style={{ left: anual ? "calc(100% - 20px)" : "4px" }}
-            />
-          </button>
-          <span className="text-[13px] font-semibold flex items-center gap-2" style={{ color: anual ? "var(--color-txt)" : "var(--color-txt3)" }}>
-            Anual
-            <span
-              className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-[0.06em]"
-              style={{ background: "rgba(196,38,78,0.15)", color: "var(--color-burg3)" }}
-            >
-              −15%
-            </span>
-          </span>
+        <div className="text-center mb-12">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] mb-3" style={{ color: "var(--color-burg3)" }}>
+            Planes
+          </p>
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(28px,4vw,52px)] font-black uppercase leading-[0.95]">
+            ¿QUÉ ROL<br />
+            <span style={{ color: "var(--color-txt3)" }}>TENÉS EN EL SHOW?</span>
+          </h2>
         </div>
 
-        {/* Grid de planes */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {planes.map((p) => {
-            const precio = anual ? p.precioAnual : p.priceMes;
-            return (
-              <div
-                key={p.name}
-                className="rounded-xl p-7 flex flex-col relative overflow-hidden transition-transform hover:-translate-y-1"
+        {/* Selector */}
+        <div className="flex justify-center mb-10">
+          <div className="flex gap-2 p-1.5 rounded-2xl"
+            style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>
+            {RAMAS.map(r => (
+              <button key={r.id} type="button" onClick={() => setActive(r.id as typeof active)}
+                className="flex items-center gap-2.5 px-5 py-3 rounded-xl transition-all"
                 style={{
-                  background: p.popular ? "var(--color-surface2)" : "var(--color-surface)",
-                  border: `1px solid ${p.popular ? "var(--color-burg3)" : "var(--color-border)"}`,
-                  boxShadow: p.popular
-                    ? "0 0 0 1px var(--color-burg3), 0 24px 48px rgba(196,38,78,0.15)"
-                    : "0 2px 8px rgba(0,0,0,0.3)",
-                }}
-              >
-                {p.popular && (
-                  <div className="absolute top-0 right-6 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-white rounded-b-md" style={{ background: "var(--color-burg3)" }}>
-                    Más elegido
-                  </div>
-                )}
-                <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-xl" style={{ background: p.color }} />
-
-                <div className="mb-6 pt-2">
-                  <div className="text-[11px] uppercase tracking-[0.14em] font-bold mb-2" style={{ color: p.color }}>{p.name}</div>
-                  <div className="text-[36px] font-extrabold leading-none transition-all duration-300" style={{ fontFamily: "var(--font-display)", letterSpacing: "0.005em" }}>
-                    {precio}
-                  </div>
-                  {anual && p.numMes && (
-                    <div className="text-[12px] line-through mt-0.5" style={{ color: "var(--color-txt3)" }}>
-                      antes USD {p.numMes}
-                    </div>
-                  )}
-                  <div className="text-[13px] text-[var(--color-txt3)] mt-1">{p.sub}</div>
-                </div>
-
-                <ul className="flex flex-col gap-2.5 mb-8 flex-1">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-[13px] text-[var(--color-txt2)]">
-                      <span style={{ color: p.color }} className="mt-0.5 shrink-0">✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  type="button"
-                  className="w-full py-3 rounded-md text-[13px] font-bold uppercase tracking-[0.06em] transition-opacity hover:opacity-90"
-                  style={
-                    p.ctaVariant === "solid"
-                      ? { background: "var(--color-burg3)", color: "#fff", boxShadow: "0 6px 18px rgba(196,38,78,0.32)" }
-                      : { background: "transparent", color: "var(--color-txt)", border: "1px solid var(--color-border2)" }
-                  }
-                >
-                  {p.cta}
-                </button>
-              </div>
-            );
-          })}
+                  background: active === r.id ? r.bg : "transparent",
+                  border: active === r.id ? `1px solid ${r.border}` : "1px solid transparent",
+                  color: active === r.id ? r.color : "var(--color-txt3)",
+                }}>
+                <r.Icon size={16} strokeWidth={2} />
+                <span className="font-[family-name:var(--font-display)] text-[13px] font-bold uppercase tracking-[0.05em] hidden sm:block">
+                  {r.label}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <p className="text-center text-[12px] text-[var(--color-txt3)] mt-8">
-          Los precios no incluyen IVA. Si el show no se confirma, no se cobra el plan por esa campaña.
-        </p>
+        {/* Panel */}
+        <div key={active}
+          className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-0 rounded-2xl overflow-hidden animate-fadein"
+          style={{ border: `1px solid ${rama.border}`, background: rama.bg }}>
+
+          {/* Left */}
+          <div className="p-8 md:p-10 flex flex-col justify-between"
+            style={{ borderRight: `1px solid ${rama.border}` }}>
+            <div>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: rama.color + "20", border: `1px solid ${rama.color}40` }}>
+                  <rama.Icon size={18} color={rama.color} strokeWidth={2} />
+                </div>
+                <span className="font-[family-name:var(--font-display)] text-[12px] font-bold uppercase tracking-[0.08em]"
+                  style={{ color: rama.color }}>
+                  {rama.label}
+                </span>
+              </div>
+
+              <h3 className="font-[family-name:var(--font-display)] text-[clamp(22px,3vw,34px)] font-black uppercase leading-[1.0] mb-4">
+                {rama.headline}
+              </h3>
+              <p className="text-[15px] leading-[1.65] mb-8" style={{ color: "var(--color-txt2)" }}>
+                {rama.desc}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <Link href={rama.href}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-[family-name:var(--font-display)] text-[14px] font-bold uppercase tracking-[0.05em] text-white transition-all hover:-translate-y-0.5 w-fit"
+                style={{ background: rama.color, boxShadow: `0 8px 24px ${rama.color}40` }}>
+                {rama.cta} <ChevronRight size={16} />
+              </Link>
+              <p className="text-[11px]" style={{ color: "var(--color-txt3)" }}>
+                Planes disponibles: <span style={{ color: "var(--color-txt)" }}>{rama.plans}</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Right — bullets */}
+          <div className="p-8 md:p-10 flex flex-col justify-center">
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] mb-5" style={{ color: rama.color }}>
+              Qué incluye
+            </p>
+            <ul className="flex flex-col gap-4">
+              {rama.puntos.map((p, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                    style={{ background: rama.color + "20", border: `1px solid ${rama.color}40` }}>
+                    <span style={{ color: rama.color, fontSize: "10px", fontWeight: 700 }}>✓</span>
+                  </div>
+                  <span className="text-[14px] leading-[1.5]" style={{ color: "var(--color-txt)" }}>{p}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-[12px] mt-8 pt-5" style={{ color: "var(--color-txt3)", borderTop: `1px solid ${rama.border}` }}>
+              Los precios y detalles de cada plan están en la página de {rama.label.toLowerCase().replace("soy ", "")}.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );
