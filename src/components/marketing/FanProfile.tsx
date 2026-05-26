@@ -39,10 +39,10 @@ const HISTORIAL = [
 
 const ACTIVIDAD = [
   { icon: CheckCircle2, color: "#10b981", text: "Lenny Kravitz alcanzó el 67% del objetivo",        time: "hace 2 hs",   type: "milestone" },
-  { icon: Bell,         color: "#A31645", text: "Tu token para K-Pop Night fue generado",             time: "hace 5 hs",   type: "token"     },
+  { icon: Bell,         color: "#A31645", text: "Tu Priority Pass para K-Pop Night fue generado",             time: "hace 5 hs",   type: "Priority Pass"     },
   { icon: TrendingUp,   color: "#3b82f6", text: "+580 apoyos esta semana en K-Pop Night",            time: "ayer",        type: "trend"     },
   { icon: Star,         color: "#f59e0b", text: "Subiste a Fan Plata — mejor posición en preventa",  time: "hace 3 días", type: "level"     },
-  { icon: Zap,          color: "#8b5cf6", text: "Bad Bunny confirmó fecha en Cdmx — tu token activo", time: "hace 5 días", type: "confirm"   },
+  { icon: Zap,          color: "#8b5cf6", text: "Bad Bunny confirmó fecha en Cdmx — tu Priority Pass activo", time: "hace 5 días", type: "confirm"   },
 ];
 
 const DESCUBRIR = campaigns.slice(0, 3);

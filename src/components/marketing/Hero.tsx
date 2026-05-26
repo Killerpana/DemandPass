@@ -55,6 +55,15 @@ export function Hero() {
               <strong className="text-[var(--color-txt)]">antes de gastar un peso en producción</strong>.
             </p>
 
+            {/* Disclaimer */}
+            <div className="inline-flex items-start gap-2.5 px-4 py-2.5 rounded-xl mb-8"
+              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <span className="text-[11px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <strong style={{ color: "rgba(255,255,255,0.65)" }}>DemandPass no vende entradas.</strong>{" "}
+                Si el show se confirma, tu apoyo puede darte prioridad de acceso según campaña, membresía y disponibilidad.
+              </span>
+            </div>
+
             <div className="flex gap-3 flex-wrap mb-14">
               <Link
                 href="/campaigns"

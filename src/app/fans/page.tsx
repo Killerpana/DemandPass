@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 const PASOS = [
   { n: "01", title: "Elegí tu artista",    desc: "Encontrá campañas activas o apoyá una Fan Demand para un artista que querés ver en tu ciudad." },
   { n: "02", title: "Registrá tu demanda", desc: "Indicá ciudad, precio y tipo de entrada. Podés hacer una reserva condicional en campañas oficiales." },
-  { n: "03", title: "Obtené tu token",     desc: "Tu DemandPass token te da acceso prioritario a la preventa si el show se confirma oficialmente." },
+  { n: "03", title: "Obtené tu Priority Pass",     desc: "Tu DemandPass Priority Pass te da acceso prioritario a la preventa si el show se confirma oficialmente." },
 ];
 
 const BENEFICIOS = [
   { Icon: Search,      title: "Descubrí antes",       desc: "Accedé a campañas antes de que el show se anuncie públicamente." },
-  { Icon: ShieldCheck, title: "Demanda verificada",   desc: "Sin bots ni cuentas falsas. Cada apoyo es real y verificado." },
-  { Icon: Ticket,      title: "Prioridad de acceso",  desc: "Tu token te da ventana de preventa antes que el público general." },
+  { Icon: ShieldCheck, title: "Demanda verificada",   desc: "Apoyos verificados con controles anti-fraude. Sin cuentas falsas ni bots." },
+  { Icon: Ticket,      title: "Prioridad de acceso",  desc: "Tu Priority Pass te da ventana de preventa antes que el público general." },
   { Icon: Star,        title: "Mejor posición",       desc: "Bronce, Plata y Oro acceden a sectores exclusivos cuando el show se confirma." },
   { Icon: Bell,        title: "Alertas a tiempo",     desc: "Te avisamos cuando se confirma un show que apoyaste." },
   { Icon: Globe,       title: "LATAM y más",          desc: "Argentina, México, Chile, Colombia y creciendo." },
@@ -41,13 +41,13 @@ const PLANES = [
     rol: "Fan activo — digital",
     items: [
       "Límites mucho más altos que Free",
-      "Más campañas para apoyar",
+      "Más campañas para seguir y apoyar",
       "Badge Bronce verificado",
       "Alertas mejoradas y personalizadas",
-      "Acceso a sectores exclusivos Bronce+ cuando el show se confirma",
-      "Cupos liberados (detrás de Oro y Plata)",
+      "Mayor participación en Fan Demand",
+      "Sin beneficios físicos por membresía",
     ],
-    nota: "Sin beneficios físicos por membresía. El acceso a sectores y cupos depende de disponibilidad.",
+    nota: "Plan 100% digital. Los beneficios físicos están disponibles desde Plata.",
     highlight: false, cta: "Empezar",
   },
   {
@@ -55,14 +55,14 @@ const PLANES = [
     rol: "Fan frecuente — beneficios reales",
     items: [
       "Todo Bronce con límites más altos",
-      "Descuentos en entradas y merch*",
-      "Fast-lane en eventos participantes*",
-      "Fanzone y upgrades/sorteos*",
+      "Descuentos en entradas y merch (eventos participantes)",
+      "Fast-lane en eventos participantes",
+      "Fanzone y upgrades/sorteos (sujeto a disponibilidad)",
       "Mejor posición en cupos liberados",
       "Acceso anticipado a ciertas campañas",
       "Beneficios en eventos participantes",
     ],
-    nota: "*En eventos y campañas participantes y/o hasta agotar stock.",
+    nota: "En eventos y campañas participantes, sujeto a disponibilidad, stock y acuerdo con productora o artista.",
     highlight: true, cta: "Empezar",
   },
   {
@@ -71,12 +71,12 @@ const PLANES = [
     items: [
       "Todo Plata con los mejores límites",
       "Máxima prioridad secundaria (tras reservantes)",
-      "Fast-lane y Fanzone prioritarios*",
-      "Mejores upgrades y sorteos*",
+      "Fast-lane y fanzone prioritarios (eventos participantes)",
+      "Mejores upgrades y sorteos (sujeto a disponibilidad)",
       "Soporte prioritario",
       "Acceso a funciones beta",
     ],
-    nota: "*En eventos y campañas participantes y/o hasta agotar stock.",
+    nota: "En eventos y campañas participantes, sujeto a disponibilidad, stock y acuerdo con productora o artista.",
     highlight: false, cta: "Empezar",
   },
 ];

@@ -7,7 +7,7 @@ const RAMAS = [
     tag: "Para fans",
     title: "Apoyá antes\nque se confirme.",
     desc: "Expresá demanda real, obtené prioridad de acceso a la preventa y seguí a tus artistas favoritos con datos verificados.",
-    items: ["Campañas activas en LATAM", "Token de acceso prioritario", "Planes Free, Bronce, Plata y Oro"],
+    items: ["Campañas activas en LATAM", "Priority Pass", "Planes Free, Bronce, Plata y Oro"],
     cta: "Ver campañas",
     href: "/campaigns",
     color: "#A31645",

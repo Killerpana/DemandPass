@@ -27,9 +27,9 @@ const PLANES = [
       "Perfil verificado y página pública",
       "Dashboard básico (señales por ciudad)",
       "Reserva solo tras umbral + validación DemandPass",
-      "1 crédito/mes incluido (rollover máx. 2)",
+      "1 campaña incluida/mes (rollover máx. 2)",
     ],
-    nota: "Ideal para validar si existe demanda antes de comprometer producción.",
+    nota: "1 campaña incluida/mes. Rollover = los créditos no usados acumulan hasta el máximo indicado.",
     highlight: false,
   },
   {
@@ -43,7 +43,7 @@ const PLANES = [
       "Demand Score + comparación de ciudades",
       "Testeo de precio y exportables",
       "Tour básico (planificación multi-ciudad)",
-      "3 créditos/mes incluidos (rollover máx. 5)",
+      "3 campañas incluidas/mes (rollover máx. 5)",
     ],
     nota: null,
     highlight: true,
@@ -55,11 +55,11 @@ const PLANES = [
     rol: "Artista profesional o manager que planifica mini-giras",
     items: [
       "8 campañas exploratorias o hasta 3 con reserva",
-      "Demand Map avanzado + benchmark pricing",
-      "Tour mode completo multi-ciudad",
+      "Demand Map avanzado + benchmark de precios",
+      "Modo tour multi-ciudad",
       "Gestión de venue, merch y pauta digital",
       "Soporte prioritario y revisión rápida",
-      "8 créditos/mes incluidos (rollover máx. 12)",
+      "8 campañas incluidas/mes (rollover máx. 12)",
     ],
     nota: null,
     highlight: false,
@@ -92,7 +92,7 @@ export default function ArtistasPage() {
             Para artistas independientes
           </div>
           <h1 className="font-[family-name:var(--font-display)] text-[clamp(42px,7vw,88px)] font-black leading-[0.92] uppercase mb-6">
-            TUS FANS<br /><span style={{ color: "var(--color-burg3)" }}>SON DATOS.</span><br />USÁLOS.
+            CONVERTÍ TUS FANS<br /><span style={{ color: "var(--color-burg3)" }}>EN DEMANDA REAL.</span>
           </h1>
           <p className="text-[17px] leading-[1.65] max-w-[540px] mb-10" style={{ color: "var(--color-txt2)" }}>
             Primero medís demanda por ciudad y precio. Si superás el umbral, DemandPass habilita la reserva condicional. Tu show se confirma con datos, no con intuición.
@@ -129,7 +129,7 @@ export default function ArtistasPage() {
               { n: "→", title: "", desc: "" },
               { n: "3", title: "Validación DemandPass", desc: "Artista + ciudad + venue + riesgo" },
               { n: "→", title: "", desc: "" },
-              { n: "4", title: "Reserva condicional",   desc: "Token + campaña oficial + waitlist" },
+              { n: "4", title: "Reserva condicional",   desc: "Priority Pass + campaña oficial + waitlist" },
             ].map((s, i) => s.n === "→" ? (
               <div key={i} className="hidden md:block text-2xl" style={{ color: "var(--color-burg3)" }}>→</div>
             ) : (

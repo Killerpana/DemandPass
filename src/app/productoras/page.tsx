@@ -13,7 +13,7 @@ const FEATURES = [
   { Icon: Route,      title: "Tour Expansion Intelligence", desc: "Evaluá expansión a ciudades del interior o nuevos países con datos verificados." },
   { Icon: LineChart,  title: "Price Intelligence",          desc: "Curva de precio óptima basada en lo que los fans están dispuestos a pagar." },
   { Icon: Zap,        title: "Fan Signals",                 desc: "Ciudad, precio, tipo de entrada, beneficios, disposición a viajar — agregado." },
-  { Icon: Ticket,     title: "Priority Access",             desc: "Tokens verificados para preventa — integración con ticketera oficial." },
+  { Icon: Ticket,     title: "Priority Access",             desc: "Priority Passs verificados para preventa — integración con ticketera oficial." },
 ];
 
 const PLANES = [
@@ -27,7 +27,7 @@ const PLANES = [
       "Dashboard básico",
       "Señales de demanda por ciudad",
       "Sensibilidad de precio y beneficios",
-      "2 créditos/mes incluidos (rollover máx. 3)",
+      "2 campañas incluidas/mes (rollover máx. 3)",
       "Reporte estándar + soporte estándar",
     ],
     cta: "Consultar", highlight: false,
@@ -43,7 +43,7 @@ const PLANES = [
       "Price Intelligence + Tour Expansion",
       "Encuestas custom + Fan Signals avanzado",
       "Análisis post-campaña + descarga de reportes y datos",
-      "6 créditos/mes incluidos (rollover máx. 9)",
+      "6 campañas incluidas/mes (rollover máx. 9)",
       "Soporte prioritario",
     ],
     cta: "Hablar con ventas", highlight: true,
