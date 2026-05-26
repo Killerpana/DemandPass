@@ -52,44 +52,33 @@ export function Hero() {
               Los <strong className="text-[var(--color-txt)]">fans</strong> expresan demanda real.
               Los <strong className="text-[var(--color-txt)]">artistas</strong> entienden su mercado.
               Las <strong className="text-[var(--color-txt)]">productoras</strong> deciden con datos —{" "}
-              <strong className="text-[var(--color-txt)]">antes de gastar un peso en producción</strong>.
+              <strong className="text-[var(--color-txt)]">cuando la decisión todavía es tuya</strong>.
             </p>
 
-            {/* Disclaimer */}
-            <div className="inline-flex items-start gap-2.5 px-4 py-2.5 rounded-xl mb-8"
-              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <span className="text-[11px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.45)" }}>
-                <strong style={{ color: "rgba(255,255,255,0.65)" }}>DemandPass no vende entradas.</strong>{" "}
-                Si el show se confirma, tu apoyo puede darte prioridad de acceso según campaña, membresía y disponibilidad.
-              </span>
-            </div>
-
-            <div className="flex gap-3 flex-wrap mb-14">
-              <Link
-                href="/campaigns"
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-md text-[14px] font-bold uppercase tracking-[0.06em] text-white transition-transform hover:-translate-y-0.5"
-                style={{
-                  background: "var(--color-burg3)",
-                  boxShadow: "0 6px 18px rgba(196,38,78,0.32), inset 0 1px 0 rgba(255,255,255,0.18)",
-                  fontFamily: "var(--font-sans)",
-                }}
-              >
-                Ver campañas activas <span aria-hidden>→</span>
-              </Link>
-              <Link
-                href="/productoras"
-                className="inline-flex items-center px-6 py-4 rounded-md text-[14px] font-bold uppercase tracking-[0.06em] border text-[var(--color-txt)] hover:bg-white/[0.02]"
-                style={{ borderColor: "var(--color-border2)" }}
-              >
-                Soy productora
-              </Link>
-              <Link
-                href="/artistas"
-                className="inline-flex items-center px-6 py-4 rounded-md text-[14px] font-bold uppercase tracking-[0.06em] border text-[var(--color-txt)] hover:bg-white/[0.02]"
-                style={{ borderColor: "var(--color-border2)", fontFamily: "var(--font-sans)" }}
-              >
-                Soy artista
-              </Link>
+            {/* CTA principal */}
+            <div className="flex flex-col gap-5 mb-14">
+              <div className="flex items-center gap-4 flex-wrap">
+                <Link
+                  href="/fan/campaigns"
+                  className="inline-flex items-center gap-2.5 px-7 py-4 rounded-md text-[15px] font-bold uppercase tracking-[0.06em] text-white transition-transform hover:-translate-y-0.5"
+                  style={{
+                    background: "var(--color-burg3)",
+                    boxShadow: "0 8px 24px rgba(196,38,78,0.38), inset 0 1px 0 rgba(255,255,255,0.18)",
+                    fontFamily: "var(--font-display)",
+                  }}
+                >
+                  Ver campañas activas <span aria-hidden>→</span>
+                </Link>
+                <Link href="/signin"
+                  className="inline-flex items-center px-7 py-4 rounded-md text-[15px] font-bold uppercase tracking-[0.06em] transition-colors hover:bg-white/5"
+                  style={{ border: "1px solid var(--color-border2)", color: "var(--color-txt)", fontFamily: "var(--font-display)" }}>
+                  Empezar gratis
+                </Link>
+              </div>
+              <p className="text-[11px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                <strong style={{ color: "rgba(255,255,255,0.5)" }}>No vendemos entradas.</strong>{" "}
+                Si el show se confirma, tu apoyo puede darte prioridad de acceso según campaña y disponibilidad.
+              </p>
             </div>
 
             {/* Trust strip */}
