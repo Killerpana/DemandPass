@@ -75,10 +75,7 @@ export function Hero() {
                   Empezar gratis
                 </Link>
               </div>
-              <p className="text-[11px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.35)" }}>
-                <strong style={{ color: "rgba(255,255,255,0.5)" }}>No vendemos entradas.</strong>{" "}
-                Si el show se confirma, tu apoyo puede darte prioridad de acceso según campaña y disponibilidad.
-              </p>
+
             </div>
 
             {/* Trust strip */}
