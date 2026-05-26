@@ -39,6 +39,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
+  const [inicioOpen, setInicioOpen] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +52,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  useEffect(() => { setMenuOpen(false); setDropOpen(false); setUserOpen(false); }, [path]);
+  useEffect(() => { setMenuOpen(false); setDropOpen(false); setUserOpen(false); setInicioOpen(false); }, [path]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -179,14 +180,44 @@ export function Navbar() {
         style={{ background: "rgba(8,8,13,0.98)", backdropFilter: "blur(20px)", opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "all" : "none", transform: menuOpen ? "translateY(0)" : "translateY(-8px)" }}
         aria-hidden={!menuOpen}>
         <div className="flex flex-col px-6 pt-4 gap-0">
-          {[...BRANCH_LINKS, ...INICIO_LINKS].map((l, i) => (
+          {/* Branch links */}
+          {BRANCH_LINKS.map((l, i) => (
             <Link key={l.href} href={l.href} onClick={closeMenu}
               className="py-4 border-b flex items-center justify-between"
-              style={{ ...NAV_STYLE, fontSize: "20px", borderColor: "var(--color-border)", color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)", transitionDelay: menuOpen ? `${i * 35}ms` : "0ms" }}>
+              style={{ ...NAV_STYLE, fontSize: "20px", borderColor: "var(--color-border)", color: isActive(l.href) ? "var(--color-burg3)" : "var(--color-txt)" }}>
               {l.label}
               <span style={{ color: "var(--color-burg3)", fontFamily: "monospace", fontSize: "14px" }}>→</span>
             </Link>
           ))}
+
+          {/* Inicio acordeón */}
+          <button type="button" onClick={() => setInicioOpen(v => !v)}
+            className="py-4 border-b flex items-center justify-between w-full"
+            style={{ ...NAV_STYLE, fontSize: "20px", borderColor: "var(--color-border)", color: inicioOpen ? "var(--color-burg3)" : "var(--color-txt)" }}>
+            Inicio
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"
+              style={{ transition: "transform 250ms", transform: inicioOpen ? "rotate(180deg)" : "none" }}>
+              <path d="M1 1.5L7 8.5L13 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
+          {/* Sub-ítems de Inicio */}
+          <div style={{
+            overflow: "hidden",
+            maxHeight: inicioOpen ? "200px" : "0px",
+            transition: "max-height 280ms ease",
+          }}>
+            {INICIO_LINKS.map(l => (
+              <Link key={l.href} href={l.href} onClick={closeMenu}
+                className="flex items-center gap-3 py-3 pl-6 border-b"
+                style={{ borderColor: "var(--color-border)", color: "var(--color-txt2)" }}>
+                <span className="w-1 h-1 rounded-full shrink-0" style={{ background: "var(--color-burg3)" }} />
+                <span style={{ ...NAV_STYLE, fontSize: "15px" }}>{l.label}</span>
+                <span className="ml-auto text-[11px]" style={{ color: "var(--color-txt3)" }}>{l.desc}</span>
+              </Link>
+            ))}
+          </div>
+
           <div className="flex flex-col gap-3 mt-8">
             <Link href="/signin" onClick={closeMenu}
               className="w-full py-3.5 text-center rounded-md text-white"
