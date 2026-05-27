@@ -157,7 +157,7 @@ export function ArtistDashboard() {
             <div className="h-full rounded-full transition-all duration-1000"
               style={{ width: `${pct}%`, background: "linear-gradient(90deg, #A31645, #E43A66)" }} />
           </div>
-          <div className="flex justify-between text-[12px]" style={{ color: "var(--color-txt3)" }}>
+          <div className="flex flex-wrap justify-between gap-x-2 text-[12px]" style={{ color: "var(--color-txt3)" }}>
             <span>{pct}% del objetivo</span>
             <span>{(CAMPAIGN.goal - CAMPAIGN.apoyos).toLocaleString()} apoyos para confirmar</span>
           </div>

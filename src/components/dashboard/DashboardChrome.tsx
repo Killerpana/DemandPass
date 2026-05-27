@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 // src/components/dashboard/DashboardChrome.tsx
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -21,9 +22,46 @@ const NAV_ITEMS = [
 
 export function DashboardSidebar({ active = "overview" }: { active?: string }) {
   const path = usePathname();
+  const [sideOpen, setSideOpen] = React.useState(false);
   return (
+    <>
+      {/* Mobile sidebar header */}
+      <div className="md:hidden flex items-center justify-between px-4 py-3 border-b"
+        style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }}>
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-black"
+            style={{ background: "var(--color-burg3)", color: "white", fontFamily: "var(--font-display)" }}>DF</div>
+          <span className="text-[13px] font-semibold">DF Entertainment</span>
+        </div>
+        <button onClick={() => setSideOpen(v => !v)}
+          className="w-8 h-8 flex flex-col justify-center items-center gap-1.5 rounded-lg"
+          style={{ background: sideOpen ? "var(--color-surface2)" : "transparent" }}>
+          <span className="block w-4 h-[1.5px] rounded-full" style={{ background: "var(--color-txt)", transform: sideOpen ? "translateY(5px) rotate(45deg)" : "none", transition: "all 200ms" }} />
+          <span className="block w-4 h-[1.5px] rounded-full" style={{ background: "var(--color-txt)", opacity: sideOpen ? 0 : 1, transition: "all 200ms" }} />
+          <span className="block w-4 h-[1.5px] rounded-full" style={{ background: "var(--color-txt)", transform: sideOpen ? "translateY(-5px) rotate(-45deg)" : "none", transition: "all 200ms" }} />
+        </button>
+      </div>
+      {sideOpen && (
+        <div className="md:hidden fixed inset-0 z-[200] flex" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setSideOpen(false)}>
+          <div className="w-[260px] h-full overflow-y-auto flex flex-col py-4" style={{ background: "var(--color-surface)" }} onClick={e => e.stopPropagation()}>
+            {NAV_ITEMS.map(it => {
+              const sel = it.href === "/dashboard" ? path === "/dashboard" : (it.href === "/dashboard/overview" ? path === "/dashboard/overview" : path.startsWith(it.href));
+              const Icon = it.icon;
+              return (
+                <Link key={it.id} href={it.href} onClick={() => setSideOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 transition-colors"
+                  style={{ color: sel ? "var(--color-txt)" : "var(--color-txt3)", background: sel ? "rgba(163,22,69,0.1)" : "transparent", borderLeft: sel ? "2px solid var(--color-burg3)" : "2px solid transparent" }}>
+                  <Icon size={16} strokeWidth={sel ? 2.2 : 1.8} />
+                  <span className="text-[14px] font-semibold">{it.l}</span>
+                  {it.n && <span className="ml-auto text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center" style={{ background: "var(--color-burg3)", color: "white" }}>{it.n}</span>}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     <aside
-      className="hidden md:flex w-[220px] shrink-0 flex-col py-5 px-3"
+      className="sidebar-desktop hidden md:flex md:w-[220px] shrink-0 flex-col py-5 px-3"
       style={{
         background: "var(--color-surface)",
         borderRight: "1px solid var(--color-border)",
@@ -90,6 +128,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
         </div>
       </div>
     </aside>
+    </>
   );
 }
 
@@ -97,7 +136,7 @@ export function DashboardSubHeader() {
   const [env, setEnv] = useState<"prod" | "sand">("prod");
   return (
     <div
-      className="h-12 px-3 md:px-6 flex items-center gap-2 md:gap-4 border-b overflow-x-auto"
+      className="h-12 px-3 md:px-6 flex items-center gap-2 md:gap-4 border-b overflow-x-hidden"
       style={{ background: "var(--color-surface)", borderColor: "var(--color-border)" }}
     >
       <div className="flex gap-1 p-0.5 rounded-lg" style={{ background: "var(--color-surface2)" }}>
@@ -128,11 +167,11 @@ export function DashboardSubHeader() {
       <div className="ml-auto flex items-center gap-2">
         <button
           type="button"
-          className="px-4 py-1.5 rounded-lg text-[12px] font-bold uppercase tracking-[0.06em] flex items-center gap-1.5 text-white transition-transform hover:-translate-y-0.5"
+          className="px-3 md:px-4 py-1.5 rounded-lg text-[12px] font-bold uppercase tracking-[0.06em] flex items-center gap-1.5 text-white transition-transform hover:-translate-y-0.5"
           style={{ background: "var(--color-burg3)", boxShadow: "0 4px 12px rgba(196,38,78,0.3)" }}
         >
           <Plus size={13} />
-          Nueva campaña
+          <span className="hidden sm:inline">Nueva campaña</span>
         </button>
       </div>
     </div>

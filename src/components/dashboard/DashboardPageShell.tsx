@@ -12,9 +12,9 @@ type Props = {
 export function DashboardPageShell({ title, breadcrumb, active, children }: Props) {
   const path = usePathname();
   return (
-    <div className="flex" style={{ background: "var(--color-bg)", minHeight: "calc(100vh - 64px)" }}>
+    <div className="flex flex-col md:flex-row" style={{ background: "var(--color-bg)", minHeight: "calc(100vh - 64px)" }}>
       <DashboardSidebar active={active} />
-      <div className="flex-1 min-w-0 flex flex-col">
+      <div className="flex-1 min-w-0 flex flex-col w-full">
         <DashboardSubHeader />
         <main className="flex-1 p-4 md:p-7 overflow-x-hidden">
         <div key={path} className="animate-fadein">

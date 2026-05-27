@@ -28,10 +28,10 @@ export function FanShell({ children }: { children: React.ReactNode }) {
     path === href || path.startsWith(href + "/");
 
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--color-bg)" }}>
+    <div className="flex flex-col md:flex-row min-h-screen" style={{ background: "var(--color-bg)" }}>
 
       {/* Sidebar */}
-      <aside className="sidebar-desktop hidden md:flex w-[220px] shrink-0 flex-col border-r"
+      <aside className="sidebar-desktop hidden md:flex md:w-[220px] shrink-0 flex-col border-r"
         style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}>
 
         {/* Logo + usuario */}

@@ -36,8 +36,8 @@ export function ArtistShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--color-bg)" }}>
-      <aside className="sidebar-desktop hidden md:flex w-[220px] shrink-0 flex-col border-r"
+    <div className="flex flex-col md:flex-row min-h-screen" style={{ background: "var(--color-bg)" }}>
+      <aside className="sidebar-desktop hidden md:flex md:w-[220px] shrink-0 flex-col border-r"
         style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}>
 
         {/* Logo + artista */}
@@ -127,7 +127,7 @@ export function ArtistShell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       )}
-      <main className="flex-1 overflow-x-hidden"><div key={path} className="animate-fadein">{children}</div></main>
+      <main className="flex-1 min-w-0 overflow-x-hidden"><div key={path} className="animate-fadein">{children}</div></main>
     </div>
   );
 }

@@ -10,7 +10,7 @@ import { RecentFans } from "@/components/dashboard/RecentFans";
 export default function DashboardPage() {
   return (
     <div
-      className="flex"
+      className="flex flex-col md:flex-row"
       style={{ background: "var(--color-bg)", minHeight: "calc(100vh - 64px)" }}
     >
       <DashboardSidebar active="campaigns" />
