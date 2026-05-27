@@ -3,12 +3,12 @@ import { CheckCircle2, Clock, XCircle } from "lucide-react";
 
 const INTEGRATIONS = [
   { name: "Ticketek",         type: "Ticketera",    status: "connected",  desc: "Export de lista blanca + tracking de conversión" },
-  { name: "AllAccess",        type: "Ticketera",    status: "connected",  desc: "Integración API · tokens firmados" },
+  { name: "AllAccess",        type: "Ticketera",    status: "connected",  desc: "Integración API · Priority Pass firmados" },
   { name: "Tu Entrada",       type: "Ticketera",    status: "pending",    desc: "En configuración — estimado: 2 semanas" },
   { name: "Salesforce CRM",   type: "CRM",          status: "connected",  desc: "Sync de leads verificados" },
   { name: "Mailchimp",        type: "Email",        status: "connected",  desc: "Listas segmentadas por nivel de fan" },
   { name: "Spotify for Artists", type: "Streaming", status: "pending",    desc: "Correlación demand vs streams · en beta" },
-  { name: "Google Analytics", type: "Analytics",    status: "connected",  desc: "Tracking de conversión post-token" },
+  { name: "Google Analytics", type: "Analytics",    status: "connected",  desc: "Tracking de conversión post-Priority Pass" },
   { name: "Meta Ads",         type: "Marketing",    status: "unavailable", desc: "Disponible en Plan Enterprise" },
 ];
 

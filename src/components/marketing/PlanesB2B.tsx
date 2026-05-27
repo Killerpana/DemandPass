@@ -16,7 +16,7 @@ const RAMAS = [
     desc: "Expresá demanda real por tus artistas favoritos. Si el show se confirma, obtenés prioridad de acceso a la preventa antes que el público general.",
     puntos: [
       "Apoyá campañas oficiales y Fan Demand",
-      "Token de acceso prioritario a preventa",
+      "Priority Pass si el show se confirma",
       "Mejor posición en sectores exclusivos",
       "Alertas cuando tu artista está en campaña",
       "Planes Free, Bronce, Plata y Oro",

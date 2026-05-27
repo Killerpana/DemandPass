@@ -330,7 +330,7 @@ export function SupportWizardV2({ campaign }: { campaign: Campaign }) {
               className="m-5 mt-0 rounded-md p-4 text-[12px] leading-[1.6] text-[var(--color-txt2)]"
               style={{ background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.22)" }}
             >
-              Estás registrando una <strong className="text-[var(--color-txt)]">reserva condicional simulada</strong>. Si el show se confirma, recibís acceso prioritario a la preventa oficial. Si no se confirma, el monto se devuelve íntegro.
+              Estás registrando una <strong className="text-[var(--color-txt)]">reserva condicional simulada</strong>. Si el show se confirma, recibís tu Priority Pass para acceder a la preventa antes que el público general. Si no se confirma, el monto se devuelve íntegro.
             </div>
           </div>
         )}

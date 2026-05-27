@@ -9,10 +9,10 @@ export default function FanAlertasPage() {
       <div className="flex flex-col gap-3">
         {[
           { text: "Lenny Kravitz alcanzó el 67% del objetivo", time: "hace 2 hs",   dot: "#10b981" },
-          { text: "Tu token para K-Pop Night fue generado",    time: "hace 5 hs",   dot: "#A31645" },
+          { text: "Tu Priority Pass para K-Pop Night está listo",    time: "hace 5 hs",   dot: "#A31645" },
           { text: "+580 apoyos esta semana en K-Pop Night",    time: "ayer",        dot: "#3b82f6" },
           { text: "Subiste a Fan Plata — mejor posición",      time: "hace 3 días", dot: "#f59e0b" },
-          { text: "Bad Bunny confirmó fecha — token activo",   time: "hace 5 días", dot: "#10b981" },
+          { text: "Bad Bunny confirmó fecha — Priority Pass activo",   time: "hace 5 días", dot: "#10b981" },
         ].map((a, i) => (
           <div key={i} className="flex items-center gap-4 p-4 rounded-xl"
             style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}>

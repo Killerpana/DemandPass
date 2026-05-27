@@ -16,7 +16,13 @@ export function Footer() {
             <p className="text-[12px] text-[var(--txt3)] leading-[1.7] mt-2">No vendemos entradas.<br/>Convertimos demanda en datos.</p>
           </div>
           {[
-            { title: "Plataforma", links: [{ label: "Campañas activas", href: "/campaigns" }, { label: "Cómo funciona", href: "/#como-funciona" }, { label: "Dashboard B2B", href: "/dashboard" }] },
+            { title: "Plataforma", links: [
+              { label: "Para fans", href: "/fans" },
+              { label: "Para artistas", href: "/artistas" },
+              { label: "Para productoras", href: "/productoras" },
+              { label: "Campañas activas", href: "/fan/campaigns" },
+              { label: "Cómo funciona", href: "/#como-funciona" },
+            ]},
             { title: "Legal", links: [{ label: "Términos de uso", href: "/terms" }, { label: "Privacidad", href: "/privacy" }, { label: "Condiciones de reserva", href: "/conditions" }] },
             { title: "Contacto", links: [{ label: "hola@demandpass.app", href: "mailto:hola@demandpass.app" }, { label: "partners@demandpass.app", href: "mailto:partners@demandpass.app" }] },
           ].map(({ title, links }) => (
