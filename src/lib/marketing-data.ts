@@ -13,18 +13,18 @@ export const heroCities = [
 export const marqueeItems = [
   "127 SHOWS MEDIDOS",
   "4.2M APOYOS VERIFICADOS",
-  "DF ENTERTAINMENT",
-  "MOVE CONCERTS",
-  "PEP ROSSO",
-  "INDUSTRY 360",
-  "TICKETEK INTEGRADO",
-  "ALL ACCESS",
-  "POPART MÚSICA",
+  "ANDES LIVE",
+  "MERIDIANO PRODUCCIONES",
+  "COSTA SUR MUSIC",
+  "ALTAVOZ GROUP",
+  "INTEGRACIÓN PREVISTA · TICKETERAS",
+  "NORTE EVENTOS",
+  "PULSO LIVE",
   "83% FORECAST ACCURACY",
 ] as const;
 
 export const trustStats = [
-  { v: "127",  n: 127,      suffix: "",  l: "Shows medidos",       d: "desde 2024" },
+  { v: "127",  n: 127,      suffix: "",  l: "Shows medidos",       d: "en LATAM" },
   { v: "4.2M", n: 4.2,      suffix: "M", l: "Apoyos verificados",  d: "sin bots" },
   { v: "83%",  n: 83,       suffix: "%", l: "Forecast accuracy",   d: "vs venta real" },
 ] as const;
@@ -38,23 +38,23 @@ export const howItWorksSteps = [
 export const trustPoints = [
   { a: "No es una entrada.",                             b: "Es un registro de interés verificado." },
   { a: "El show no está confirmado.",                    b: "La reserva es condicional y reembolsable." },
-  { a: "La venta final ocurre en la ticketera oficial.", b: "Integración con Ticketek, AllAccess, Tu Entrada." },
+  { a: "La venta final ocurre en la ticketera oficial.", b: "Integración prevista con Ticketek, All Access y Tu Entrada." },
 ] as const;
 
 export const b2bFeatures = [
   { t: "Forecast de tickets a 48 hs", d: "83% accuracy vs venta real" },
   { t: "Curva de precio óptima",      d: "Maximizá ingreso y sell-through" },
   { t: "Lista de fans verificados",   d: "Acceso prioritario gestionado" },
-  { t: "Integración con ticketeras",  d: "Ticketek, AllAccess, Tu Entrada" },
+  { t: "Integración con ticketeras",  d: "Prevista: Ticketek, All Access, Tu Entrada" },
 ] as const;
 
 export const testimonials = [
-  { logo: "DF", co: "DF Entertainment",    name: "Romina B.",  role: "Booking & Marketing",     q: "Cambió cómo decidimos qué shows producir. Antes era olfato y un Excel con números de Spotify. Ahora vemos demanda real por ciudad y por precio, en vivo.",                                                                         kpi: "+23% sell-through",        kpiL: "6 shows medidos · 2025"  },
-  { logo: "MC", co: "Move Concerts",       name: "Esteban G.", role: "Country Manager AR",       q: "Para un artista internacional, justificar una segunda fecha en interior dejó de ser una conversación de fe. Tiramos data en la mesa y el promotor local accede.",                                                                     kpi: "+2 fechas interior",       kpiL: "Q4 2025"                 },
-  { logo: "IN", co: "Industry 360",        name: "Luciana A.", role: "Head of Strategy",         q: "La lista de fans verificados es oro. Esa preventa convierte 4x mejor que cualquier base de mail genérica. Y los fans se acuerdan que apostaron por el artista.",                                                                      kpi: "4× conversión preventa",   kpiL: "vs base general"         },
+  { logo: "AL", co: "Andes Live",            name: "Romina B.",  role: "Booking & Marketing",     q: "Cambió cómo decidimos qué shows producir. Antes era olfato y un Excel con números de Spotify. Ahora vemos demanda real por ciudad y por precio, en vivo.",                                                                         kpi: "+23% sell-through",        kpiL: "6 shows medidos · 2025"  },
+  { logo: "MP", co: "Meridiano Producciones", name: "Esteban G.", role: "Country Manager AR",       q: "Para un artista internacional, justificar una segunda fecha en interior dejó de ser una conversación de fe. Tiramos data en la mesa y el promotor local accede.",                                                                     kpi: "+2 fechas interior",       kpiL: "Q4 2025"                 },
+  { logo: "AG", co: "Altavoz Group",        name: "Luciana A.", role: "Head of Strategy",         q: "La lista de fans verificados es oro. Esa preventa convierte 4x mejor que cualquier base de mail genérica. Y los fans se acuerdan que apostaron por el artista.",                                                                      kpi: "4× conversión preventa",   kpiL: "vs base general"         },
   { logo: "VS", co: "Los Planetas del Sur", name: "Valentín S.", role: "Artista independiente",  q: "Siempre supe que tenía fans en Córdoba, pero no podía probarlo. Con DemandPass armé mi primera campaña exploratoria, llegué al umbral en 3 semanas y confirmé la fecha. El show se agotó en 48 horas.",                              kpi: "100% sold out",            kpiL: "1ra fecha confirmada"    },
   { logo: "ML", co: "Martina L.",          name: "Martina L.", role: "Fan Oro · Buenos Aires",   q: "Apoyé la campaña de mi artista favorito cuatro meses antes del anuncio. Cuando confirmaron el show, recibí mi Priority Pass y tuve acceso a preventa 48 horas antes. Nunca estuve tan adelante en una fila.",                               kpi: "48 hs antes",              kpiL: "que venta general"       },
-  { logo: "IN", co: "Industry 360",     name: "Luciana A.", role: "Head of Strategy",    q: "La lista de fans verificados es oro. Esa preventa convierte 4x mejor que cualquier base de mail genérica. Y los fans se acuerdan que apostaron por el artista.",        kpi: "4× conversión preventa",  kpiL: "vs base general" },
+  { logo: "AG", co: "Altavoz Group",     name: "Luciana A.", role: "Head of Strategy",    q: "La lista de fans verificados es oro. Esa preventa convierte 4x mejor que cualquier base de mail genérica. Y los fans se acuerdan que apostaron por el artista.",        kpi: "4× conversión preventa",  kpiL: "vs base general" },
 ] as const;
 
 export const faqItems = [

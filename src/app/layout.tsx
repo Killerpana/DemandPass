@@ -4,10 +4,29 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import { ViewTransitionProvider } from "@/components/ui/ViewTransition";
 
+export const viewport = {
+  themeColor: "#08080D",
+};
+
 export const metadata: Metadata = {
   title: { default: "DemandPass — Real Fans · Real Demand", template: "%s — DemandPass" },
   description: "DemandPass convierte el apoyo de fans en intención de compra verificable antes de confirmar un show.",
-  themeColor: "#08080D",
+  metadataBase: new URL("https://demand-pass.vercel.app"),
+  openGraph: {
+    title: "DemandPass — Real Fans · Real Demand",
+    description: "La capa de inteligencia previa al ticketing. Demanda verificada por ciudad, precio y tipo de entrada para eventos en vivo en LATAM.",
+    url: "https://demand-pass.vercel.app",
+    siteName: "DemandPass",
+    images: [{ url: "/brand/og.png", width: 1200, height: 630, alt: "DemandPass" }],
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DemandPass — Real Fans · Real Demand",
+    description: "La capa de inteligencia previa al ticketing para eventos en vivo en LATAM.",
+    images: ["/brand/og.png"],
+  },
   icons: {
     icon: [
       { url: "/brand/favicon.svg", type: "image/svg+xml" },

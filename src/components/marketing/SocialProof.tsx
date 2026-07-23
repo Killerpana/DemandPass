@@ -26,7 +26,7 @@ export function SocialProof() {
             </div>
             <h2 className="uppercase"
               style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 4vw, 52px)", lineHeight: 0.95, letterSpacing: "0.005em" }}>
-              Resultados reales.<br />
+              Así se ve el valor.<br />
               <span style={{ color: "var(--color-txt3)" }}>De los tres lados.</span>
             </h2>
           </div>

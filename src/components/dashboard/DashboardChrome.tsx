@@ -31,7 +31,7 @@ export function DashboardSidebar({ active = "overview" }: { active?: string }) {
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-black"
             style={{ background: "var(--color-burg3)", color: "white", fontFamily: "var(--font-display)" }}>DF</div>
-          <span className="text-[13px] font-semibold">DF Entertainment</span>
+          <span className="text-[13px] font-semibold">Andes Live</span>
         </div>
         <button onClick={() => setSideOpen(v => !v)}
           className="w-8 h-8 flex flex-col justify-center items-center gap-1.5 rounded-lg"

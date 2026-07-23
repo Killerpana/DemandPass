@@ -22,7 +22,7 @@ export default function DashboardPage() {
           <DashboardPageHeader
             title="Campañas activas"
             breadcrumbs={[
-              { label: "DF Entertainment" },
+              { label: "Andes Live" },
               { label: "Campañas" },
             ]}
             actions={

@@ -20,7 +20,7 @@ export function DashboardPageShell({ title, breadcrumb, active, children }: Prop
         <div key={path} className="animate-fadein">
           <DashboardPageHeader
             title={title}
-            breadcrumbs={[{ label: "DF Entertainment" }, { label: breadcrumb }]}
+            breadcrumbs={[{ label: "Andes Live" }, { label: breadcrumb }]}
           />
           {children}
         </div>

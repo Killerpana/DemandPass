@@ -24,7 +24,6 @@ export function Footer() {
               { label: "Cómo funciona", href: "/#como-funciona" },
             ]},
             { title: "Legal", links: [{ label: "Términos de uso", href: "/terms" }, { label: "Privacidad", href: "/privacy" }, { label: "Condiciones de reserva", href: "/conditions" }] },
-            { title: "Contacto", links: [{ label: "hola@demandpass.app", href: "mailto:hola@demandpass.app" }, { label: "partners@demandpass.app", href: "mailto:partners@demandpass.app" }] },
           ].map(({ title, links }) => (
             <div key={title}>
               <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[var(--txt3)] mb-3 font-[family-name:'Barlow_Condensed',sans-serif]">{title}</p>

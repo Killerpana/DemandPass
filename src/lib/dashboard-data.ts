@@ -3,8 +3,8 @@
 // In production these come from your backend — kept structured the same way.
 
 export const orgInfo = {
-  shortCode: "DF",
-  name: "DF Entertainment",
+  shortCode: "AL",
+  name: "Andes Live",
   plan: "PRO · AR",
 };
 

@@ -66,7 +66,7 @@ export function B2BPreview() {
 
             <div className="flex gap-3 flex-wrap">
               <Link
-                href="mailto:partners@demandpass.app"
+                href="/signin"
                 className="inline-flex items-center gap-2 px-6 py-4 rounded-md text-[14px] font-bold uppercase tracking-[0.06em] text-white"
                 style={{
                   background: "var(--color-burg3)",
@@ -113,7 +113,7 @@ function B2BDashPreview() {
           <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--color-surface3)" }} />
         </div>
         <div className="text-[10px] text-[var(--color-txt3)]" style={{ fontFamily: "var(--font-mono)" }}>
-          demandpass.app/dashboard/df-entertainment
+          demandpass.app/dashboard/andes-live
         </div>
         <Pill variant="live" pulse>Live</Pill>
       </div>
