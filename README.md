@@ -1,76 +1,33 @@
-# next-port v5 — Auth (`/signin`) + Página de artista (`/artists/[slug]`)
+# DemandPass
 
-Las 2 pantallas que faltaban del mockup. Cierran el set completo.
+**Real Fans · Real Demand** — la capa de inteligencia previa al ticketing.
 
-## 📦 Lo que incluye
+DemandPass permite a los fans expresar demanda verificada por conciertos (ciudad, precio, tipo de entrada, reserva condicional) y a las productoras decidir shows con datos antes de comprometer capital. No vende entradas: la venta final ocurre siempre en la ticketera oficial.
 
-### `/signin` — auth split-screen
-- Toggle **Fan / Productora** con descripción de cada uno
-- OAuth: **Google + Apple + Spotify** (Spotify solo para fans, marcado "Recomendado")
-- Email + password form, con campos extras para productora (nombre + país)
-- Toggle entre **"Crear cuenta"** y **"Ingresar"**
-- Panel visual a la derecha con caso de éxito (Lenny confirmado) + cards flotantes de campañas
-- Watermark gigante "DP" + grid background
+> **Estado: demo de inversión (Fase 0).** Todos los datos son simulados. Sin backend, sin pagos reales, sin login real. Las empresas y testimonios que aparecen son ficticios.
 
-### `/artists/[slug]` — página de artista
-Rutas generadas estáticamente: `/artists/lenny-kravitz`, `/artists/sza`, `/artists/bad-bunny`.
+## Demo
 
-- **Hero** con avatar 160×160 + initials, breadcrumb, nombre HUGE, géneros, CTAs (Seguir + Apoyar)
-- **Stat strip** (5 KPIs): Demanda LATAM, Países activos, Precio promedio, Probabilidad, Última visita
-- **Momentum chart** de 90 días con eventos anotados (Anuncio campaña, Spotify featured, Press release)
-- **"Sobre el tour"** — bio del artista
-- **Setlist probable** — 6 canciones con sparkline de frecuencia + Hit badge + duración + botón "Abrir en Spotify"
-- **Active campaign card** (sticky en la derecha) — link al detalle de la campaña
-- **Demand by country** — flags + cities + progress bars
-- **Related artists** — 4 artistas similares con género + estado
+**https://demand-pass.vercel.app** · Visión: [/vision](https://demand-pass.vercel.app/vision) ([EN](https://demand-pass.vercel.app/en/vision))
 
-## 🗂️ Archivos (6 nuevos)
+Recorrido sugerido: home → campaña → apoyar → Priority Pass → "Ver lo que ve la productora" → dashboard B2B.
 
-| Origen | Destino |
-|---|---|
-| `next-port-v5/src/lib/artists-data.ts` | `src/lib/artists-data.ts` |
-| `next-port-v5/src/components/marketing/AuthScreen.tsx` | `src/components/marketing/AuthScreen.tsx` |
-| `next-port-v5/src/app/signin/page.tsx` | `src/app/signin/page.tsx` |
-| `next-port-v5/src/components/marketing/ArtistDetail.tsx` | `src/components/marketing/ArtistDetail.tsx` |
-| `next-port-v5/src/components/marketing/ArtistMomentumChart.tsx` | `src/components/marketing/ArtistMomentumChart.tsx` |
-| `next-port-v5/src/app/artists/[slug]/page.tsx` | `src/app/artists/[slug]/page.tsx` |
+## Stack
 
-## ⚙️ Compatibilidad
+Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 (CSS-first, `@theme` en `globals.css`) · framer-motion · Lucide. Deploy automático en Vercel al pushear a `main`.
 
-- **`/signin` es nueva ruta** — la navbar ya linkea a `/signin` desde la primera vez (v1 landing)
-- **`/artists/[slug]` es nueva ruta** — todavía no hay link directo desde el resto de la app. Probala manualmente con `/artists/lenny-kravitz`. Después podemos:
-  - Linkear el nombre del artista en cada card de campaña → su página
-  - Agregar una página índice `/artists` con grid de todos
-- Los formularios todavía no autentican de verdad — son visuales por ahora. Cuando definas el backend (Supabase, Clerk, NextAuth, etc) los conectamos.
+## Estructura
 
-## 🚀 Aplicarlo
+- `src/app/` — rutas: landing pública, `/campaigns`, `/fan/*` (app del fan), `/dashboard/*` (productora), `/artistas/*` (artista), `/artists` (perfiles), `/vision`, legales
+- `src/components/` — `marketing/` (landing + pantallas), `dashboard/` (B2B), `ui/` (primitivas)
+- `src/lib/` — datos simulados y tipos
+- `public/brand/` — Brand Kit v1.0 (Saira Condensed · Inter · JetBrains Mono, Deep Ink `#08080D`, burgundy `#A31645`)
 
-```powershell
-cd $HOME\Downloads\demandpass\mi-repo
-git checkout main
-git pull origin main
-git checkout -b redesign/auth-artists
-Copy-Item -Path ..\next-port-v5\* -Destination . -Recurse -Force
-git add .
-git commit -m "feat(auth+artists): signin page + artist detail pages"
-git push origin redesign/auth-artists
+## Desarrollo
+
+```bash
+npm install
+npm run dev
 ```
 
-PR → Vercel ✅ → Merge.
-
-## 🧪 Cómo testear
-
-Después del deploy:
-1. **`/signin`** → toggle Fan/Productora, vas viendo cómo cambia el copy del título y los campos
-2. **`/artists/lenny-kravitz`** → ves toda la página con momentum chart, setlist con sparklines, campaign card sticky, related artists
-3. **`/artists/sza`** y **`/artists/bad-bunny`** también funcionan
-4. Click "Apoyar" desde el artist page → te lleva a la campaña activa de ese artista
-
-## ⏭️ Próximos pasos (cuando estén las 6 pantallas en producción)
-
-Ahí pasamos a la fase de **iteración + features**:
-1. Conectar auth real (Supabase / NextAuth)
-2. Agregar **listado de artistas `/artists`** (índice grid)
-3. Hacer que cada artist name en campañas linkee a su página
-4. Mejoras según feedback de productoras / fans reales
-5. Mobile polish del dashboard
+Antes de pushear: `npx tsc --noEmit && npm run build`. Todo push a `main` deploya a producción.

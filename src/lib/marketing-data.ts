@@ -26,7 +26,7 @@ export const marqueeItems = [
 export const trustStats = [
   { v: "127",  n: 127,      suffix: "",  l: "Shows medidos",       d: "en LATAM" },
   { v: "4.2M", n: 4.2,      suffix: "M", l: "Apoyos verificados",  d: "sin bots" },
-  { v: "83%",  n: 83,       suffix: "%", l: "Forecast accuracy",   d: "vs venta real" },
+  { v: "83%",  n: 83,       suffix: "%", l: "Precisión de forecast", d: "vs venta real" },
 ] as const;
 
 export const howItWorksSteps = [
@@ -42,8 +42,8 @@ export const trustPoints = [
 ] as const;
 
 export const b2bFeatures = [
-  { t: "Forecast de tickets a 48 hs", d: "83% accuracy vs venta real" },
-  { t: "Curva de precio óptima",      d: "Maximizá ingreso y sell-through" },
+  { t: "Forecast de tickets a 48 hs", d: "83% de precisión vs venta real" },
+  { t: "Curva de precio óptima",      d: "Maximizá ingreso y ocupación" },
   { t: "Lista de fans verificados",   d: "Acceso prioritario gestionado" },
   { t: "Integración con ticketeras",  d: "Prevista: Ticketek, All Access, Tu Entrada" },
 ] as const;

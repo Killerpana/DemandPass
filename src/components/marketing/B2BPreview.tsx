@@ -128,7 +128,7 @@ function B2BDashPreview() {
             { l: "Fans verificados", v: "82%",     d: "+4.2 pp", sd: [12, 14, 16, 19, 22, 24, 26, 28] },
             { l: "Precio aceptado",  v: "USD 74",  d: "+2.1",    sd: [60, 62, 64, 68, 70, 72, 73, 74] },
             { l: "Forecast 48hs",    v: "7.8K",    d: "+18%",    sd: [4, 5, 5, 6, 6, 7, 7, 8] },
-            { l: "Show probability", v: "91%",     d: "+6 pp",   color: "var(--color-emerald2)", sd: [70, 74, 80, 84, 86, 88, 90, 91] },
+            { l: "Prob. de show", v: "91%",     d: "+6 pp",   color: "var(--color-emerald2)", sd: [70, 74, 80, 84, 86, 88, 90, 91] },
           ] as const).map((k, i) => (
             <div
               key={k.l}
