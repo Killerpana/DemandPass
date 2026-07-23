@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Privacidad — DemandPass" };
+export const metadata: Metadata = { title: "Privacidad" };
 
 export default function Page() {
   return (

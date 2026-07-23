@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Condiciones de reserva — DemandPass" };
+export const metadata: Metadata = { title: "Condiciones de reserva" };
 
 export default function Page() {
   return (
