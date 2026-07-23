@@ -26,7 +26,10 @@ export function AnimatedCounter({
   decimals = 0,
   className = "",
 }: AnimatedCounterProps) {
-  const [display, setDisplay] = useState("0");
+  // SSR y no-JS muestran el valor final — la animación arranca al entrar en viewport
+  const [display, setDisplay] = useState(() =>
+    decimals > 0 ? value.toFixed(decimals) : value.toLocaleString("es-AR")
+  );
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 

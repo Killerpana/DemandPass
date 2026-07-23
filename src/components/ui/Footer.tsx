@@ -26,7 +26,7 @@ export function Footer() {
             { title: "Legal", links: [{ label: "Términos de uso", href: "/terms" }, { label: "Privacidad", href: "/privacy" }, { label: "Condiciones de reserva", href: "/conditions" }] },
           ].map(({ title, links }) => (
             <div key={title}>
-              <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[var(--txt3)] mb-3 font-[family-name:'Barlow_Condensed',sans-serif]">{title}</p>
+              <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[var(--txt3)] mb-3 font-condensed">{title}</p>
               {links.map(({ label, href }) => (
                 <Link key={label} href={href} className="block text-[13px] text-[var(--txt2)] mb-2 hover:text-[var(--txt)] transition-colors">{label}</Link>
               ))}

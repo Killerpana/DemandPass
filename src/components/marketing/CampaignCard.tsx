@@ -1,5 +1,6 @@
 // src/components/marketing/CampaignCard.tsx
 import Link from "next/link";
+import Image from "next/image";
 import type { Campaign } from "@/lib/data";
 import { Pill } from "@/components/ui/Pill";
 import { Progress } from "@/components/ui/Progress";
@@ -70,10 +71,11 @@ export function CampaignCard({ c, hot }: { c: Campaign; hot?: boolean }) {
         {/* Imagen del tour (solo campañas oficiales con tourImg) */}
         {c.tourImg ? (
           <>
-            <img
+            <Image
               src={c.tourImg}
               alt={`${c.artist} — ${c.event}`}
-              className="absolute inset-0 w-full h-full"
+              fill
+              sizes="(max-width: 768px) 100vw, 400px"
               style={{ objectFit: "cover", objectPosition: "center top", opacity: 0.92 }}
             />
             {/* Overlay sutil para legibilidad de badges */}

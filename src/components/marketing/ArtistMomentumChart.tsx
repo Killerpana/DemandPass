@@ -59,7 +59,7 @@ export function ArtistMomentumChart({ target = 5420 }: { target?: number }) {
           <g key={e.x}>
             <line x1={x} x2={x} y1={pad} y2={H - pad} stroke={e.col} strokeWidth="1" strokeDasharray="3,3" opacity="0.5" />
             <circle cx={x} cy={y} r="4" fill={e.col} stroke="var(--color-bg)" strokeWidth="2" />
-            <text x={x} y={pad - 6} fontSize="9" fill={e.col} fontFamily="Barlow" fontWeight="700" textAnchor="middle">
+            <text x={x} y={pad - 6} fontSize="9" fill={e.col} fontFamily="var(--font-sans)" fontWeight="700" textAnchor="middle">
               {e.l}
             </text>
           </g>

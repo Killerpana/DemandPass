@@ -33,7 +33,10 @@ const WHY_NOW = [
 export default function VisionPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-20">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-txt3 mb-3">La visión</p>
+      <div className="flex items-center justify-between mb-3">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-txt3">La visión</p>
+        <Link href="/en/vision" className="font-mono text-xs uppercase tracking-[0.2em] text-txt3 hover:text-txt transition-colors">EN →</Link>
+      </div>
       <h1 className="font-condensed text-5xl md:text-7xl font-extrabold uppercase leading-[0.95] mb-8">
         La capa de inteligencia<br />previa al ticketing.
       </h1>

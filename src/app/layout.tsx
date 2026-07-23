@@ -44,7 +44,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#08080D" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Brand fonts: Saira Condensed (titulares) · JetBrains Mono (utility) · Inter (body) */}
         <link
           href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700;800;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
