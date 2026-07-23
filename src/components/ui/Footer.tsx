@@ -20,8 +20,8 @@ export function Footer() {
               { label: "Para fans", href: "/fans" },
               { label: "Para artistas", href: "/artistas" },
               { label: "Para productoras", href: "/productoras" },
-              { label: "Campañas activas", href: "/fan/campaigns" },
-              { label: "Cómo funciona", href: "/#como-funciona" },
+              { label: "Campañas activas", href: "/campaigns" },
+              { label: "Cómo funciona", href: "/#como-funciona" }, { label: "Visión", href: "/vision" },
             ]},
             { title: "Legal", links: [{ label: "Términos de uso", href: "/terms" }, { label: "Privacidad", href: "/privacy" }, { label: "Condiciones de reserva", href: "/conditions" }] },
           ].map(({ title, links }) => (

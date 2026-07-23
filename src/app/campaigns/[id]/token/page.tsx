@@ -261,6 +261,27 @@ export default async function TokenPage({
         >
           Explorar más campañas <span aria-hidden>→</span>
         </Link>
+
+        {/* Puente al lado B2B — golden path */}
+        <div
+          className="mt-8 rounded-md p-5 text-center"
+          style={{ border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.03)" }}
+        >
+          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-txt3)] mb-2">
+            El otro lado · Demo B2B
+          </div>
+          <p className="text-[13px] text-[var(--color-txt2)] leading-relaxed mb-4">
+            Tu apoyo acaba de convertirse en una señal. Mirá el dashboard donde la productora la ve en
+            tiempo real — y decide si el show sucede.
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-[13px] font-bold uppercase tracking-[0.06em] text-[var(--color-txt)] transition-colors hover:border-white/40"
+            style={{ border: "1px solid rgba(255,255,255,0.18)" }}
+          >
+            Ver lo que ve la productora <span aria-hidden>→</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

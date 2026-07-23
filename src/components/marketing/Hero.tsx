@@ -55,11 +55,18 @@ export function Hero() {
               <strong className="text-[var(--color-txt)]">cuando la decisión todavía es tuya</strong>.
             </p>
 
+            <Link
+              href="/vision"
+              className="inline-flex items-center gap-2 mb-10 font-mono text-[12px] uppercase tracking-[0.18em] text-[var(--color-txt3)] hover:text-[var(--color-txt)] transition-colors"
+            >
+              La capa de inteligencia previa al ticketing · Conocé la visión <span aria-hidden>→</span>
+            </Link>
+
             {/* CTA principal */}
             <div className="flex flex-col gap-5 mb-14">
               <div className="flex items-center gap-4 flex-wrap">
                 <Link
-                  href="/fan/campaigns"
+                  href="/campaigns"
                   className="inline-flex items-center gap-2.5 px-7 py-4 rounded-md text-[15px] font-bold uppercase tracking-[0.06em] text-white transition-transform hover:-translate-y-0.5"
                   style={{
                     background: "var(--color-burg3)",

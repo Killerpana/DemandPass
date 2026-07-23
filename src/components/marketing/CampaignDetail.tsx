@@ -2,6 +2,7 @@
 // Detail page composition — server component, premium dark hero.
 import Link from "next/link";
 import type { Campaign } from "@/lib/data";
+import { findArtist, slugify } from "@/lib/artists-data";
 import { Pill } from "@/components/ui/Pill";
 import { Progress } from "@/components/ui/Progress";
 import { LiveActivityFeed } from "./LiveActivityFeed";
@@ -10,6 +11,7 @@ export function CampaignDetail({ c }: { c: Campaign }) {
   const pct = Math.min(100, Math.round((c.current / c.goal) * 100));
   const remaining = Math.max(0, c.goal - c.current);
   const isHot = pct >= 70;
+  const artistPage = findArtist(slugify(c.artist));
 
   return (
     <>
@@ -71,6 +73,14 @@ export function CampaignDetail({ c }: { c: Campaign }) {
           <div className="text-[16px] text-[var(--color-txt)] opacity-90">
             {c.event} · {c.city}, {c.country}
           </div>
+          {artistPage && (
+            <Link
+              href={`/artists/${artistPage.slug}`}
+              className="inline-flex items-center gap-1.5 mt-3 font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--color-txt3)] hover:text-[var(--color-txt)] transition-colors"
+            >
+              Ver perfil del artista <span aria-hidden>→</span>
+            </Link>
+          )}
         </div>
       </section>
 

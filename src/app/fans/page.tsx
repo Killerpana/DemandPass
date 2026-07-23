@@ -107,7 +107,7 @@ export default function FansPage() {
             Expresá demanda real antes de que el show se confirme. Si llega al objetivo, obtenés acceso prioritario a la preventa oficial — antes que todos.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/fan/campaigns"
+            <Link href="/campaigns"
               className="px-7 py-3.5 rounded-md text-white font-[family-name:var(--font-display)] text-[15px] font-bold uppercase tracking-[0.05em] transition-transform hover:-translate-y-0.5"
               style={{ background: "var(--color-burg3)", boxShadow: "0 8px 24px rgba(196,38,78,0.38), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
               Ver campañas →
