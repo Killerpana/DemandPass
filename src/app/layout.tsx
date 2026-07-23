@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/ui/Navbar";
-import { Footer } from "@/components/ui/Footer";
+import { FooterGate } from "@/components/ui/FooterGate";
 
 export const viewport = {
   themeColor: "#08080D",
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Navbar />
         <main id="main-content" style={{ flex: 1 }}>{children}</main>
-        <Footer />
+        <FooterGate />
       </body>
     </html>
   );

@@ -97,7 +97,7 @@ export function SocialProof() {
               </p>
 
               <div className="mt-5 pt-4 border-t border-[var(--color-border)] flex items-baseline justify-between">
-                <div className="text-[18px] font-bold tabular-nums"
+                <div className="text-[16px] font-bold tabular-nums whitespace-nowrap"
                   style={{ color: "var(--color-burg3)", fontFamily: "var(--font-mono)" }}>
                   {t.kpi}
                 </div>

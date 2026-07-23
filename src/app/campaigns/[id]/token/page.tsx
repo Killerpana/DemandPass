@@ -127,7 +127,7 @@ export default async function TokenPage({
           Tu Priority Pass está listo
         </h1>
         <p className="text-[12px] text-[var(--color-txt3)] mb-4">
-          {c.artist} · {c.city}
+          {c.artist} · {sp.city || c.city}
         </p>
 
         {earlySupporter && (

@@ -1,6 +1,7 @@
 // src/components/marketing/CampaignDetail.tsx
 // Detail page composition — server component, premium dark hero.
 import Link from "next/link";
+import Image from "next/image";
 import type { Campaign } from "@/lib/data";
 import { findArtist, slugify } from "@/lib/artists-data";
 import { Pill } from "@/components/ui/Pill";
@@ -33,7 +34,26 @@ export function CampaignDetail({ c }: { c: Campaign }) {
           minHeight: 360,
         }}
       >
-        {/* Watermark */}
+        {/* Imagen oficial del tour como fondo (si existe) */}
+        {c.tourImg && (
+          <>
+            <Image
+              src={c.tourImg}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="pointer-events-none select-none"
+              style={{ objectFit: "cover", objectPosition: "center 25%", opacity: 0.5 }}
+            />
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: "linear-gradient(180deg, rgba(8,8,13,0.25) 0%, rgba(8,8,13,0.78) 100%)" }}
+            />
+          </>
+        )}
+        {/* Watermark (solo sin imagen de tour) */}
+        {!c.tourImg && (
         <div
           className="absolute -top-8 -right-12 select-none pointer-events-none uppercase leading-none"
           style={{
@@ -45,6 +65,7 @@ export function CampaignDetail({ c }: { c: Campaign }) {
         >
           {c.img}
         </div>
+        )}
         {/* Bottom fade */}
         <div
           className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
@@ -76,7 +97,7 @@ export function CampaignDetail({ c }: { c: Campaign }) {
           {artistPage && (
             <Link
               href={`/artists/${artistPage.slug}`}
-              className="inline-flex items-center gap-1.5 mt-3 font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--color-txt3)] hover:text-[var(--color-txt)] transition-colors"
+              className="inline-flex items-center gap-1.5 mt-3 font-mono text-[12px] uppercase tracking-[0.14em] text-[var(--color-txt2)] underline underline-offset-4 decoration-[rgba(255,255,255,0.3)] hover:text-[var(--color-txt)] hover:decoration-white transition-colors"
             >
               Ver perfil del artista <span aria-hidden>→</span>
             </Link>
